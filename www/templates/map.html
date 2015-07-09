@@ -1,14 +1,10 @@
 <ion-view view-title="信息确认">
     <ion-content class="has-header">
-    <div>
-        <img src="img/map.jpg" style="width:100%">
-    </div>
-    <div class="list">
-        <div class="item item-divider" ng-repeat="pay in payData.pay">
-            <p>押金：{{pay.deposit}}</p>
-            <p>租赁：{{pay.rent}}</p>
-            <p>封顶：{{pay.maxPay}}</p>
-        </div>
+    <app-map style="height:200px;margin:12px;box-shadow:0 3px 25px black;"> </app-map>
+    <div class="list" ng-repeat="pay in payData.pay">
+        <div class="item item-divider" >押金：{{pay.deposit}}</div>
+        <div class="item item-divider">租赁：{{pay.rent}}</div>
+        <div class="item item-divider">封顶：{{pay.maxPay}}</div>
     </div>
 </ion-content>
 </ion-view>

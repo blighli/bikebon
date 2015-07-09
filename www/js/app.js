@@ -15,6 +15,11 @@ ionicApp.run(function($ionicPlatform) {
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+
+     //启动极光推送服务
+      window.plugins.jPushPlugin.init();
+      //调试模式
+      window.plugins.jPushPlugin.setDebugMode(true);
   });
 });
 

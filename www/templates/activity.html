@@ -12,10 +12,10 @@
         <div class="list" style="top:-6px;">
             <a class="item item-thumbnail-left" href=# ng-repeat="act in activityList.activity">
                 <img src={{act.img}}>
-                <div>
-                    <p>{{act.description}}</p>
-                    <p>{{act.user}}</p>
-                    <div class="activity_operation_button">
+                <div style="text-align:right;" >
+                    <p style="padding-right:20px;">{{act.description}}</p>
+                    <p style="padding-right:20px;">{{act.user}}</p>
+                    <div class="activity_operation_button" style="float:right;">
                         <button class="button ion-android-favorite button-clear activity_button"></button>
                         <button class="button ion-thumbsup button-clear activity_button"></button>
                         <button class="button ion-share button-clear activity_button"></button>
