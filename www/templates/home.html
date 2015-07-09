@@ -1,0 +1,76 @@
+<ion-view view-title="百客邦bikebon">
+    <ion-nav-bar  align-title="center" class="bar-positive">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button icon ion-location button-clear" menu-toggle="left">软院</button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <button class="button icon ion-navigate button-clear" menu-toggle="right"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+  <ion-content class="has-header has-footer">
+      <ion-slide-box does-continue="true" auto-play="true">
+          <ion-slide ng-repeat="img in imgs">
+              <div class="slide-box">
+                  <img src={{img.url}} style="width:100%;height:200px;">
+              </div>
+          </ion-slide>
+      </ion-slide-box>
+      <div class="row">
+          <div class="col col-50">
+              <div class="col" style="background-color: #FF4040;">
+                  租车
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+              </div>
+          </div>
+          <div class="col col-50">
+              <div class="col" style="background-color: #B3EE3A;">
+                  预约
+                  <br/>
+                  <br/>
+              </div>
+              <div class="col"></div>
+              <div class="col" style="background-color: #00F5FF;">
+                  还车
+                  <br/>
+                  <br/>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col">
+              <div class="col" style="background-color: #FF6A6A;">
+                  最新活动
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+                  <br/>
+              </div>
+          </div>
+      </div>
+  </ion-content>
+  <div class="tabs tabs-icon-top tabs-positive">
+      <a class="tab-item">
+          <i class="icon ion-ios-home"></i>
+          主页
+      </a>
+      <a class="tab-item" href="#/bike/bikeList">
+          <i class="icon ion-android-bicycle"></i>
+          租车
+      </a>
+      <a class="tab-item" href="#/bike/activity">
+          <i class="icon ion-ios-baseball"></i>
+          活动
+      </a>
+      <a class="tab-item" href="#/bike/mine">
+          <i class="icon ion-ios-person"></i>
+          我的
+      </a>
+  </div>
+</ion-view>

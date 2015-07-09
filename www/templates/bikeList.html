@@ -1,0 +1,11 @@
+<ion-view view-title="Bike List">
+    <ion-content class="has-header">
+        <div class="list">
+            <a class="item item-avatar" href={{bike.href}} ng-repeat="bike in bikes.bikes">
+                <img src={{bike.img}} style="border-radius: inherit">
+                <h2>{{bike.title}}</h2>
+                <p>{{bike.description}}</p>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>

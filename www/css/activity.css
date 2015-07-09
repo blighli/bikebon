@@ -1,0 +1,27 @@
+.scrollPic{
+    margin:0px;
+}
+.scroll_image{
+    width:100%;
+}
+.activity_operation_button{
+    display:-moz-box;
+    display:-webkit-box;
+    display:box;
+}
+button.activity_oparation{
+    -moz-box-flex:1;
+    -webkit-box-flex:1;
+    box-flex:1;
+}
+a.item-avatar{
+    padding-left:92px;
+}
+.item-avatar > img:first-child{
+    height: 70%;
+    top: 30%;
+}
+.activity_button{
+    min-height:20px;
+    line-height:28px;
+}

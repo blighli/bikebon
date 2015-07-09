@@ -1,0 +1,27 @@
+<ion-view view-title="Show">
+    <ion-content class="has-header" style="top:43px;">
+        <div class="list scrollPic"  ng-controller="picListCtrl">
+            <ion-slide-box auto-play="true">
+                <ion-slide ng-repeat="pic in picList.pic">
+                    <div class="slide-box">
+                        <img src="{{pic.img}}" style="width:100%;height:200px;">
+                    </div>
+                </ion-slide>
+            </ion-slide-box>
+        </div>
+        <div class="list" style="top:-6px;">
+            <a class="item item-thumbnail-left" href=# ng-repeat="act in activityList.activity">
+                <img src={{act.img}}>
+                <div>
+                    <p>{{act.description}}</p>
+                    <p>{{act.user}}</p>
+                    <div class="activity_operation_button">
+                        <button class="button ion-android-favorite button-clear activity_button"></button>
+                        <button class="button ion-thumbsup button-clear activity_button"></button>
+                        <button class="button ion-share button-clear activity_button"></button>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>
