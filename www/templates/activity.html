@@ -9,19 +9,37 @@
                 </ion-slide>
             </ion-slide-box>
         </div>
-        <div class="list" style="top:-6px;">
-            <a class="item item-thumbnail-left" href=# ng-repeat="act in activityList.activity">
-                <img src={{act.img}}>
-                <div style="text-align:right;" >
-                    <p style="padding-right:20px;">{{act.description}}</p>
-                    <p style="padding-right:20px;">{{act.user}}</p>
-                    <div class="activity_operation_button" style="float:right;">
-                        <button class="button ion-android-favorite button-clear activity_button"></button>
-                        <button class="button ion-thumbsup button-clear activity_button"></button>
-                        <button class="button ion-share button-clear activity_button"></button>
-                    </div>
+        <!--<div class="list" style="top:-6px;">-->
+            <!--<a class="item item-thumbnail-left" href=# ng-repeat="act in activityList.activity">-->
+                <!--<img src={{act.img}}>-->
+                <!--<div>-->
+                    <!--<p>{{act.description}}</p>-->
+                    <!--<p>{{act.user}}</p>-->
+                    <!--<div class="activity_operation_button">-->
+                        <!--<button class="button ion-android-favorite button-clear activity_button"></button>-->
+                        <!--<button class="button ion-thumbsup button-clear activity_button"></button>-->
+                        <!--<button class="button ion-share button-clear activity_button"></button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</a>-->
+        <!--</div>-->
+        <div class="list card" style="margin:0px; border:0px;">
+            <div class="item item-body" style="padding:0px;" ng-repeat="act in activityList.activity">
+                <h2 style="margin-left:16px; margin-right:16px;">{{act.user}}</h2>
+                <img class="full-image" style="padding:0 16px;" src={{act.img}}>
+                <p style="margin-left:16px; margin-right:16px;">{{act.description}}</p>
+                <div class="item tabs tabs-secondary tabs-icon-left" style="border:0px;">
+                    <a class="tab-item" href="#">
+                        <i class="icon ion-thumbsup" style="font-size:1rem;">&nbsp;&nbsp;喜欢</i>
+                    </a>
+                    <a class="tab-item" href="#">
+                        <i class="icon ion-chatbox" style="font-size:1rem;">&nbsp;&nbsp;评论</i>
+                    </a>
+                    <a class="tab-item" href="#">
+                        <i class="icon ion-share" style="font-size:1rem;">&nbsp;&nbsp;分享</i>
+                    </a>
                 </div>
-            </a>
+            </div>
         </div>
     </ion-content>
 </ion-view>
