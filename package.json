@@ -15,12 +15,19 @@
     "shelljs": "^0.3.0"
   },
   "cordovaPlugins": [
-    "org.apache.cordova.device",
-    "org.apache.cordova.console",
+    "cordova-plugin-device",
+    "cordova-plugin-console",
+    "cordova-plugin-whitelist",
+    "cordova-plugin-splashscreen",
     "com.ionic.keyboard",
-    "F:\\jpush-phonegap-plugin"
+    {
+      "locator": "/Users/yxq/Documents/push/JPush/jpush-phonegap-plugin",
+      "id": "cn.jpush.phonegap.JPushPlugin"
+    },
+    "org.apache.cordova.splashscreen"
   ],
   "cordovaPlatforms": [
+    "ios",
     "android"
   ]
 }

@@ -15,85 +15,69 @@ ionicApp.run(function($ionicPlatform) {
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-
-     //启动极光推送服务
-      window.plugins.jPushPlugin.init();
-      //调试模式
-      window.plugins.jPushPlugin.setDebugMode(true);
+    //启动极光推送服务
+    window.plugins.jPushPlugin.init();
+    //调试模式
+    window.plugins.jPushPlugin.setDebugMode(true);
   });
 });
+ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
 
-ionicApp.config(function($stateProvider, $urlRouterProvider){
-    $stateProvider
-        .state('bike',{
-            url: '/bike',
-            abstract: true,
-            templateUrl: "templates/bike.html"
-        })
-        .state('bike.bikeList',{
-            url: '/bikeList',
-            views: {
-                'bikeContent': {
-                    templateUrl: "templates/bikeList.html",
-                    controller: 'bikeListCtrl'
-                }
-            }
-        })
-        .state('bike.bikeDetail',{
-            url: '/bikeList/:bikeId',
-            views: {
-                'bikeContent': {
-                    templateUrl: "templates/bikeDetail.html"
-                }
-            }
-        })
-        .state('bike.home',{
-            url: '/home',
-            views: {
-                'bikeContent': {
-                    templateUrl: "templates/home.html",
-                    controller: 'imgCtrl'
-                }
-            }
-        })
-        .state('bike.mine',{
-            url: '/mine',
-            views:{
-                'bikeContent':{
-                    templateUrl: "templates/mine.html"
-                }
-            }
-        })
-        .state('bike.map',{
-            url:'/map',
-            views:{
-                'bikeContent':{
-                    templateUrl: "templates/map.html",
-                    controller: 'mapListCtrl'
-                }
-            }
-        })
-        .state('bike.activity',{
-            url: '/activity',
-            views:{
-                'bikeContent':{
-                    templateUrl: "templates/activity.html",
-                    controller: 'activityListCtrl'
-                }
-            }
-        });
+  $ionicConfigProvider.platform.ios.tabs.style('standard');
+  $ionicConfigProvider.platform.ios.tabs.position('bottom');
+  $ionicConfigProvider.platform.android.tabs.style('standard');
+  $ionicConfigProvider.platform.android.tabs.position('standard');
 
-    $urlRouterProvider.otherwise('/bike/home');
-});
+  $ionicConfigProvider.platform.ios.navBar.alignTitle('center');
+  $ionicConfigProvider.platform.android.navBar.alignTitle('left');
 
-ionicApp.controller('mapListCtrl',function($scope){
-    $scope.payData = {
-        "pay": [
-            {
-                "deposit": 100,
-                "rent": 50,
-                "maxPay": 100
-            }
-        ]
-    }
+  $ionicConfigProvider.platform.ios.backButton.previousTitleText('').icon('ion-ios-arrow-thin-left');
+  $ionicConfigProvider.platform.android.backButton.previousTitleText('').icon('ion-android-arrow-back');
+
+  $ionicConfigProvider.platform.ios.views.transition('ios');
+  $ionicConfigProvider.platform.android.views.transition('android');
+
+  $stateProvider
+      .state('bike',{
+        url: '/bike',
+        abstract: true,
+        templateUrl: 'templates/bikes.html'
+      })
+      .state('bike.home',{
+        url: '/home',
+        views: {
+          'bike-home': {
+            templateUrl: 'templates/home.html',
+            controller: 'imgCtrl'
+          }
+        }
+      })
+      .state('bike.rentBike',{
+        url: '/rentBike',
+        views: {
+          'bike-rentBike': {
+            templateUrl: 'templates/rentBike.html',
+            controller: 'bikeCtrl'
+          }
+        }
+      })
+      .state('bike.find',{
+        url: '/find',
+        views: {
+          'bike-find': {
+            templateUrl: 'templates/find.html'
+          }
+        }
+      })
+      .state('bike.mine',{
+        url: '/mine',
+        views: {
+          'bike-mine': {
+            templateUrl: 'templates/mine.html'
+          }
+        }
+      });
+
+  $urlRouterProvider.otherwise("/bike/home");
+
 });

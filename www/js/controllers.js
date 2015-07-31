@@ -1,157 +1,184 @@
+/**
+ * Created by yxq on 15/7/23.
+ */
 var ionicCtrl = angular.module("starter.controllers",[]);
-
 ionicCtrl.controller('imgCtrl',function($scope){
     $scope.imgs = [
         {
             "id": 1,
-            "url": "img/rm8.png",
+            "url": "img/rm/rm8.png",
             "title": "Bike One"
         },
         {
             "id": 2,
-            "url": "img/rm2.jpg",
+            "url": "img/rm/rm2.jpg",
             "title": "Bike Two"
         },
         {
             "id": 3,
-            "url": "img/rm6.jpg",
+            "url": "img/rm/rm6.jpg",
             "title": "Bike Three"
         }
     ];
 });
-
-ionicCtrl.controller('bikeListCtrl',function($scope){
-    $scope.bikes = {
-        "bikes": [
-            {
-                "description": "运动型，体验飞一般的速度",
-                "href": "#/bike/bikeList/:1",
-                "id": 1,
-                "img": "img/glbike.jpg",
-                "title": "公路车"
-            },
-            {
-                "description": "越野型，翻山越岭的不二之选",
-                "href": "#",
-                "id": 2,
-                "img": "img/sdbike.jpg",
-                "title": "山地车"
-            },
-            {
-                "description": "普通型，省时省力的好伙伴",
-                "href": "#",
-                "id": 3,
-                "img": "img/elbike.jpg",
-                "title": "电动车"
-            },
-            {
-                "description": "潮流型，绿色环保的交通工具",
-                "href": "#",
-                "id": 4,
-                "img": "img/phbike.jpg",
-                "title": "平衡车"
-            }
-
-        ]
-    }
-});
-ionicCtrl.controller('activityListCtrl',function($scope){
-    $scope.activityList = {
-        "activity": [
-            {
-                "description": "哈哈~我和我的车~",
-                "href": "#",
-                "id": 1,
-                "img": "img/rm3.jpg",
-                "user": "最讨厌想昵称"
-            },
-            {
-                "description": "最浪漫的事情---骑行",
-                "href": "#",
-                "id": 2,
-                "img": "img/rm5.jpg",
-                "user": "Anglet"
-            },
-            {
-                "description": "我的车技棒棒哒！",
-                "href": "#",
-                "id": 3,
-                "img": "img/rm7.jpg",
-                "user": "lxl"
-            },
-            {
-                "description": "哥骑得是人生~",
-                "href": "#",
-                "id": 4,
-                "img": "img/rm9.jpg",
-                "user": "三藏"
-            }
-        ]
-    }
-});
-
-ionicCtrl.controller('picListCtrl',function($scope){
-    $scope.picList = {
-        "pic": [
-            {
-                "id": 1,
-                "img": "img/rm1.jpg"
-            },
-            {
-                "id": 2,
-                "img": "img/rm9.jpg"
-            },
-            {
-                "id": 3,
-                "img": "img/rm4.jpg"
-            }
-        ]
-    }
-});
-
-ionicCtrl.controller('mapListCtrl',function($scope){
-    $scope.payData = {
-        "pay": [
-            {
-                "deposit": 100,
-                "rent": 50,
-                "maxPay": 100
-            }
-        ]
-    }
-});
-
-ionicCtrl.controller('mapListCtrl',function($scope){
-    $scope.payData = {
-        "pay": [
-            {
-                "deposit": 100,
-                "rent": 50,
-                "maxPay": 100
-            }
-        ]
-    }
-});
-
-ionicCtrl.directive("appMap", function () {
-    return {
-        restrict: "E",
-        replace: true,
-        template: "<div id='appMap'></div>",
-        scope: {
-            center: "=",		// Center point on the map (e.g. <code>{ latitude: 10, longitude: 10 }</code>).
-            markers: "=",	   // Array of map markers (e.g. <code>[{ lat: 10, lon: 10, name: "hello" }]</code>).
-            width: "@",		 // Map width in pixels.
-            height: "@",		// Map height in pixels.
-            zoom: "@",		  // Zoom level (one is totally zoomed out, 25 is very much zoomed in).
-            zoomControl: "@",   // Whether to show a zoom control on the map.
-            scaleControl: "@",   // Whether to show scale control on the map.
-            address:"@"
+ionicCtrl.controller('bikeCtrl',function($scope){
+    $scope.bikes = [
+        {
+            "id": 1,
+            "url": "img/bikes/bike3.jpg",
+            "title": " 公路车",
+            "surplus": 12,
+            "total": 50,
+            "href": "#"
         },
-        link: function (scope, element, attrs) {
-            var map;
-            map = new BMap.Map("appMap");
-            map.centerAndZoom(new BMap.Point(113.402364,23.056676), 16);
+        {
+            "id": 2,
+            "url": "img/bikes/bike7.jpg",
+            "title": "平板车",
+            "surplus": 8,
+            "total": 50,
+            "href": "#"
+        },
+        {
+            "id": 3,
+            "url": "img/bikes/bike8.jpg",
+            "title": "山地车",
+            "surplus": 10,
+            "total": 50,
+            "href": "#"
+        },
+        {
+            "id": 4,
+            "url": "img/bikes/bike4.jpg",
+            "title": "电动车",
+            "surplus": 13,
+            "total": 50,
+            "href": "#"
         }
-    };
+    ];
+});
+ionicCtrl.controller('successCtrl',function($scope){
+     $scope.fails = [{
+        "id": 1,
+        "title": "身份认证",
+        "img": "img/fail_Success/right.png",
+        "description": "操作成功，系统会在一个工作日内审核"
+    },{
+        "id": 2,
+        "title": "身份认证",
+        "img": "img/fail_Success/wrong.png",
+        "description": "信息填写错误，请重新提交"
+    },{
+        "id": 3,
+        "title": "租用成功",
+        "img": "img/fail_Success/right.png",
+        "description": "订单已成功提交，请在30分钟内到租车点提车"
+    },{
+        "id": 4,
+        "title": "租用失败",
+        "img": "img/fail_Success/wrong.png",
+        "description": "该车型已被抢光，请选其他车型"
+    }];
+});
+ionicCtrl.controller('incomeCtrl',function($scope){
+    $scope.expense = [{
+        "id": 1,
+        "name": "在线支付",
+        "balance": "313.00",
+        "date": "2015-07-25",
+        "cost": "-76.00",
+        "zero": false
+    },{
+        "id": 2,
+        "name": "在线支付",
+        "balance": "389.00",
+        "date": "2015-07-23",
+        "cost": "－11.00",
+        "zero": false
+    },{
+        "id": 3,
+        "name": "在线支付",
+        "balance": "400.00",
+        "date": "2015-07-25",
+        "cost": "-100.50",
+        "zero": false
+    },{
+        "id": 4,
+        "name": "充值",
+        "balance": "500.50",
+        "date": "2015-07-25",
+        "cost": "+60.00",
+        "zero": true
+    },{
+        "id": 5,
+        "name": "在线支付",
+        "balance": "440.50",
+        "date": "2015-07-25",
+        "cost": "-15.00",
+        "zero": false
+    },{
+        "id": 6,
+        "name": "在线支付",
+        "balance": "455.50",
+        "date": "2015-07-14",
+        "cost": "-15.50",
+        "zero": false
+    },{
+        "id": 7,
+        "name": "在线支付",
+        "balance": "471.00",
+        "date": "2015-07-13",
+        "cost": "-29.00",
+        "zero": false
+    },{
+        "id": 8,
+        "name": "充值",
+        "balance": "500.00",
+        "date": "2015-07-9",
+        "cost": "+500.00",
+        "zero": true
+    }];
+});
+ionicCtrl.controller('orderCtrl',function($scope){
+    $scope.orders = [{
+        id: 1,
+        name: '公路车',
+        img: 'img/bikes/bike1.jpg',
+        cost: '0',
+        time: '0',
+        date: '2015-07-28',
+        status: '订单审核中',
+        delete: true,
+        estimate: true
+    }, {
+        id: 2,
+        name: '公路车',
+        img: 'img/bikes/bike2.jpg',
+        cost: '13.00',
+        time: '30',
+        date: '2015-07-27',
+        status: '订单已完成',
+        delete: true,
+        estimate: true
+    }, {
+        id: 3,
+        name: '公路车',
+        img: 'img/bikes/bike3.jpg',
+        cost: '0',
+        time: '0',
+        date: '2015-07-26',
+        status: '订单已取消',
+        delete: true,
+        estimate: false
+    },{
+        id: 3,
+        name: '公路车',
+        img: 'img/bikes/bike3.jpg',
+        cost: '0',
+        time: '0',
+        date: '2015-07-26',
+        status: '订单已取消',
+        delete: true,
+        estimate: true
+    }];
 });

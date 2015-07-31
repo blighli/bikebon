@@ -1,4 +1,49 @@
-/* Empty. Add your own CSS if you like */
-.myBlock{
-    margin: 10px;
+@font-face {
+	font-family: 'myicon';
+	src:url('fonts/myicon.eot?-a5jypj');
+	src:url('fonts/myicon.eot?#iefix-a5jypj') format('embedded-opentype'),
+		url('fonts/myicon.ttf?-a5jypj') format('truetype'),
+		url('fonts/myicon.woff?-a5jypj') format('woff'),
+		url('fonts/myicon.svg?-a5jypj#myicon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="yxq_"], [class*=" yxq_"] {
+	font-family: 'myicon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.yxq_feedback:before {
+	content: "\e606";
+}
+.yxq_about:before {
+	content: "\e607";
+}
+.yxq_rent_outline:before {
+	content: "\e600";
+}
+.yxq_rent:before {
+	content: "\e601";
+}
+.yxq_home_outline:before {
+	content: "\e602";
+}
+.yxq_home:before {
+	content: "\e603";
+}
+.yxq_mine_outline:before {
+	content: "\e604";
+}
+.yxq_mine:before {
+	content: "\e605";
 }

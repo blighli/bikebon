@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html ng-app="starter">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <!-- compiled css output -->
+    <link href="css/ionic.app.css" rel="stylesheet">
+
+    <!-- your app's css -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/myStyle.css" rel="stylesheet">
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+</head>
+<body>
+<div class="bar bar-header bar-balanced">
+    <h1 class="title">发&nbsp;&nbsp;&nbsp;&nbsp;现</h1>
+    <button class="button icon ion-ios-plus-empty button-clear"></button>
+</div>
+<ion-content>
+    <ion-scroll class="has-header has-footer" scrollbar-y="false" paging="false">
+        <div style="background: url(img/bg/bg_find.png) no-repeat center;height:200px;width:100%;text-align:center;padding-top:90px;">
+            <span style="color:white;font-size: 14px;">轻触设置封面</span>
+        </div>
+        <div style="color:white;margin-top:-20px;text-align:right;padding-right:63px;">
+            <span style="font-size: 16px">最讨厌想昵称</span>
+        </div>
+        <div style="text-align:right;margin-top:-25px;">
+            <img src="img/headShow/user_s.png" style="width:50px;height:50px;"/>
+            <span style="margin-right:5px;"></span>
+        </div>
+        <div style="margin-top:10px;margin-bottom: 10px;">
+            <div class="div-left-yxq">
+                <img src="img/headShow/user_s.png" style="width: 40px;height: 40px;"/>
+            </div>
+            <div class="div-right-yxq">
+                <div style="color:#90b622;font-size:16px;">小雷工作室</div>
+                <div style="font-size: 15px;">小雷工作室的同胞们，为了感谢各位的辛苦工作，我们周末踏春去了～雷友们，想去哪儿讷？</div>
+                <div class="row" style="padding: 0px;">
+                    <span class="col col-40" style="font-size: 13px;color: #B3B3B3;padding: 0px;">1分钟前</span>
+                    <span class="col col-offset-10 col-40" style="text-align: right;margin-right: 20px;padding: 0px;"><span class="col"><a href="#" class="ion ion-chatbox-working" style="color: #b3b3b3"></a></span></span>
+                </div>
+                <div style="background:#f2f2f2;font-size: 13px;margin-right: 20px;padding-right: 2px;">
+                    <div class="ion ion-ios-heart-outline balanced" style="padding-left: 2px;">&nbsp;小肥肥,彬哥,学聪大帅哥</div>
+                    <div>
+                        <span class="balanced" style="margin-left: 2px;">三藏</span>
+                        <span style="">：</span>
+                        <span>师父带你们取经去，可好?八戒，跟上...</span>
+                    </div>
+                    <div>
+                        <span class="balanced" style="margin-left: 2px;">小宇宇</span>
+                        <span style="">回复</span>
+                        <span class="balanced">三藏</span>
+                        <span style="">：</span>
+                        <span>汗，楼上的注意雷雷工作室的形象！</span>
+                    </div>
+                    <div>
+                        <span class="balanced" style="margin-left: 2px;">小龙哥</span>
+                        <span style="">回复</span>
+                        <span class="balanced">三藏</span>
+                        <span style="">：</span>
+                        <span>师父，我永远是你的小白龙～</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr style="border:0;background-color:#e6e6e6;height:1px;">
+        <div style="margin-top:10px;margin-bottom: 10px;">
+            <div class="div-left-yxq">
+                <img src="img/headShow/user_s.png" style="width: 40px;height: 40px;"/>
+            </div>
+            <div class="div-right-yxq">
+                <div style="color:#90b622;font-size:16px;">UI静</div>
+                <div style="font-size: 15px;">啊～又是和前端姑娘相爱相杀的一天～</div>
+                <div>
+                    <img src="img/rm/rm1.jpg" style="height: 80px; width: auto"/>
+                </div>
+                <div class="row" style="padding: 0px;">
+                    <span class="col col-40" style="font-size: 13px;color: #B3B3B3;padding: 0px;">昨天08:48</span>
+                    <span class="col col-offset-10 col-40" style="text-align: right;margin-right: 20px;padding: 0px;"><span class="col"><a href="#" class="ion ion-chatbox-working" style="color: #b3b3b3"></a></span></span>
+                </div>
+                <div style="background:#f2f2f2;font-size: 13px;margin-right: 20px;">
+                    <div class="ion ion-ios-heart-outline balanced" style="padding-left: 2px;">&nbsp;琦宝～,Dilemma,妃姐,小龙哥,三藏等9人觉得很赞</div>
+                    <div>
+                        <span class="balanced" style="margin-left: 2px;">最讨厌想昵称</span>
+                        <span style="">：</span>
+                        <span>啊～又是和UI妹子相爱相杀的一天～</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr style="border:0;background-color:#e6e6e6;height:1px;">
+    </ion-scroll>
+</ion-content>
+<ion-tabs class="tabs-icon-top tabs-color-active-balanced">
+
+    <ion-tab title="主页" icon-off="yxq_home_outline" icon-on="yxq_home" href="#">
+    </ion-tab>
+
+    <ion-tab title="租车" icon-off="yxq_rent_outline" icon-on="yxq_rent" href="#">
+    </ion-tab>
+
+    <ion-tab title="发现" icon-off="ion-ios-navigate-outline" icon-on="ion-ios-navigate" href="#">
+    </ion-tab>
+
+    <ion-tab title="我的" icon-off="yxq_mine_outline" icon-on="yxq_mine" href="#">
+    </ion-tab>
+
+</ion-tabs>
+</body>
+</html>
