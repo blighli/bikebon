@@ -7,13 +7,14 @@
             <a class="item item-icon-left item-icon-right" href="#" style="border-top: 0px;">
                 <i class="icon ion-ios-location-outline" style="color:#808383"></i>
                 <span class="font-left-yxq">浙江省宁波市江南路1689号2号公寓1楼</span>
+                <span class="item-note">4.4分</span>
                 <i class="icon ion-ios-arrow-right" style="color:#808383"></i>
             </a>
         </div>
         <div class="list">
             <a class="item item-thumbnail-left" href={{bike.href}} ng-repeat="bike in bikes">
                 <img src={{bike.url}} />
-                <h2>{{bike.title}}</h2>
+                <h2>{{bike.title}}&nbsp;&nbsp;&nbsp;<span style="color: #B3B3B3">4.5分</span></h2>
                 <br />
                 <div class="row" style="padding: 0px;margin: 0px;">
                     <div class="col col-30" style="color: #B3B3B3">剩余<span class="balanced font-yxq">{{bike.surplus}}</span>辆</div>

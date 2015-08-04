@@ -3,7 +3,7 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var ionicApp = angular.module('starter', ['ionic',"starter.controllers"]);
+var ionicApp = angular.module('starter', ['ionic',"starter.controllers","starter.directives"]);
 
 ionicApp.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -42,6 +42,10 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
         url: '/login',
         templateUrl: 'templates/login.html'
       })
+      .state('mySchedule',{
+          url: '/mySchedule',
+          templateUrl: 'templates/main/mySchedule.html'
+      })
       .state('bike',{
         url: '/bike',
         abstract: true,
@@ -65,6 +69,14 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
           }
         }
       })
+      .state('bike.bikeList',{
+          url: '/rentBike/:bikeId',
+          views: {
+              'bike-rentBike': {
+                  templateUrl: 'templates/main/bikeDetail.html'
+              }
+          }
+      })
       .state('bike.find',{
         url: '/find',
         views: {
@@ -72,6 +84,14 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
             templateUrl: 'templates/find.html'
           }
         }
+      })
+      .state('bike.mySays',{
+          url: '/mySays',
+          views: {
+              'bike-find': {
+                  templateUrl: 'templates/find/mySays.html'
+              }
+          }
       })
       .state('bike.mine',{
         url: '/mine',
@@ -88,8 +108,73 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
             templateUrl: 'templates/mine/myPurse.html'
           }
         }
+      })
+      .state('bike.income',{
+          url:'/income',
+          views:{
+              'bike-mine':{
+                  templateUrl: 'templates/mine/incomeAndExpenses.html',
+                  controller: 'incomeCtrl'
+              }
+          }
+      })
+      .state('bike.myCoupon',{
+        url:'/myCoupon',
+        views:{
+          'bike-mine':{
+            templateUrl: 'templates/mine/myCoupon.html'
+          }
+        }
+      })
+      .state('bike.myOrder',{
+        url:'/myOrder',
+        views:{
+          'bike-mine':{
+            templateUrl: 'templates/mine/myOrder.html'
+          }
+        }
+      })
+      .state('bike.evaluateOrder',{
+          url:'/evaluateOrder',
+          views:{
+              'bike-mine':{
+                  templateUrl: 'templates/main/evaluateOrder.html'
+              }
+          }
+      })
+      .state('bike.feedback',{
+          url:'/feedback',
+          views:{
+              'bike-mine':{
+                  templateUrl: 'templates/mine/feedback.html'
+              }
+          }
+      })
+      .state('bike.aboutBikebon',{
+          url:'/aboutBikebon',
+          views:{
+              'bike-mine':{
+                  templateUrl: 'templates/mine/aboutBikebon.html'
+              }
+          }
+      })
+      .state('bike.settings',{
+          url:'/settings',
+          views:{
+              'bike-mine':{
+                  templateUrl: 'templates/mine/settings.html'
+              }
+          }
+      })
+      .state('bike.identity',{
+          url:'/identity',
+          views:{
+              'bike-mine':{
+                  templateUrl: 'templates/mine/identity.html'
+              }
+          }
       });
 
-  $urlRouterProvider.otherwise("/bike/home");
+  $urlRouterProvider.otherwise("/login");
 
 });

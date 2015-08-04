@@ -1,6 +1,3 @@
-/**
- * Created by yxq on 15/7/23.
- */
 var ionicCtrl = angular.module("starter.controllers",[]);
 ionicCtrl.controller('imgCtrl',function($scope){
     $scope.imgs = [
@@ -45,7 +42,7 @@ ionicCtrl.controller('bikeCtrl',function($scope){
             "title": "山地车",
             "surplus": 10,
             "total": 50,
-            "href": "#"
+            "href": "#/bike/rentBike/3"
         },
         {
             "id": 4,
