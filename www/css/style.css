@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'myicon';
-	src:url('fonts/myicon.eot?-a5jypj');
-	src:url('fonts/myicon.eot?#iefix-a5jypj') format('embedded-opentype'),
-		url('fonts/myicon.ttf?-a5jypj') format('truetype'),
-		url('fonts/myicon.woff?-a5jypj') format('woff'),
-		url('fonts/myicon.svg?-a5jypj#myicon') format('svg');
+	src:url('fonts/myicon.eot?3md9he');
+	src:url('fonts/myicon.eot?#iefix3md9he') format('embedded-opentype'),
+		url('fonts/myicon.ttf?3md9he') format('truetype'),
+		url('fonts/myicon.woff?3md9he') format('woff'),
+		url('fonts/myicon.svg?3md9he#myicon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,6 +23,15 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.yxq_find_outline:before {
+	content: "\e608";
+}
+.yxq_find:before {
+	content: "\e609";
+}
+.yxq_wallet:before {
+	content: "\e60b";
+}
 .yxq_feedback:before {
 	content: "\e606";
 }

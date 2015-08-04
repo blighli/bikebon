@@ -6,33 +6,33 @@
             <button class="button icon ion-location button-clear" menu-toggle="left">宁波</button>
         </ion-nav-buttons>
         <ion-nav-buttons side="right">
-            <button class="button icon ion-navigate button-clear" menu-toggle="right"></button>
+            <button class="button button-clear" menu-toggle="right">地图</button>
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content>
         <ion-slide-box does-continue="true" auto-play="true">
             <ion-slide ng-repeat="img in imgs">
                 <div class="slide-box">
-                    <img src={{img.url}} style="width:100%;height:200px;">
+                    <img src={{img.url}} class="pic-200-yxq" />
                 </div>
             </ion-slide>
         </ion-slide-box>
         <div style="background:url(img/line/line.png) center no-repeat;margin-top:20px;">
             <div class = "row">
-                <div class = "col col-50 text-center" style="padding-bottom:25px;">
+                <a class = "col col-50 text-center home-up-yxq" href="#">
                     <img src="img/home/rentCar.png" /><br />立即租车
-                </div>
-                <div class = "col col-50 text-center" style="padding-bottom:25px;">
+                </a>
+                <a class = "col col-50 text-center home-up-yxq" href="#/bike/rentBike">
                     <img src="img/home/beforeRent.png"><br />预约租车
-                </div>
+                </a>
             </div>
             <div class = "row">
-                <div class = "col col-50 text-center" style="padding-top:30px;">
+                <a class = "col col-50 text-center home-down-yxq" href="#">
                     <img src="img/home/trip.png"><br />当前行程
-                </div>
-                <div class = "col col-50 text-center" style="padding-top:30px;">
+                </a>
+                <a class = "col col-50 text-center home-down-yxq" href="#">
                     <img src="img/home/activity.png"><br />最新活动
-                </div>
+                </a>
             </div>
         </div>
     </ion-content>

@@ -38,6 +38,10 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
   $ionicConfigProvider.platform.android.views.transition('android');
 
   $stateProvider
+      .state('login',{
+        url: '/login',
+        templateUrl: 'templates/login.html'
+      })
       .state('bike',{
         url: '/bike',
         abstract: true,
@@ -74,6 +78,14 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
         views: {
           'bike-mine': {
             templateUrl: 'templates/mine.html'
+          }
+        }
+      })
+      .state('bike.myPurse',{
+        url:'/myPurse',
+        views:{
+          'bike-mine':{
+            templateUrl: 'templates/mine/myPurse.html'
           }
         }
       });
