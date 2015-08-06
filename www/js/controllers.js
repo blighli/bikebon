@@ -3,17 +3,17 @@ ionicCtrl.controller('imgCtrl',function($scope){
     $scope.imgs = [
         {
             "id": 1,
-            "url": "img/rm/rm8.png",
+            "url": "img/homes/home_pic1.png",
             "title": "Bike One"
         },
         {
             "id": 2,
-            "url": "img/rm/rm2.jpg",
+            "url": "img/homes/home_pic2.png",
             "title": "Bike Two"
         },
         {
             "id": 3,
-            "url": "img/rm/rm6.jpg",
+            "url": "img/homes/home_pic3.png",
             "title": "Bike Three"
         }
     ];
@@ -22,7 +22,7 @@ ionicCtrl.controller('bikeCtrl',function($scope){
     $scope.bikes = [
         {
             "id": 1,
-            "url": "img/bikes/bike3.jpg",
+            "url": "img/bikes/road.png",
             "title": " 公路车",
             "surplus": 12,
             "total": 50,
@@ -30,7 +30,7 @@ ionicCtrl.controller('bikeCtrl',function($scope){
         },
         {
             "id": 2,
-            "url": "img/bikes/bike7.jpg",
+            "url": "img/bikes/flatbed.png",
             "title": "平板车",
             "surplus": 8,
             "total": 50,
@@ -38,7 +38,7 @@ ionicCtrl.controller('bikeCtrl',function($scope){
         },
         {
             "id": 3,
-            "url": "img/bikes/bike8.jpg",
+            "url": "img/bikes/mountain.png",
             "title": "山地车",
             "surplus": 10,
             "total": 50,
@@ -46,7 +46,7 @@ ionicCtrl.controller('bikeCtrl',function($scope){
         },
         {
             "id": 4,
-            "url": "img/bikes/bike4.jpg",
+            "url": "img/bikes/electric.png",
             "title": "电动车",
             "surplus": 13,
             "total": 50,
@@ -134,48 +134,5 @@ ionicCtrl.controller('incomeCtrl',function($scope){
         "date": "2015-07-9",
         "cost": "+500.00",
         "zero": true
-    }];
-});
-ionicCtrl.controller('orderCtrl',function($scope){
-    $scope.orders = [{
-        id: 1,
-        name: '公路车',
-        img: 'img/bikes/bike1.jpg',
-        cost: '0',
-        time: '0',
-        date: '2015-07-28',
-        status: '订单审核中',
-        delete: true,
-        estimate: true
-    }, {
-        id: 2,
-        name: '公路车',
-        img: 'img/bikes/bike2.jpg',
-        cost: '13.00',
-        time: '30',
-        date: '2015-07-27',
-        status: '订单已完成',
-        delete: true,
-        estimate: true
-    }, {
-        id: 3,
-        name: '公路车',
-        img: 'img/bikes/bike3.jpg',
-        cost: '0',
-        time: '0',
-        date: '2015-07-26',
-        status: '订单已取消',
-        delete: true,
-        estimate: false
-    },{
-        id: 3,
-        name: '公路车',
-        img: 'img/bikes/bike3.jpg',
-        cost: '0',
-        time: '0',
-        date: '2015-07-26',
-        status: '订单已取消',
-        delete: true,
-        estimate: true
     }];
 });

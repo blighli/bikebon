@@ -1,7 +1,5 @@
 <ion-view view-title="百客邦">
     <ion-nav-bar  align-title="center" class="bar-balanced">
-        <ion-nav-back-button>
-        </ion-nav-back-button>
         <ion-nav-buttons side="left">
             <button class="button icon ion-location button-clear" menu-toggle="left">宁波</button>
         </ion-nav-buttons>
@@ -12,26 +10,25 @@
     <ion-content>
         <ion-slide-box does-continue="true" auto-play="true">
             <ion-slide ng-repeat="img in imgs">
-                <div class="slide-box">
-                    <img src={{img.url}} class="pic-200-yxq" />
+                <div class="slide-box pic-200-yxq" style="background: url({{img.url}}) no-repeat center;">
                 </div>
             </ion-slide>
         </ion-slide-box>
-        <div style="background:url(img/line/line.png) center no-repeat;margin-top:20px;">
+        <div class="home-line-yxq">
             <div class = "row">
                 <a class = "col col-50 text-center home-up-yxq" href="#">
-                    <img src="img/home/rentCar.png" /><br />立即租车
+                    <img src="img/homes/rentCar.png" /><br />立即租车
                 </a>
                 <a class = "col col-50 text-center home-up-yxq" href="#/bike/rentBike">
-                    <img src="img/home/beforeRent.png"><br />预约租车
+                    <img src="img/homes/beforeRent.png"><br />预约租车
                 </a>
             </div>
             <div class = "row">
                 <a class = "col col-50 text-center home-down-yxq" href="#/mySchedule">
-                    <img src="img/home/trip.png"><br />当前行程
+                    <img src="img/homes/trip.png"><br />当前行程
                 </a>
                 <a class = "col col-50 text-center home-down-yxq" href="#">
-                    <img src="img/home/activity.png"><br />最新活动
+                    <img src="img/homes/activity.png"><br />最新活动
                 </a>
             </div>
         </div>
