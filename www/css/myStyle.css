@@ -66,8 +66,8 @@
     border: 1px #cccccc solid;
 }
 .order-span-f{
-    font-size: 11px;
-    color: #B3B3B3;
+    font-size: 12px;
+    color: #808080;
 }
 .order-divs-f{
     width: 150px;
@@ -79,13 +79,13 @@
 }
 .order-p-f{
     font-size: 12px;
-    padding-right: 13px;
+    padding-right: 12px;
 }
 .order-div-f{
     position: absolute;
     bottom: 0px;
     right: 0px;
-    padding-right: 13px;
+    padding-right: 12px;
 }
 .mySays-div-yxq{
     background: #FFFFFF;

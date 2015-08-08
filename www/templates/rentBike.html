@@ -7,18 +7,18 @@
         <div class="list">
             <a class="item item-icon-left item-icon-right" href="#" style="border-top: 0px;">
                 <i class="icon ion-ios-location-outline color-83-jx"></i>
-                <span class="font-left-yxq">浙江省宁波市江南路...</span>
-                <span class="item-note">4.4分</span>
+                <span class="font-left-yxq">{{rentStop.lenderName | limitTo : 9}}...{{rentStop.lenderId}}</span>
+                <span class="item-note">{{rentStop.lenderScore}}分</span>
                 <i class="icon ion-ios-arrow-right color-83-jx"></i>
             </a>
         </div>
         <div class="list">
-            <a class="item item-thumbnail-left" href={{bike.href}} ng-repeat="bike in bikes">
-                <img src={{bike.url}} />
-                <h2>{{bike.title}}&nbsp;&nbsp;&nbsp;<span class="color-b3-jx">4.5分</span></h2>
+            <a class="item item-thumbnail-left" href="#/bikebon/rent/{{rentStop.LenderId}}/bike/{{bike.bikeTypeId}}" ng-repeat="bike in bikes">
+                <img src={{bike.bikeTypePhotoUrl}} />
+                <h2>{{bike.bikeTypeName}}&nbsp;&nbsp;&nbsp;<span class="color-b3-jx">{{bike.BikeTypeScore}}分</span></h2>
                 <br />
                 <div class="row all-0-yxq">
-                    <div class="col col-30 color-b3-jx">剩余<span class="font-38-yxq balanced">{{bike.surplus}}</span>辆</div>
+                    <div class="col col-30 color-b3-jx">剩余<span class="font-38-yxq balanced">{{bike.available}}</span>辆</div>
                     <div class="col col-30 color-b3-jx">总共<span class="font-38-yxq color-59-jx">{{bike.total}}</span>辆</div>
                 </div>
             </a>

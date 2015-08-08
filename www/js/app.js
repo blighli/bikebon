@@ -3,12 +3,17 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var ionicApp = angular.module('starter', ['ionic',"starter.controllers","starter.directives"]);
+var ionicApp = angular.module('starter', ['ionic',"starter.services","starter.controllers","starter.directives","ngResource"]);
+
+ionicApp.value('baseUrl', 'http://bike.liqilei.com:2444/api/v1.0');
 
 ionicApp.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
+    if(navigator.splashscreen) {
+      navigator.splashscreen.hide();
+    }
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -21,6 +26,7 @@ ionicApp.run(function($ionicPlatform) {
     window.plugins.jPushPlugin.setDebugMode(true);
   });
 });
+
 ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider) {
 
   $ionicConfigProvider.platform.ios.tabs.style('standard');
@@ -46,38 +52,39 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
           url: '/mySchedule',
           templateUrl: 'templates/main/mySchedule.html'
       })
-      .state('bike',{
-        url: '/bike',
+      .state('bikebon',{
+        url: '/bikebon',
         abstract: true,
         templateUrl: 'templates/bikes.html'
       })
-      .state('bike.home',{
+      .state('bikebon.home',{
         url: '/home',
         views: {
           'bike-home': {
             templateUrl: 'templates/home.html',
-            controller: 'imgCtrl'
+            controller: 'homeCtrl'
           }
         }
       })
-      .state('bike.rentBike',{
-        url: '/rentBike',
+      .state('bikebon.rent',{
+        url: '/rent/:lender_id',
         views: {
           'bike-rentBike': {
             templateUrl: 'templates/rentBike.html',
-            controller: 'bikeCtrl'
+            controller: 'rentBikeCtrl'
           }
         }
       })
-      .state('bike.bikeList',{
-          url: '/rentBike/:bikeId',
+      .state('bikebon.bikeList',{
+          url: '/rent/:lender_id/bike/:bike_type_id',
           views: {
               'bike-rentBike': {
-                  templateUrl: 'templates/main/bikeDetail.html'
+                  templateUrl: 'templates/main/bikeDetail.html',
+                  controller: 'bikeDetailCtrl'
               }
           }
       })
-      .state('bike.find',{
+      .state('bikebon.find',{
         url: '/find',
         views: {
           'bike-find': {
@@ -85,7 +92,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
           }
         }
       })
-      .state('bike.mySays',{
+      .state('bikebon.mySays',{
           url: '/mySays',
           views: {
               'bike-find': {
@@ -93,7 +100,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
               }
           }
       })
-      .state('bike.mine',{
+      .state('bikebon.mine',{
         url: '/mine',
         views: {
           'bike-mine': {
@@ -101,7 +108,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
           }
         }
       })
-      .state('bike.myPurse',{
+      .state('bikebon.myPurse',{
         url:'/myPurse',
         views:{
           'bike-mine':{
@@ -109,7 +116,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
           }
         }
       })
-      .state('bike.income',{
+      .state('bikebon.income',{
           url:'/income',
           views:{
               'bike-mine':{
@@ -118,7 +125,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
               }
           }
       })
-      .state('bike.myCoupon',{
+      .state('bikebon.myCoupon',{
         url:'/myCoupon',
         views:{
           'bike-mine':{
@@ -126,7 +133,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
           }
         }
       })
-      .state('bike.myOrder',{
+      .state('bikebon.myOrder',{
         url:'/myOrder',
         views:{
           'bike-mine':{
@@ -134,7 +141,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
           }
         }
       })
-      .state('bike.evaluateOrder',{
+      .state('bikebon.evaluateOrder',{
           url:'/evaluateOrder',
           views:{
               'bike-mine':{
@@ -142,7 +149,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
               }
           }
       })
-      .state('bike.feedback',{
+      .state('bikebon.feedback',{
           url:'/feedback',
           views:{
               'bike-mine':{
@@ -150,7 +157,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
               }
           }
       })
-      .state('bike.aboutBikebon',{
+      .state('bikebon.aboutBikebon',{
           url:'/aboutBikebon',
           views:{
               'bike-mine':{
@@ -158,7 +165,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
               }
           }
       })
-      .state('bike.settings',{
+      .state('bikebon.settings',{
           url:'/settings',
           views:{
               'bike-mine':{
@@ -166,7 +173,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
               }
           }
       })
-      .state('bike.identity',{
+      .state('bikebon.identity',{
           url:'/identity',
           views:{
               'bike-mine':{

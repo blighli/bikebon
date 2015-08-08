@@ -1,59 +1,50 @@
 var ionicCtrl = angular.module("starter.controllers",[]);
-ionicCtrl.controller('imgCtrl',function($scope){
-    $scope.imgs = [
-        {
-            "id": 1,
-            "url": "img/homes/home_pic1.png",
-            "title": "Bike One"
-        },
-        {
-            "id": 2,
-            "url": "img/homes/home_pic2.png",
-            "title": "Bike Two"
-        },
-        {
-            "id": 3,
-            "url": "img/homes/home_pic3.png",
-            "title": "Bike Three"
-        }
-    ];
-});
-ionicCtrl.controller('bikeCtrl',function($scope){
-    $scope.bikes = [
-        {
-            "id": 1,
-            "url": "img/bikes/road.png",
-            "title": " 公路车",
-            "surplus": 12,
-            "total": 50,
-            "href": "#"
-        },
-        {
-            "id": 2,
-            "url": "img/bikes/flatbed.png",
-            "title": "平板车",
-            "surplus": 8,
-            "total": 50,
-            "href": "#"
-        },
-        {
-            "id": 3,
-            "url": "img/bikes/mountain.png",
-            "title": "山地车",
-            "surplus": 10,
-            "total": 50,
-            "href": "#/bike/rentBike/3"
-        },
-        {
-            "id": 4,
-            "url": "img/bikes/electric.png",
-            "title": "电动车",
-            "surplus": 13,
-            "total": 50,
-            "href": "#"
-        }
-    ];
-});
+
+ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
+    function($scope, imgSer){
+        $scope.imgs = [
+            {
+                "imgLink": "",
+                "imgUrl": "img/homes/home_pic1.png",
+                "imgTitle": "Bike One"
+            },
+            {
+                "imgLink": 2,
+                "imgUrl": "img/homes/home_pic2.png",
+                "imgTitle": "Bike Two"
+            },
+            {
+                "imgLink": 3,
+                "imgUrl": "img/homes/home_pic3.png",
+                "imgTitle": "Bike Three"
+            }
+        ];
+}]);
+
+ionicCtrl.controller('rentBikeCtrl', ['$scope', '$stateParams', 'lenderSer', 'bikeTypeSer',
+    function($scope, $stateParams, lenderSer, bikeTypeSer){
+        lenderSer.get({lender_id: $stateParams.lender_id}, function(data){
+            $scope.rentStop = data;
+        });
+        bikeTypeSer.query({lender_id: $stateParams.lender_id}, function(data){
+            $scope.bikes = data.types;
+        });
+}]);
+
+ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
+    function($scope, $stateParams, bikeTypeSer){
+        bikeTypeSer.get(
+            {lender_id: $stateParams.lender_id, bike_type_id: $stateParams.bike_type_id},
+            function(data){
+                $scope.bike = data;
+        });
+}]);
+
+
+
+
+
+
 ionicCtrl.controller('successCtrl',function($scope){
      $scope.fails = [{
         "id": 1,
