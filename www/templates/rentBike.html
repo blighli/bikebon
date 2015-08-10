@@ -7,13 +7,13 @@
         <div class="list">
             <a class="item item-icon-left item-icon-right" href="#" style="border-top: 0px;">
                 <i class="icon ion-ios-location-outline color-83-jx"></i>
-                <span class="font-left-yxq">{{rentStop.lenderName | limitTo : 9}}...{{rentStop.lenderId}}</span>
+                <span class="font-left-yxq">{{rentStop.lenderName | limitTo : 9}}...</span>
                 <span class="item-note">{{rentStop.lenderScore}}分</span>
                 <i class="icon ion-ios-arrow-right color-83-jx"></i>
             </a>
         </div>
         <div class="list">
-            <a class="item item-thumbnail-left" href="#/bikebon/rent/{{rentStop.LenderId}}/bike/{{bike.bikeTypeId}}" ng-repeat="bike in bikes">
+            <a class="item item-thumbnail-left" href="#/bikebon/rentBike/{{bike.bikeTypeId}}" ng-repeat="bike in bikes">
                 <img src={{bike.bikeTypePhotoUrl}} />
                 <h2>{{bike.bikeTypeName}}&nbsp;&nbsp;&nbsp;<span class="color-b3-jx">{{bike.BikeTypeScore}}分</span></h2>
                 <br />

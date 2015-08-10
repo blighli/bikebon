@@ -3,11 +3,11 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var ionicApp = angular.module('starter', ['ionic',"starter.services","starter.controllers","starter.directives","ngResource"]);
+var ionicApp = angular.module('starter', ['ionic','starter.values', "starter.services","starter.controllers","starter.directives","ngResource"]);
 
-ionicApp.value('baseUrl', 'http://bike.liqilei.com:2444/api/v1.0');
-
-ionicApp.run(function($ionicPlatform) {
+ionicApp.run(function($ionicPlatform, $localStorage) {
+  $localStorage.set("name","13056961943");
+  $localStorage.set("pwd","000000");
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -66,8 +66,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
           }
         }
       })
-      .state('bikebon.rent',{
-        url: '/rent/:lender_id',
+      .state('bikebon.rentBike',{
+        url: '/rentBike',
         views: {
           'bike-rentBike': {
             templateUrl: 'templates/rentBike.html',
@@ -76,7 +76,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider,$ionicConfigProvider
         }
       })
       .state('bikebon.bikeList',{
-          url: '/rent/:lender_id/bike/:bike_type_id',
+          url: '/rentBike/:bike_type_id',
           views: {
               'bike-rentBike': {
                   templateUrl: 'templates/main/bikeDetail.html',

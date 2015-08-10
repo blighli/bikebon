@@ -7,29 +7,22 @@
             <button class="button button-clear" menu-toggle="right">地图</button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-content>
-        <ion-slide-box does-continue="true" auto-play="true">
-            <ion-slide ng-repeat="img in imgs">
-                <div class="slide-box pic-200-yxq" style="background: url({{img.imgUrl}}) no-repeat center;">
-                </div>
-            </ion-slide>
-        </ion-slide-box>
-        <div class="home-line-yxq">
-            <div class = "row">
-                <a class = "col col-50 text-center home-up-yxq" href="#">
-                    <img src="img/homes/rentCar.png" /><br />立即租车
-                </a>
-                <a class = "col col-50 text-center home-up-yxq" href="#/bikebon/rent/1">
-                    <img src="img/homes/beforeRent.png"><br />预约租车
-                </a>
+    <ion-content scrollbar-y="false">
+        <div class="home">
+            <ion-slide-box does-continue="true" auto-play="true" show-pager="true">
+                <ion-slide ng-repeat="img in imgs">
+                    <div class="slide-box">
+                        <img src={{img.imgUrl}} />
+                    </div>
+                </ion-slide>
+            </ion-slide-box>
+            <div class="home-middle">
+                <img src="img/homes/rentCar.png">
             </div>
-            <div class = "row">
-                <a class = "col col-50 text-center home-down-yxq" href="#/mySchedule">
-                    <img src="img/homes/trip.png"><br />当前行程
-                </a>
-                <a class = "col col-50 text-center home-down-yxq" href="#">
-                    <img src="img/homes/activity.png"><br />最新活动
-                </a>
+            <div class="home-bottom">
+                <a class="home-bottom-img" href="#/bikebon/rentBike"><img src="img/homes/beforeRent.png"></a>
+                <div class="home-bottom-img"><img src="img/homes/activity.png"></div>
+                <a class="home-bottom-img" href="#/mySchedule"><img src="img/homes/trip.png"></a>
             </div>
         </div>
     </ion-content>

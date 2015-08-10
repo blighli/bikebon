@@ -10,52 +10,73 @@
     margin-top: 10px;
     margin-right: 10px;
 }
-.home-line-yxq{
-    background: url(../img/line/line.png) center no-repeat;
-    margin-top: 20px;
+.home{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    padding-bottom: 0px;
 }
-.home-up-yxq{
-    padding-bottom: 25px;
-    text-decoration: none;
-    color: black;
+.slide-box img{
+    width: 100%;
+    height: auto;
 }
-.home-down-yxq{
-    padding-top: 30px;
-    text-decoration: none;
-    color: black;
+.home-middle{
+    margin-bottom: 0px;
 }
-.coupon-bg-yxq{
+.home-middle img{
+    width: 100%;
+    height: auto;
+    padding: 0px 6px 0 6px;
+}
+.home-bottom{
+    margin:0 6px;
+    overflow: hidden;
+}
+.home-bottom-img{
+    width: 33.33333333%;
+    height: auto;
+    float: left;
+}
+.home-bottom-img img{
+    width: 100%;
+    height:auto;
+
+}
+.coupon-bg-gj{
     margin-bottom: 10px;
-    width: 340px;
-    height: 105px;
+    height: auto;
     background: url("../img/coupon.png") no-repeat center;
+    background-position: center;
+    margin-left: 10px;
+    margin-right: 10px;
+
 }
-.coupon-font2-xk{
+.coupon-font2-gj{
     position: relative;
-    top: 60px;
-    left: 36px;
+    top: 50px;
+    left: -113px;
     font-size: 24px;
     color: #90B622;
 }
-.coupon-font3-xk{
+.coupon-font3-gj{
     position: relative;
-    top: 22.5px;
-    left: 55px;
+    top: 12.5px;
+    left: -80px;
     font-size: 70px;
     color: #90B622;
 }
-.coupon-font4-xk{
+.coupon-font4-gj{
     position: relative;
-    top: 0px;
-    left: 110px;
+    top: -15px;
+    left: 35px;
     font-size: 15px;
     color: #111111;
 
 }
-.coupon-font5-xk{
+.coupon-font5-gj{
     position: relative;
-    top: 4px;
-    left: 110px;
+    top: -11px;
+    left: 35px;
     font-size: 12px;
     color: #999;
 }
@@ -68,24 +89,6 @@
 .order-span-f{
     font-size: 12px;
     color: #808080;
-}
-.order-divs-f{
-    width: 150px;
-    height: 75px;
-    position: absolute;
-    top: 12px;
-    right: 0;
-    text-align: right;
-}
-.order-p-f{
-    font-size: 12px;
-    padding-right: 12px;
-}
-.order-div-f{
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    padding-right: 12px;
 }
 .mySays-div-yxq{
     background: #FFFFFF;
@@ -154,6 +157,7 @@
 .find-div-right{
     margin-left: 65px;
     height: 100%;
+    padding-right: 5px;
 }
 .find-icon-chat{
     text-align: right;
@@ -268,7 +272,9 @@
     height: 40px;
 }
 .text-left{
-    text-align: left;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 .text-center{
     text-align:center;

@@ -2,7 +2,7 @@ var ionicCtrl = angular.module("starter.controllers",[]);
 
 ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
     function($scope, imgSer){
-        $scope.imgs = [
+/*        $scope.imgs = [
             {
                 "imgLink": "",
                 "imgUrl": "img/homes/home_pic1.png",
@@ -18,15 +18,18 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
                 "imgUrl": "img/homes/home_pic3.png",
                 "imgTitle": "Bike Three"
             }
-        ];
+        ];*/
+        imgSer.query({}, function(data){
+           $scope.imgs = data.imgs;
+        });
 }]);
 
-ionicCtrl.controller('rentBikeCtrl', ['$scope', '$stateParams', 'lenderSer', 'bikeTypeSer',
-    function($scope, $stateParams, lenderSer, bikeTypeSer){
-        lenderSer.get({lender_id: $stateParams.lender_id}, function(data){
+ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer',
+    function($scope, lenderSer, bikeTypeSer){
+        lenderSer.get({}, function(data){
             $scope.rentStop = data;
         });
-        bikeTypeSer.query({lender_id: $stateParams.lender_id}, function(data){
+        bikeTypeSer.query({}, function(data){
             $scope.bikes = data.types;
         });
 }]);
@@ -34,14 +37,11 @@ ionicCtrl.controller('rentBikeCtrl', ['$scope', '$stateParams', 'lenderSer', 'bi
 ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
     function($scope, $stateParams, bikeTypeSer){
         bikeTypeSer.get(
-            {lender_id: $stateParams.lender_id, bike_type_id: $stateParams.bike_type_id},
+            {bike_type_id: $stateParams.bike_type_id},
             function(data){
                 $scope.bike = data;
         });
 }]);
-
-
-
 
 
 
