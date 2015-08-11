@@ -132,6 +132,10 @@
     padding-top: 8px;
     padding-bottom: 20px;
 }
+.rentBike-bg-gj{
+    background-color: #f2f2f2;
+    position: relative;
+}
 .find-user-name{
     color: #ffffff;
     margin-top: -20px;
@@ -177,6 +181,9 @@
 .color-83-jx{
     color: #808383;
 }
+.color-83-gj{
+    color: white;
+}
 .color-59-jx{
     color: #595959;
 }
@@ -187,8 +194,9 @@
     background-color: #f2f2f2;
 }
 .font-left-yxq {
-    float: left;
-    color: #808383;
+    width: 100%;
+    padding-left: 50px;
+    color: white;
     font-size: 15px;
 }
 .font-50-yxq{
@@ -228,6 +236,42 @@
     border: 0;
     background-color: #e6e6e6;
     height: 1px;
+}
+.rentBike-300-gj{
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+
+}
+.rentBike-300-gj img{
+    width: 100%;
+    height: auto;
+
+}
+.rentBike-items-gj{
+    width: 100%;
+    padding: 10px 0;
+}
+.rentBike-item-gj{
+    color: white;
+    padding-right: 35px;
+}
+.rentBike-light-gj{
+    padding: 10px 0;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 100;
+}
+.rentBike-light-gj a{
+    text-decoration: none;
+    color: white;
+
 }
 .pic-200-yxq{
     width: 100%;
