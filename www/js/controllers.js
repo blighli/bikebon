@@ -2,7 +2,7 @@ var ionicCtrl = angular.module("starter.controllers",[]);
 
 ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
     function($scope, imgSer){
-/*        $scope.imgs = [
+        $scope.imgs = [
             {
                 "imgLink": "",
                 "imgUrl": "img/homes/home_pic1.png",
@@ -18,10 +18,10 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
                 "imgUrl": "img/homes/home_pic3.png",
                 "imgTitle": "Bike Three"
             }
-        ];*/
-        imgSer.query({}, function(data){
+        ];
+       /* imgSer.query({}, function(data){
            $scope.imgs = data.imgs;
-        });
+        });*/
 }]);
 
 ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer',
