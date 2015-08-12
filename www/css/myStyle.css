@@ -1,5 +1,28 @@
+.actionSheets .action-sheet-backdrop.active {
+    background-color: rgba(0, 0, 0, 0.2); }
+.actionSheets .action-sheet {
+    margin: 0; }
+.actionSheets .action-sheet .action-sheet-title, .platform-android .action-sheet .button {
+    text-align: left;
+    border-color: transparent;
+    font-size: 16px;
+    color: inherit; }
+.actionSheets .action-sheet .action-sheet-title {
+    font-size: 14px;
+    padding: 16px;
+    color: #666; }
+.actionSheets .action-sheet .button.active, .platform-android .action-sheet .button.activated {
+    background: #e8e8e8; }
+.actionSheets .action-sheet-group {
+    margin: 0;
+    border-radius: 0;
+    background-color: #fafafa; }
+.actionSheets .action-sheet-cancel {
+    display: none; }
+.actionSheets .action-sheet-has-icons .button {
+    padding-left: 56px; }
 .login-bg-yxq{
-    background: url(../img/bg/bg.jpg) no-repeat center;
+    background: url(../img/bg.jpg) no-repeat center;
     text-align: center;
     padding-top: 100px;
 }
@@ -39,6 +62,114 @@
     width: 100%;
     height:auto;
 
+}
+.rentBike-bg-gj{
+    background-color: #f2f2f2;
+    position: relative;
+}
+.rentBike-300-gj{
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
+
+}
+.rentBike-300-gj img{
+    width: 100%;
+    height: auto;
+
+}
+.rentBike-items-gj{
+    width: 100%;
+    padding: 10px 0;
+}
+.rentBike-item-gj{
+    color: white;
+    padding-right: 0px;
+}
+.rentBike-light-gj{
+    padding: 10px 0;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    background-color: black;
+    opacity: 0.5;
+    z-index: 100;
+}
+.rentBike-light-gj a{
+    text-decoration: none;
+    color: white;
+}
+.schedule-div-up{
+    background: #ffffff;
+    margin-bottom: 15px;
+    border-bottom: 1px #cccccc solid;
+}
+.schedule-inDiv-up{
+    text-align: center;
+    padding-top:10px;
+    padding-bottom:15px;
+}
+.schedule-div-down{
+    margin-top: 15px;
+    border-top: 1px #cccccc solid;
+    border-bottom: 1px #cccccc solid;
+    background: #ffffff;
+    padding-top: 10px;
+}
+.schedule-div-downUp{
+    padding-top: 25px;
+    padding-left: 25px;
+    padding-bottom: 18px;
+}
+.schedule-div-downDown{
+    padding-left: 25px;
+    padding-top: 8px;
+    padding-bottom: 20px;
+}
+.find-user-name{
+    color: #ffffff;
+    margin-top: -20px;
+    text-align: right;
+    padding-right: 63px;
+}
+.find-user-pic{
+    text-align: right;
+    margin-top: -25px;
+}
+.find-act-pic{
+    height: 80px;
+    width: auto;
+}
+.find-div-left{
+    position: absolute;
+    left: 15px;
+    width: 50px;
+    height: 100%;
+}
+.find-div-right{
+    margin-left: 65px;
+    height: 100%;
+    padding-right: 5px;
+}
+.find-icon-chat{
+    text-align: right;
+    margin-right: 20px;
+    padding: 0px;
+}
+.find-content{
+    background: #f2f2f2;
+    font-size: 13px;
+    margin-right: 20px;
+    padding-right: 2px;
+}
+.mySays-div-yxq{
+    background: #FFFFFF;
+    padding-left: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 .coupon-bg-gj{
     margin-bottom: 10px;
@@ -88,12 +219,6 @@
     font-size: 12px;
     color: #808080;
 }
-.mySays-div-yxq{
-    background: #FFFFFF;
-    padding-left: 20px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-}
 .evaluate-div-yxq{
     padding-top: 15px;
     padding-bottom: 15px;
@@ -104,73 +229,6 @@
     color: #808080;
     background: #f2f2f2;
     font-size: 12px;
-}
-.schedule-div-up{
-    background: #ffffff;
-    margin-bottom: 15px;
-    border-bottom: 1px #cccccc solid;
-}
-.schedule-inDiv-up{
-    text-align: center;
-    padding-top:10px;
-    padding-bottom:15px;
-}
-.schedule-div-down{
-    margin-top: 15px;
-    border-top: 1px #cccccc solid;
-    border-bottom: 1px #cccccc solid;
-    background: #ffffff;
-    padding-top: 10px;
-}
-.schedule-div-downUp{
-    padding-top: 25px;
-    padding-left: 25px;
-    padding-bottom: 18px;
-}
-.schedule-div-downDown{
-    padding-left: 25px;
-    padding-top: 8px;
-    padding-bottom: 20px;
-}
-.rentBike-bg-gj{
-    background-color: #f2f2f2;
-    position: relative;
-}
-.find-user-name{
-    color: #ffffff;
-    margin-top: -20px;
-    text-align: right;
-    padding-right: 63px;
-}
-.find-user-pic{
-    text-align:right;
-    margin-top:-25px;
-}
-.find-act-pic{
-    height: 80px;
-    width: auto;
-}
-.find-div-left{
-    position: absolute;
-    left: 15px;
-    width: 50px;
-    height: 100%;
-}
-.find-div-right{
-    margin-left: 65px;
-    height: 100%;
-    padding-right: 5px;
-}
-.find-icon-chat{
-    text-align: right;
-    margin-right: 20px;
-    padding: 0px;
-}
-.find-content{
-    background: #f2f2f2;
-    font-size: 13px;
-    margin-right: 20px;
-    padding-right: 2px;
 }
 .button-none{
     border: none;
@@ -236,42 +294,6 @@
     border: 0;
     background-color: #e6e6e6;
     height: 1px;
-}
-.rentBike-300-gj{
-    width: 100%;
-    height: auto;
-    padding: 0;
-    margin: 0;
-
-}
-.rentBike-300-gj img{
-    width: 100%;
-    height: auto;
-
-}
-.rentBike-items-gj{
-    width: 100%;
-    padding: 10px 0;
-}
-.rentBike-item-gj{
-    color: white;
-    padding-right: 35px;
-}
-.rentBike-light-gj{
-    padding: 10px 0;
-    width: 100%;
-    height: auto;
-    position: absolute;
-    bottom: 5px;
-    left: 0;
-    background-color: black;
-    opacity: 0.5;
-    z-index: 100;
-}
-.rentBike-light-gj a{
-    text-decoration: none;
-    color: white;
-
 }
 .pic-200-yxq{
     width: 100%;
@@ -347,7 +369,6 @@
 .padding-2-left{
     padding-left: 2px;
 }
-
 
 
 

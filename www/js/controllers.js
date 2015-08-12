@@ -5,17 +5,17 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
         $scope.imgs = [
             {
                 "imgLink": "",
-                "imgUrl": "img/homes/home_pic1.png",
+                "imgUrl": "img/home/home_pic1.jpg",
                 "imgTitle": "Bike One"
             },
             {
                 "imgLink": 2,
-                "imgUrl": "img/homes/home_pic2.png",
+                "imgUrl": "img/home/home_pic2.jpg",
                 "imgTitle": "Bike Two"
             },
             {
                 "imgLink": 3,
-                "imgUrl": "img/homes/home_pic3.png",
+                "imgUrl": "img/home/home_pic3.jpg",
                 "imgTitle": "Bike Three"
             }
         ];
@@ -43,7 +43,25 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
         });
 }]);
 
-
+ionicCtrl.controller('identityCtrl', ['$scope', '$ionicActionSheet',
+    function($scope, $ionicActionSheet){
+        $scope.show = function(){
+           var hideSheet = $ionicActionSheet.show({
+               buttons: [
+                   {text: '拍照'},
+                   {text: '从相册选择'}
+               ],
+               cancelText: '取消',
+               cancel: function(){
+                   hideSheet();
+               },
+               buttonClicked: function(index){
+                   return true;
+               }
+           });
+        }
+    }
+]);
 
 ionicCtrl.controller('successCtrl',function($scope){
      $scope.fails = [{
@@ -68,6 +86,7 @@ ionicCtrl.controller('successCtrl',function($scope){
         "description": "该车型已被抢光，请选其他车型"
     }];
 });
+
 ionicCtrl.controller('incomeCtrl',function($scope){
     $scope.expense = [{
         "id": 1,
