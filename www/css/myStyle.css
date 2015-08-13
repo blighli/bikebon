@@ -1,30 +1,7 @@
-.actionSheets .action-sheet-backdrop.active {
-    background-color: rgba(0, 0, 0, 0.2); }
-.actionSheets .action-sheet {
-    margin: 0; }
-.actionSheets .action-sheet .action-sheet-title, .platform-android .action-sheet .button {
-    text-align: left;
-    border-color: transparent;
-    font-size: 16px;
-    color: inherit; }
-.actionSheets .action-sheet .action-sheet-title {
-    font-size: 14px;
-    padding: 16px;
-    color: #666; }
-.actionSheets .action-sheet .button.active, .platform-android .action-sheet .button.activated {
-    background: #e8e8e8; }
-.actionSheets .action-sheet-group {
-    margin: 0;
-    border-radius: 0;
-    background-color: #fafafa; }
-.actionSheets .action-sheet-cancel {
-    display: none; }
-.actionSheets .action-sheet-has-icons .button {
-    padding-left: 56px; }
 .login-bg-yxq{
     background: url(../img/bg.jpg) no-repeat center;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 25%;
 }
 .login-cancel-yxq{
     position: fixed;
@@ -70,32 +47,30 @@
 .rentBike-300-gj{
     width: 100%;
     height: auto;
-    padding: 0;
-    margin: 0;
-
 }
 .rentBike-300-gj img{
     width: 100%;
     height: auto;
-
 }
 .rentBike-items-gj{
     width: 100%;
     padding: 10px 0;
+    overflow: hidden;
 }
 .rentBike-item-gj{
+    float: right;
     color: white;
-    padding-right: 0px;
+    padding-right:40px;
 }
 .rentBike-light-gj{
     padding: 10px 0;
     width: 100%;
     height: auto;
     position: absolute;
-    bottom: 5px;
+    bottom: -1px;
     left: 0;
     background-color: black;
-    opacity: 0.5;
+    opacity: 0.7;
     z-index: 100;
 }
 .rentBike-light-gj a{
@@ -132,6 +107,12 @@
 .find-user-name{
     color: #ffffff;
     margin-top: -20px;
+    text-align: right;
+    padding-right: 63px;
+}
+.find-user-name-gj{
+    color: #ffffff;
+    margin-top: -30px;
     text-align: right;
     padding-right: 63px;
 }
@@ -254,6 +235,7 @@
 .font-left-yxq {
     width: 100%;
     padding-left: 50px;
+    /*padding-right: 90px;*/
     color: white;
     font-size: 15px;
 }
@@ -278,12 +260,18 @@
 .font-16-yxq{
     font-size: 16px;
 }
+.font-16-gj{
+    font-size: 16px;
+    color: black;
+    opacity: 0.9;
+}
 .font-15-yxq{
     font-size: 15px;
 }
 .font-14-yxq{
     font-size: 14px;
 }
+
 .font-13-yxq{
     font-size: 13px;
 }
@@ -298,6 +286,31 @@
 .pic-200-yxq{
     width: 100%;
     height: 200px;
+}
+.pic-200-yxq img{
+    width: 100%;
+    height: auto;
+}
+.pic-50-yxq{
+    width: 50px;
+    height: 50px;
+    opacity: 0.9;
+}
+.pic-200-gj{
+    width: 100%;
+    height:auto;
+    position: relative;
+}
+.pic-200-gj img{
+    width: 100%;
+    height: auto;
+}
+.font-14-gj{
+    font-size: 14px;
+    color: #595959;
+    position: absolute;
+    left: 38%;
+    top: 42%;
 }
 .pic-100-yxq{
     width: 100%;
@@ -327,10 +340,7 @@
     width: 75px;
     height: 75px;
 }
-.pic-50-yxq{
-    width: 50px;
-    height: 50px;
-}
+
 .pic-40-yxq{
     width: 40px;
     height: 40px;
@@ -368,6 +378,82 @@
 }
 .padding-2-left{
     padding-left: 2px;
+}
+.ios-actionSheet .action-sheet-backdrop{
+    -webkit-transition: background-color 150ms ease-in-out;
+    transition: background-color 150ms ease-in-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 11;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+.ios-actionSheet .action-sheet-backdrop.active{
+    background-color:rgba(0,0,0,0.5);
+}
+.ios-actionSheet .action-sheet-wrapper{
+    -webkit-transform: translate3d(0,100%,0);
+    transform: translate3d(0,100%,0);
+    -webkit-transition: all cubic-bezier(.36,.66,.04,1) 500ms;
+    transition: all cubic-bezier(.36,.66,.04,1) 500ms;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+}
+.ios-actionSheet .action-sheet-up{
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+}
+.ios-actionSheet .action-sheet{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: auto;
+    z-index: 11;
+    overflow: hidden;
+}
+.ios-actionSheet .action-sheet .button{
+    display: block;
+    padding: 1px;
+    width: 100%;
+    border-radius: 0;
+    border-color: #d1d3d6;
+    background-color: transparent;
+    color: #595959;
+    font-size: 21px;
+    text-align: center;
+}
+.ios-actionSheet .action-sheet .button:hover{
+    color: black;
+}
+.ios-actionSheet .action-sheet .button.activated,.action-sheet .button.active{
+    box-shadow: none;
+    border-color: #d1d3d6;
+    color: black;
+    background: #e4e5e7;
+}
+.ios-actionSheet .action-sheet-group{
+    margin-bottom: 8px;
+    border-radius: 4px;
+    background-color: #fff;
+    overflow: hidden;
+}
+.ios-actionSheet .action-sheet-group .button{
+    border-width: 1px 0 0;
+}
+.ios-actionSheet .action-sheet-group .button:first-child:last-child{
+    border-width: 0;
+}
+.ios-actionSheet .action-sheet-options{
+    background: #f1f2f3;
+}
+.ios-actionSheet .action-sheet-cancel .button{
+    font-weight: 500;
 }
 
 

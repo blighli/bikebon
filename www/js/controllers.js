@@ -52,6 +52,7 @@ ionicCtrl.controller('identityCtrl', ['$scope', '$ionicActionSheet',
                    {text: '从相册选择'}
                ],
                cancelText: '取消',
+               cssClass: 'ios-actionSheet',
                cancel: function(){
                    hideSheet();
                },
