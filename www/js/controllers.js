@@ -1,5 +1,13 @@
 var ionicCtrl = angular.module("starter.controllers",[]);
 
+ionicCtrl.controller('loginCtrl',['$scope', '$http', function($scope, $http){
+    console.log("Come in loginCtrl");
+    $scope.getCode = function(phoneNum){
+        console.log("phoneNum:" + phoneNum);
+        $http.post("http://bike.liqilei.com:2444/api/v1.0/user/confirm_num",{"phone_number": phoneNum});
+    }
+}]);
+
 ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
     function($scope, imgSer){
         $scope.imgs = [
