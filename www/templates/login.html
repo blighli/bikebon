@@ -1,15 +1,17 @@
 <ion-view hide-nav-bar="true">
-<ion-content class="login-bg-yxq" >
+<ion-content scrollbar-y="false" class="login-bg-yxq" >
     <img class="pic-95-yxq" src="img/icon.png"/>
     <br />
     <div class="list">
-        <label class="item item-input">
-            <input type="number" placeholder="请输入您的手机号码" />
-        </label>
-        <label class="item item-input">
-            <input type="text" placeholder="请输入验证码" />
-            <span class="balanced font-15-yxq" style="padding-right: 15px;">获取验证码</span>
-        </label>
+        <div class="item item-input">
+            <input type="number" ng-model="phoneNum" placeholder="请输入您的手机号码" />
+        </div>
+        <div class="item item-input">
+            <input type="number" placeholder="请输入验证码" />
+            <button class="button button-small button-clear button-balanced font-15-yxq" style="margin-top:-2px;padding-right: 15px;" ng-click="getCode(phoneNum)">
+                获取验证码
+            </button>
+        </div>
         <div class="margin-10-yxq" style="margin-top: 20px;">
             <a class="button button-block button-balanced" style="border:none;" href="#/bikebon/home">
                 登录
