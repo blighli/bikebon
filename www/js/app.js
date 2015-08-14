@@ -168,5 +168,5 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
               }
           }
       });
-  $urlRouterProvider.otherwise("/login");
+  $urlRouterProvider.otherwise("/bikebon/home");
 });

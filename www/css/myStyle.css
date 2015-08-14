@@ -5,7 +5,7 @@
 }
 .login-cancel-yxq{
     position: fixed;
-    bottom: 15px;
+    top:95%;
     right: 15px;
 }
 .home{
@@ -340,7 +340,10 @@
     width: 75px;
     height: 75px;
 }
-
+.pic-65-yxq{
+    width: 65px;
+    height: 65px;
+}
 .pic-40-yxq{
     width: 40px;
     height: 40px;
@@ -378,6 +381,12 @@
 }
 .padding-2-left{
     padding-left: 2px;
+}
+.item-divider-yxq {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    min-height: 15px;
+    background-color: #f2f2f2;
 }
 .ios-actionSheet .action-sheet-backdrop{
     -webkit-transition: background-color 150ms ease-in-out;
