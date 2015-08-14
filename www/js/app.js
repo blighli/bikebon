@@ -90,7 +90,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
         url: '/mine',
         views: {
           'bike-mine': {
-            templateUrl: 'templates/mine.html'
+            templateUrl: 'templates/mine-registration.html'
           }
         }
       })
