@@ -369,6 +369,13 @@
     width: 60px;
     height: 60px;
 }
+.photo-gj-w img{
+    position: absolute;
+    left: 20px;
+    top: 9px;
+    width: 60px;
+    height: 60px;
+}
 .img-right-gj{
     position: absolute;
     top: 48px;
