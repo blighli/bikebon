@@ -6,15 +6,15 @@
             </div>
             <div class="rentBike-light-gj">
                 <a class="rentBike-items-gj item-icon-left item-icon-right" href="#" style="border-top: 0px;">
-                    <i class="icon ion-ios-location-outline color-83-gj"></i>
+                    <i class="icon ion-ios-location-outline light"></i>
                     <span class="font-left-yxq">{{rentStop.lenderName | limitTo : 9}}...</span>
                     <span class="rentBike-item-gj">{{rentStop.lenderScore}}分</span>
-                    <i class="icon ion-ios-arrow-right color-83-gj"></i>
+                    <i class="icon ion-ios-arrow-right light"></i>
                 </a>
             </div>
         </div>
 
-        <div class="list gittop">
+        <div class="list margin-06-top">
             <a class="item item-thumbnail-left" href="#/bikebon/rentBike/{{bike.bikeTypeId}}" ng-repeat="bike in bikes">
                 <img src={{bike.bikeTypePhotoUrl}} />
                 <h2>{{bike.bikeTypeName}}&nbsp;&nbsp;&nbsp;<span class="color-b3-jx">{{bike.BikeTypeScore}}分</span></h2>
