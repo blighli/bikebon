@@ -31,7 +31,7 @@
     overflow: hidden;
 }
 .home-bottom-img{
-    width: 33.33333333%;
+    width: 33.333333333333333333333%;
     height: auto;
     float: left;
 }
@@ -345,17 +345,13 @@
 .img-gj{
     position:relative;
 }
+.item-thumbnail-left{
+    height: 85px;
+}
 .photo-gj img{
     position: absolute;
     left: 20px;
-    top: 15px;
-    width: 60px;
-    height: 60px;
-}
-.photo-gj-w img{
-    position: absolute;
-    left: 20px;
-    top: 9px;
+    top: 11px;
     width: 60px;
     height: 60px;
 }
