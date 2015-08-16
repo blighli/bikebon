@@ -6,8 +6,9 @@
 var ionicApp = angular.module('starter', ['ionic','starter.values', "starter.services","starter.controllers","starter.directives","ngResource"]);
 
 ionicApp.run(function($ionicPlatform, $localStorage) {
-  $localStorage.set("name","13056961943");
-  $localStorage.set("pwd","000000");
+  $localStorage.set("token","");
+  $localStorage.set("loginFlag", false);
+  $localStorage.set("verifyFlag", false);
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -90,7 +91,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
         url: '/mine',
         views: {
           'bike-mine': {
-            templateUrl: 'templates/mine-registration.html'
+            templateUrl: 'templates/mine.html',
+            controller: 'mineCtrl'
           }
         }
       })

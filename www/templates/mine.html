@@ -8,14 +8,21 @@
     </ion-nav-bar>
     <ion-content class="has-header" scrollbar-y="false">
         <ion-list>
-            <ion-item class="item-thumbnail-left item-icon-right img-gj">
+            <ion-item class="item-thumbnail-left img-gj item-icon-right">
                 <div class="photo-gj"><img src="img/headShow/defaultUser_1.png" /></div>
-                <div class="item-center-yxq margin-12-top">
+                <div class="item-center-yxq margin-22-top" ng-show="!loginFlag">
+                    <a class="balanced font-18-gj text-none-gj" href="#/login">立即登录</a>
+                </div>
+                <div class="item-center-yxq margin-12-top" ng-show="loginFlag&&!verifyFlag">
                     <div class="margin-6-bottom font-17-yxq">最讨厌想昵称</div>
                     <span class="font-14-yxq color-b3-jx" style="margin-right:7px;">未认证用户</span>
                     <a class="font-14-yxq balanced text-none-gj" href="#/bikebon/identity">立即认证</a>
                 </div>
-                <i class="icon ion-ios-arrow-right img-right-gj" ></i>
+                <div class="item-center-yxq margin-12-top" ng-show="loginFlag&&verifyFlag">
+                    <div class="margin-6-bottom font-17-yxq">最讨厌想昵称</div>
+                    <div class="font-14-yxq balanced text-none-gj">已认证用户{{loginFlag}}{{verifyFlag}}</div>
+                </div>
+                <i class="icon ion-ios-arrow-right img-right-gj" ng-show="loginFlag"></i>
             </ion-item>
             <ion-item class="item-divider-yxq"></ion-item>
             <ion-item class="item-icon-left item-icon-right" href="#/bikebon/myPurse" >

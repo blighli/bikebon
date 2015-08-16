@@ -1,11 +1,45 @@
 var ionicCtrl = angular.module("starter.controllers",[]);
 
-ionicCtrl.controller('loginCtrl',['$scope', '$http', function($scope, $http){
-    console.log("Come in loginCtrl");
-    $scope.getCode = function(phoneNum){
-        console.log("phoneNum:" + phoneNum);
-        $http.post("http://bike.liqilei.com:2444/api/v1.0/user/confirm_num",{"phone_number": phoneNum});
-    }
+ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$state',
+    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $state){
+        $scope.getCode = function(flag, phone){
+            if(true == flag){
+                $http.post("http://bike.liqilei.com:2444/api/v1.0/user/confirm_num",{"phone_number": phone});
+            }else{
+                var myPopup = $ionicPopup.show({title: '手机号码输入有误,请重新输入～'});
+                $timeout(function(){
+                    myPopup.close();
+                }, 2500);
+            }
+        };
+        $scope.login = function(flag, phone, pwd){
+            if(true == flag){
+                $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(phone + ':' + pwd);
+                $http.get('http://bike.liqilei.com:2444/api/v1.0/user').success(function(){
+                    $http.get('http://bike.liqilei.com:2444/api/v1.0/get_token')
+                        .success(function(data){
+                            $localStorage.set("token", data.token);
+                            $localStorage.set("loginFlag", true);
+                            $state.go('/bikebon/mine');
+                        }).error(function(){
+                            var p = $ionicPopup.show({title: '登录失败，请重新登录！'});
+                            $timeout(function(){
+                                p.close();
+                            }, 2500);
+                        });
+                }).error(function(){
+                    var popup = $ionicPopup.show({title: '登录失败，请重新登录～'});
+                    $timeout(function(){
+                        popup.close();
+                    }, 2500);
+                });
+            }else{
+                var myPopup = $ionicPopup.show({title: '密码不正确，请重新输入～'});
+                $timeout(function(){
+                   myPopup.close();
+                }, 2500);
+            }
+        };
 }]);
 
 ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
@@ -51,23 +85,34 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
         });
 }]);
 
+ionicCtrl.controller('mineCtrl', ['$scope', '$localStorage', function($scope, $localStorage){
+    $scope.loginFlag = ($localStorage.get('loginFlag') === "true");
+    $scope.verifyFlag = ($localStorage.get('verifyFlag') === "true");
+}]);
+
 ionicCtrl.controller('identityCtrl', ['$scope', '$ionicActionSheet',
     function($scope, $ionicActionSheet){
         $scope.show = function(){
-           var hideSheet = $ionicActionSheet.show({
-               buttons: [
-                   {text: '拍照'},
-                   {text: '从相册选择'}
-               ],
-               cancelText: '取消',
-               cssClass: 'ios-actionSheet',
-               cancel: function(){
-                   hideSheet();
-               },
-               buttonClicked: function(index){
-                   return true;
-               }
-           });
+            var hideSheet = $ionicActionSheet.show({
+                buttons: [
+                    {text: '拍照'},
+                    {text: '从相册选择'}
+                ],
+                cancelText: '取消',
+                cssClass: 'ios-actionSheet',
+                cancel: function(){
+                    hideSheet();
+                },
+                buttonClicked: function(index){
+                    if(index == 0){
+                        console.log("拍照");
+                    }
+                    if(index == 1){
+                        console.log("从相册选择");
+                    }
+                    return true;
+                }
+            });
         }
     }
 ]);
