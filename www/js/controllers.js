@@ -1,7 +1,7 @@
 var ionicCtrl = angular.module("starter.controllers",[]);
 
-ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$state',
-    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $state){
+ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$location',
+    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $location){
         $scope.getCode = function(flag, phone){
             if(true == flag){
                 $http.post("http://bike.liqilei.com:2444/api/v1.0/user/confirm_num",{"phone_number": phone});
@@ -20,7 +20,8 @@ ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', 
                         .success(function(data){
                             $localStorage.set("token", data.token);
                             $localStorage.set("loginFlag", true);
-                            $state.go('/bikebon/mine');
+                            console.log("loginFlag-ls:" + $localStorage.get("loginFlag") + "verifyFlag-ls:" + $localStorage.get("verifyFlag"));
+                            $location.path('/bikebon/mine');
                         }).error(function(){
                             var p = $ionicPopup.show({title: '登录失败，请重新登录！'});
                             $timeout(function(){
@@ -40,6 +41,9 @@ ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', 
                 }, 2500);
             }
         };
+        $scope.cancelLogin = function(){
+            $location.path('/bikebon/mine');
+        }
 }]);
 
 ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
@@ -86,8 +90,10 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
 }]);
 
 ionicCtrl.controller('mineCtrl', ['$scope', '$localStorage', function($scope, $localStorage){
-    $scope.loginFlag = ($localStorage.get('loginFlag') === "true");
-    $scope.verifyFlag = ($localStorage.get('verifyFlag') === "true");
+    $scope.loginFlag = ($localStorage.get("loginFlag") === "true");
+    $scope.verifyFlag = ($localStorage.get("verifyFlag") === "true");
+    console.log("loginFlag(ls):" + $localStorage.get("loginFlag") + "verifyFlag(ls):" + $localStorage.get("verifyFlag"));
+    console.log("loginFlag:" + $scope.loginFlag + "verifyFlag:" + $scope.verifyFlag);
 }]);
 
 ionicCtrl.controller('identityCtrl', ['$scope', '$ionicActionSheet',
@@ -116,6 +122,10 @@ ionicCtrl.controller('identityCtrl', ['$scope', '$ionicActionSheet',
         }
     }
 ]);
+
+
+
+
 
 ionicCtrl.controller('successCtrl',function($scope){
      $scope.fails = [{
