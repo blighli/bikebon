@@ -1,10 +1,16 @@
 var ionicCtrl = angular.module("starter.controllers",[]);
 
-ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$location', '$rootScope',
-    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $location, $rootScope){
+/**
+ *  name：登录界面控制器（login.html）
+ *  desc：
+ *  author：yxq
+ * */
+ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$location', 'baseUrl', '$state',
+    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $location, baseUrl, $state){
+        //获取验证码
         $scope.getCode = function(flag, phone){
             if(true == flag){
-                $http.post("http://bike.liqilei.com:2444/api/v1.0/user/confirm_num",{"phone_number": phone});
+                $http.post(baseUrl + "/user/confirm_num",{"phone_number": phone});
             }else{
                 var myPopup = $ionicPopup.show({title: '手机号码输入有误,请重新输入～'});
                 $timeout(function(){
@@ -12,29 +18,20 @@ ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', 
                 }, 2500);
             }
         };
+        //验证用户是否登录[通过获取token服务判断登录是否成功，并把token存到localStorage上]
         $scope.login = function(flag, phone, pwd){
             if(true == flag){
                 $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(phone + ':' + pwd);
-                $http.get('http://bike.liqilei.com:2444/api/v1.0/user').success(function(){
-                    $http.get('http://bike.liqilei.com:2444/api/v1.0/get_token')
-                        .success(function(data){
-                            $localStorage.set("token", data.token);
-                            $localStorage.set("loginFlag", true);
-                            $rootScope.loginFlag = ($localStorage.get("loginFlag") === "true");
-                            $rootScope.verifyFlag = ($localStorage.get("verifyFlag") === "true");
-                            $location.path('/bikebon/mine');
-                        }).error(function(){
-                            var p = $ionicPopup.show({title: '登录失败，请重新登录！'});
-                            $timeout(function(){
-                                p.close();
-                            }, 2500);
-                        });
-                }).error(function(){
-                    var popup = $ionicPopup.show({title: '登录失败，请重新登录～'});
-                    $timeout(function(){
-                        popup.close();
-                    }, 2500);
-                });
+                $http.get(baseUrl + '/get_token')
+                    .success(function(data){
+                        $localStorage.set("token", data.token);
+                        $location.path('/bikebon/mine');
+                    }).error(function(){
+                        var p = $ionicPopup.show({title: '登录失败，请重新登录！'});
+                        $timeout(function(){
+                            p.close();
+                        }, 2500);
+                    });
             }else{
                 var myPopup = $ionicPopup.show({title: '密码不正确，请重新输入～'});
                 $timeout(function(){
@@ -42,11 +39,17 @@ ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', 
                 }, 2500);
             }
         };
+        //取消登录
         $scope.cancelLogin = function(){
             $location.path('/bikebon/mine');
         }
 }]);
 
+/**
+ *  name：主页界面控制器（home.html）
+ *  desc：轮播图的加载（但是图片加载后，CSS样式无法适用）
+ *  author：yxq
+ * */
 ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
     function($scope, imgSer){
         $scope.imgs = [
@@ -71,16 +74,28 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
         });*/
 }]);
 
+/**
+ *  name：租车界面控制器（rentBike.html）
+ *  desc：问题－租车点图片的加载(如主页)
+ *  author：yxq
+ * */
 ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer',
     function($scope, lenderSer, bikeTypeSer){
+        //租车点信息的获取
         lenderSer.get({}, function(data){
             $scope.rentStop = data;
         });
+        //车信息的获取
         bikeTypeSer.query({}, function(data){
             $scope.bikes = data.types;
         });
 }]);
 
+/**
+ *  name：租车详情界面控制器（main/bikeDetail.html）
+ *  desc：问题－页面标题的显示(待完善)
+ *  author：yxq
+ * */
 ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
     function($scope, $stateParams, bikeTypeSer){
         bikeTypeSer.get(
@@ -90,11 +105,41 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
         });
 }]);
 
-ionicCtrl.controller('mineCtrl', ['$rootScope', '$localStorage', function($rootScope, $localStorage){
-    $rootScope.loginFlag = ($localStorage.get("loginFlag") === "true");
-    $rootScope.verifyFlag = ($localStorage.get("verifyFlag") === "true");
+/**
+ *  name：我的界面控制器（mine.html）
+ *  desc：
+ *  author：yxq
+ * */
+ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 'baseUrl',
+    function($localStorage, $scope, $http, Base64, baseUrl){
+        var temp = $localStorage.get("token");
+        if(temp !== "undefined" && temp !== undefined){
+            $scope.loginFlag = true;
+            $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
+            $http.get(baseUrl + '/user')
+                .success(function(data){
+                    $scope.user = data;
+                    var flag = data.verifyTag;
+                    if(flag === true){
+                        $scope.verifyFlag = true;
+                        $scope.verifyMess = "已认证用户";
+                    }else{
+                        $scope.verifyFlag = false;
+                        $scope.verifyMess = "认证审核中";
+                    }
+                }).error(function(){
+                    console.log("Sorry, it has an error in mineCtrl.");
+                });
+        }else{
+            console.log("I am in false loginFlag.");
+        }
 }]);
 
+/**
+ *  name：身份认证界面控制器（mine/identity.html）
+ *  desc：仅仅实现了ActionSheet的弹出（ios取消键的取消功能，android无取消键）
+ *  author：yxq
+ * */
 ionicCtrl.controller('identityCtrl', ['$scope', '$ionicActionSheet',
     function($scope, $ionicActionSheet){
         $scope.show = function(){
@@ -124,8 +169,11 @@ ionicCtrl.controller('identityCtrl', ['$scope', '$ionicActionSheet',
 
 
 
-
-
+/**
+ *  name：所有成功失败提示界面控制器（mine/failOrSuccess.html）
+ *  desc：自己的观点－服务器端只需要返回成功或失败的标记，description要重新写
+ *  author：yxq
+ * */
 ionicCtrl.controller('successCtrl',function($scope){
      $scope.fails = [{
         "id": 1,
@@ -150,6 +198,11 @@ ionicCtrl.controller('successCtrl',function($scope){
     }];
 });
 
+/**
+ *  name：收支明细界面控制器（mine/incomeAndExpense.html）
+ *  desc：还未与服务器端进行数据交流
+ *  author：yxq
+ * */
 ionicCtrl.controller('incomeCtrl',function($scope){
     $scope.expense = [{
         "id": 1,

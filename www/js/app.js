@@ -6,9 +6,9 @@
 var ionicApp = angular.module('starter', ['ionic','starter.values', "starter.services","starter.controllers","starter.directives","ngResource"]);
 
 ionicApp.run(function($ionicPlatform, $localStorage) {
-  $localStorage.set("token","");
-  $localStorage.set("loginFlag", false);
-  $localStorage.set("verifyFlag", false);
+  if($localStorage.get("token") === "undefined" || $localStorage.get("token") === undefined){
+      $localStorage.set("token", "");
+  }
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -94,7 +94,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'templates/mine.html',
             controller: 'mineCtrl'
           }
-        }
+        },
+        cache: false
       })
       .state('bikebon.myPurse',{
         url:'/myPurse',
