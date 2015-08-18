@@ -4,8 +4,8 @@
     padding-top: 25%;
 }
 .login-cancel-yxq{
-    position: fixed;
-    top:95%;
+    position: absolute;
+    top: 95%;
     right: 15px;
 }
 .home{
@@ -27,18 +27,17 @@
     padding: 0px 6px 0 6px;
 }
 .home-bottom{
-    margin:0 6px;
+    margin: 0 6px;
     overflow: hidden;
 }
 .home-bottom-img{
-    width: 33.33333%;
+    width: 33.333333333333333333333333%;
     height: auto;
     float: left;
 }
 .home-bottom-img img{
     width: 100%;
-    height:auto;
-
+    height: auto;
 }
 .rentBike-bg-gj{
     background-color: #f2f2f2;
@@ -60,7 +59,7 @@
 .rentBike-item-gj{
     float: right;
     color: white;
-    padding-right:40px;
+    padding-right: 40px;
 }
 .rentBike-light-gj{
     padding: 10px 0;
@@ -84,8 +83,8 @@
 }
 .schedule-inDiv-up{
     text-align: center;
-    padding-top:10px;
-    padding-bottom:15px;
+    padding-top: 10px;
+    padding-bottom: 15px;
 }
 .schedule-div-down{
     margin-top: 15px;
@@ -153,40 +152,170 @@
     padding-bottom: 8px;
 }
 .coupon-bg-gj{
+    position: relative;
+    overflow: hidden;
+}
+.coupon-bg-gj img{
+    width: 100%;
+    height: auto;
+}
+.coupon-head-gj{
+    padding-bottom: 25px;
+}
+.couponx-head-gj{
+    padding-bottom: 25px;
+    padding-top: 10px;
+}
+.coupon-quan-gj{
+    padding-left: 10px;
+    font-size: 16px;
+    position: absolute;
+    left: 0px;
+}
+.coupon-add-gj{
+    padding-left: 10px;
+    font-size: 12px;
+    position: absolute;
+    left: 55px;
+    top: 2px;
+    color: #999;
+}
+.couponx-add-gj{
+    padding-left: 10px;
+    font-size: 12px;
+    position: absolute;
+    left: 90px;
+    top: 12px;
+    color: #999;
+}
+.myCoupon-word-gj{
+    width: 100%;
+    position: absolute;
+    left: 30px;
+    top: 20px;
+    margin: 0 auto;
+}
+.coupono-bg-gj{
     margin-bottom: 10px;
     height: auto;
-    background: url("../img/coupon.png") no-repeat center;
+    background: url("../img/coupono.png") no-repeat center;
     background-position: center;
     margin-left: 10px;
     margin-right: 10px;
-
 }
 .coupon-font2-gj{
-    position: relative;
-    top: 50px;
-    left: -113px;
+    position: absolute;
+    top: 65px;
+    left: 10px;
     font-size: 24px;
     color: #90B622;
 }
 .coupon-font3-gj{
-    position: relative;
-    top: 12.5px;
-    left: -80px;
-    font-size: 70px;
+    position: absolute;
+    top: 45px;
+    left: 20px;
+    font-size: 75px;
     color: #90B622;
+    margin-right: 8px;
 }
 .coupon-font4-gj{
-    position: relative;
-    top: -15px;
-    left: 35px;
-    font-size: 15px;
+    position: absolute;
+    top: 35px;
+    left: 110px;
+    font-size: 16px;
     color: #111111;
-
 }
 .coupon-font5-gj{
-    position: relative;
-    top: -11px;
-    left: 35px;
+    position: absolute;
+    top: 65px;
+    left: 112px;
+    font-size: 12px;
+    color: #999;
+}
+.coupono-font2-gj{
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    font-size: 24px;
+    color: #90B622;
+}
+.coupono-font3-gj{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 75px;
+    color: #90B622;
+    margin-right: 8px;
+}
+.coupono-font4-gj{
+    position: absolute;
+    top: 10px;
+    left: 110px;
+    font-size: 16px;
+    color: #111111;
+}
+.coupono-font5-gj{
+    position: absolute;
+    top: 40px;
+    left: 110px;
+    font-size: 12px;
+    color: #999;
+}
+.couponx-font2-gj{
+    position: absolute;
+    top: 55px;
+    left: 10px;
+    font-size: 75px;
+    color: #90B622;
+}
+.couponx-font3-gj{
+    position: absolute;
+    top: 77px;
+    left: 60px;
+    font-size: 15px;
+    color: #90B622;
+    margin-right: 8px;
+}
+.couponx-font4-gj{
+    position: absolute;
+    top: 45px;
+    left: 110px;
+    font-size: 16px;
+    color: #111111;
+}
+.couponx-font5-gj{
+    position: absolute;
+    top: 75px;
+    left: 110px;
+    font-size: 12px;
+    color: #999;
+}
+.couponox-font2-gj{
+    position: absolute;
+    top: 20px;
+    left: 10px;
+    font-size: 75px;
+    color: #90B622;
+}
+.couponox-font3-gj{
+    position: absolute;
+    top: 42px;
+    left: 60px;
+    font-size: 15px;
+    color: #90B622;
+    margin-right: 8px;
+}
+.couponox-font4-gj{
+    position:absolute;
+    top: 10px;
+    left: 110px;
+    font-size: 16px;
+    color: #111111;
+}
+.couponox-font5-gj{
+    position:absolute;
+    top: 40px;
+    left: 110px;
     font-size: 12px;
     color: #999;
 }
