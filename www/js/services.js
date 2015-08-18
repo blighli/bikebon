@@ -1,5 +1,10 @@
 var ionicSer = angular.module('starter.services',[]);
 
+/**
+ *  name：获取图片信息服务(REST)
+ *  desc：首页轮播图
+ *  author：yxq
+ * */
 ionicSer.factory('imgSer', ['$resource', 'baseUrl',
     function($resource, baseUrl){
         return $resource(baseUrl + '/imgs/homepage',
@@ -7,6 +12,11 @@ ionicSer.factory('imgSer', ['$resource', 'baseUrl',
         );
 }]);
 
+/**
+ *  name：获取租车点信息服务(REST)
+ *  desc：
+ *  author：yxq
+ * */
 ionicSer.factory('lenderSer', ['$resource', 'baseUrl', 'lender_id',
     function($resource, baseUrl, lender_id){
         return $resource(baseUrl + '/lender/:lender_id',
@@ -14,6 +24,11 @@ ionicSer.factory('lenderSer', ['$resource', 'baseUrl', 'lender_id',
         );
 }]);
 
+/**
+ *  name：获取车的信息服务(REST)
+ *  desc：包括所有车子及某一种车的信息
+ *  author：yxq
+ * */
 ionicSer.factory('bikeTypeSer', ['$resource', 'baseUrl', 'lender_id',
     function($resource, baseUrl, lender_id){
         return $resource(baseUrl + '/lender/:lender_id/biketype/:bike_type_id',
@@ -22,11 +37,11 @@ ionicSer.factory('bikeTypeSer', ['$resource', 'baseUrl', 'lender_id',
         );
 }]);
 
-ionicSer.factory('schedule',['$resource',
-    function($resource){
-        return $resource('');
-}]);
-
+/**
+ *  name：有localStorage相关的服务
+ *  desc：本地数据的存储删除［附加JSON格式］
+ *  author：yxq
+ * */
 ionicSer.factory('$localStorage',['$window', function($window){
     return {
         set: function(key, value){
@@ -40,10 +55,18 @@ ionicSer.factory('$localStorage',['$window', function($window){
         },
         getObject: function(key){
             return JSON.parse($window.localStorage[key] || '{}');
+        },
+        remove: function(key){
+            $window.localStorage.removeItem(key);
         }
     }
 }]);
 
+/**
+ *  name：Base64编码服务
+ *  desc：从网上直接copy来的
+ *  author：yxq
+ * */
 ionicSer.factory('Base64', function() {
     var keyStr = 'ABCDEFGHIJKLMNOP' +
         'QRSTUVWXYZabcdef' +
