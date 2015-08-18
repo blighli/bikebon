@@ -478,12 +478,12 @@
     align-items:center;
 }
 .item-thumbnail-left{
-    height: 85px;
+    height: 95px;
 }
 .photo-gj img{
     position: absolute;
     left: 20px;
-    top: 11px;
+    top: 16px;
     width: 60px;
     height: 60px;
 }
@@ -491,6 +491,85 @@
     position: absolute;
     top: 48px;
     right: 26px;
+}
+.mine-time-gj{
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 75px;
+    overflow: hidden;
+}
+.mine-yuan-gj{
+    float: left;
+    width: 33.3333333333333%;
+    height: 75px;
+    border-right: 1px solid #e5e5e5;
+    position: relative;
+}
+.mine-border-gj{
+    border-right: none;
+}
+.mine-big-gj{
+    position: absolute;
+    left: 17px;
+    top: 20px;
+    font-size: 24px;
+    color: #90B621;
+}
+.mine-small-gj{
+    position: absolute;
+    left: 57px;
+    top: 22px;
+    font-size: 15px;
+    color: #90B621;
+}
+.mine-bigo-gj{
+    position: absolute;
+    left: 18px;
+    top: 20px;
+    font-size: 24px;
+    color: #4B7AEC;
+}
+.mine-smallo-gj{
+    position: absolute;
+    left: 44px;
+    top: 22px;
+    font-size: 15px;
+    color: #4B7AEC;
+}
+.mine-bigx-gj{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    font-size: 24px;
+    color: #FEB849;
+}
+.mine-smallx-gj{
+    position: absolute;
+    left: 48px;
+    top: 22px;
+    font-size: 15px;
+    color: #FEB849;
+}
+.mine-money-gj{
+    position: absolute;
+    left: 30px;
+    top: 45px;
+    font-size: 12px;
+    color: #363636;
+}
+.mine-moneyo-gj{
+    position: absolute;
+    left: 32px;
+    top: 45px;
+    font-size: 12px;
+    color: #363636;
+}
+.mine-moneyx-gj{
+    position: absolute;
+    left: 35px;
+    top: 45px;
+    font-size: 12px;
+    color: #363636;
 }
 .pic-40-yxq{
     width: 40px;
@@ -518,7 +597,7 @@
     margin-top: 12px;
 }
 .margin-22-top{
-    margin-top: 22px;
+    margin-top: 27px;
 }
 .margin-10-bottom{
     margin-bottom: 10px;
