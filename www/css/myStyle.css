@@ -199,7 +199,7 @@
     margin-bottom: 10px;
     height: auto;
     background: url("../img/coupono.png") no-repeat center;
-    background-position: center;
+    background-position:center;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -477,6 +477,11 @@
 .item-center-yxq{
     align-items:center;
 }
+.mine-color-gj a{
+    text-decoration: none;
+    color: black;
+    display: block;
+}
 .item-thumbnail-left{
     height: 95px;
 }
@@ -596,6 +601,9 @@
 .margin-12-top{
     margin-top: 12px;
 }
+.margin-18-top{
+    margin-top: 18px;
+}
 .margin-22-top{
     margin-top: 27px;
 }
@@ -625,7 +633,7 @@
 .padding-2-left{
     padding-left: 2px;
 }
-.item-divider-yxq {
+.item-divider-yxq{
     padding-top: 2px;
     padding-bottom: 2px;
     min-height: 15px;
@@ -710,10 +718,3 @@
 .ios-actionSheet .action-sheet-cancel .button{
     font-weight: 500;
 }
-
-
-
-
-
-
-
