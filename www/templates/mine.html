@@ -13,23 +13,35 @@
                 <div class="item-center-yxq margin-22-top" ng-show="!loginFlag">
                     <a class="balanced font-18-gj text-none-gj" href="#/login">立即登录</a>
                 </div>
-                <div class="item-center-yxq margin-12-top" ng-show="loginFlag&&!verifyFlag">
-                    <div class="margin-6-bottom font-17-yxq">{{user.userName}}</div>
+                <div class="item-center-yxq margin-18-top" ng-show="loginFlag&&!verifyFlag">
+                    <div class="mine-color-gj"><a class="margin-6-bottom font-17-yxq">{{user.userName}}</a></div>
                     <span class="font-14-yxq color-b3-jx" style="margin-right:7px;">未认证用户</span>
                     <a class="font-14-yxq balanced text-none-gj" href="#/bikebon/identity">立即认证</a>
                 </div>
-                <div class="item-center-yxq margin-12-top" ng-show="loginFlag&&verifyFlag">
-                    <div class="margin-6-bottom font-17-yxq">{{user.userName}}</div>
+                <div class="item-center-yxq margin-18-top" ng-show="loginFlag&&verifyFlag">
+                    <div class="mine-color-gj"><a class="margin-6-bottom font-17-yxq">{{user.userName}}</a></div>
                     <div class="font-14-yxq balanced text-none-gj">{{verifyMess}}</div>
                 </div>
                 <i class="icon ion-ios-arrow-right img-right-gj" ng-show="loginFlag"></i>
             </ion-item>
+            <div class="mine-time-gj">
+                <div class="mine-yuan-gj">
+                    <div class="mine-big-gj">500</div>
+                    <div class="mine-small-gj">.00元</div>
+                    <div class="mine-money-gj">我的余额</div>
+                </div>
+                <div class="mine-yuan-gj">
+                    <div class="mine-bigo-gj">21</div>
+                    <div class="mine-smallo-gj">.00小时</div>
+                    <div class="mine-moneyo-gj">普通时间</div>
+                </div>
+                <div class="mine-yuan-gj mine-border-gj">
+                    <div class="mine-bigx-gj">26</div>
+                    <div class="mine-smallx-gj">.00小时</div>
+                    <div class="mine-moneyx-gj">高级时间</div>
+                </div>
+            </div>
             <ion-item class="item-divider-yxq"></ion-item>
-            <ion-item class="item-icon-left item-icon-right" href="#/bikebon/myPurse" >
-                <i class="icon yxq_wallet"></i>
-                我的钱包
-                <i class="icon ion-ios-arrow-right" ></i>
-            </ion-item>
             <ion-item class="item-icon-left item-icon-right" href="#/bikebon/myCoupon">
                 <i class="icon ion-ios-pricetag-outline"></i>
                 我的券
