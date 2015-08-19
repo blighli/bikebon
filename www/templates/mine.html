@@ -24,20 +24,20 @@
                 </div>
                 <i class="icon ion-ios-arrow-right img-right-gj" ng-show="loginFlag"></i>
             </ion-item>
-            <div class="mine-time-gj">
+            <div class="mine-time-gj" ng-show="loginFlag">
                 <div class="mine-yuan-gj">
-                    <div class="mine-big-gj">500</div>
-                    <div class="mine-small-gj">.00元</div>
+                    <div class="mine-big-gj">{{user.deposit | roundNum}}</div>
+                    <div class="mine-small-gj">{{user.deposit | limitTo : -3}}元</div>
                     <div class="mine-money-gj">我的余额</div>
                 </div>
                 <div class="mine-yuan-gj">
-                    <div class="mine-bigo-gj">21</div>
-                    <div class="mine-smallo-gj">.00小时</div>
+                    <div class="mine-bigo-gj">{{user.baseTime | roundNum}}</div>
+                    <div class="mine-smallo-gj">{{user.baseTime | limitTo : -3}}小时</div>
                     <div class="mine-moneyo-gj">普通时间</div>
                 </div>
                 <div class="mine-yuan-gj mine-border-gj">
-                    <div class="mine-bigx-gj">26</div>
-                    <div class="mine-smallx-gj">.00小时</div>
+                    <div class="mine-bigx-gj">{{user.upscaleTime | roundNum}}</div>
+                    <div class="mine-smallx-gj">{{user.upscaleTime | limitTo : -3}}小时</div>
                     <div class="mine-moneyx-gj">高级时间</div>
                 </div>
             </div>
