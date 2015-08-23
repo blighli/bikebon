@@ -97,20 +97,19 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
         },
         cache: false
       })
-      .state('bikebon.myPurse',{
-        url:'/myPurse',
-        views:{
-          'bike-mine':{
-            templateUrl: 'templates/mine/myPurse.html'
-          }
-        }
-      })
-      .state('bikebon.income',{
-          url:'/income',
+      .state('bikebon.normalTime',{
+          url:'/normalTime',
           views:{
               'bike-mine':{
-                  templateUrl: 'templates/mine/incomeAndExpenses.html',
-                  controller: 'incomeCtrl'
+                  templateUrl: 'templates/mine/normalTime.html'
+              }
+          }
+      })
+      .state('bikebon.advancedTime',{
+          url:'/advancedTime',
+          views:{
+              'bike-mine':{
+                  templateUrl: 'templates/mine/advancedTime.html'
               }
           }
       })

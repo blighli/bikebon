@@ -113,8 +113,18 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
 ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 'baseUrl',
     function($localStorage, $scope, $http, Base64, baseUrl){
         var temp = $localStorage.get("token");
+        $scope.loginFlag = true;
+        $scope.user = {
+            "baseTime": "0.00",
+            "deposit": "0.00",
+            "gender": "",
+            "portraitUrl": "",
+            "school": "",
+            "upscaleTime": "0.00",
+            "userName": "无名氏",
+            "verifyTag": false
+        };
         if(temp !== "undefined" && temp !== undefined){
-            $scope.loginFlag = true;
             $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
             $http.get(baseUrl + '/user')
                 .success(function(data){
