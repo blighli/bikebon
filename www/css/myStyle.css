@@ -328,7 +328,10 @@
     height: 20px;
 }
 .order-img-f{
+    width: 70px;
+    height: 70px;
     padding: 1px 3px;
+    border: 1px solid #e5e5e5;
 }
 .order-img-gj{
     width: 70px;
@@ -577,7 +580,7 @@
 .mine-big-gj{
     float: left;
     margin-top: 19px;
-    margin-left: 15px;
+    margin-left: 12px;
     font-size: 24px;
     color: #90B621;
 }
@@ -590,7 +593,7 @@
 .mine-bigo-gj{
     float: left;
     margin-top: 19px;
-    margin-left: 15px;
+    margin-left: 10px;
     font-size: 24px;
     color: #4B7AEC;
 }
@@ -603,7 +606,7 @@
 .mine-bigx-gj{
     float: left;
     margin-top: 19px;
-    margin-left: 15px;
+    margin-left: 10px;
     font-size: 24px;
     color: #FEB849;
 }
