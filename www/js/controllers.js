@@ -52,7 +52,7 @@ ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', 
  * */
 ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
     function($scope, imgSer){
-        $scope.imgs = [
+/*        $scope.imgs = [
             {
                 "imgLink": "",
                 "imgUrl": "img/home/home_pic1.jpg",
@@ -68,10 +68,10 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
                 "imgUrl": "img/home/home_pic3.jpg",
                 "imgTitle": "Bike Three"
             }
-        ];
-       /* imgSer.query({}, function(data){
+        ];*/
+       imgSer.query({}, function(data){
            $scope.imgs = data.imgs;
-        });*/
+        });
 }]);
 
 /**
@@ -113,7 +113,7 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
 ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 'baseUrl',
     function($localStorage, $scope, $http, Base64, baseUrl){
         var temp = $localStorage.get("token");
-        $scope.loginFlag = true;
+        $scope.loginFlag = false;
         $scope.user = {
             "baseTime": "0.00",
             "deposit": "0.00",
@@ -125,6 +125,7 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
             "verifyTag": false
         };
         if(temp !== "undefined" && temp !== undefined){
+            $scope.loginFlag = true;
             $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
             $http.get(baseUrl + '/user')
                 .success(function(data){

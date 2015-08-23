@@ -25,21 +25,21 @@
                 <i class="icon ion-ios-arrow-right img-right-gj" ng-show="loginFlag"></i>
             </ion-item>
             <div class="mine-time-gj" ng-show="loginFlag">
-                <div class="mine-yuan-gj" ng-click="">
+                <a class="mine-yuan-gj text-none-gj" href="#/bikebon/myBalance">
                     <div class="mine-big-gj">{{user.deposit | roundNum}}</div>
                     <div class="mine-small-gj">{{user.deposit | limitTo : -3}}元</div>
                     <div class="mine-money-gj">我的余额</div>
-                </div>
-                <div class="mine-yuan-gj" ng-click="">
+                </a>
+                <a class="mine-yuan-gj text-none-gj" href="#/bikebon/normalTime">
                     <div class="mine-bigo-gj">{{user.baseTime | roundNum}}</div>
                     <div class="mine-smallo-gj">{{user.baseTime | limitTo : -3}}小时</div>
                     <div class="mine-moneyo-gj">普通时间</div>
-                </div>
-                <div class="mine-yuan-gj mine-border-gj" ng-click="">
+                </a>
+                <a class="mine-yuan-gj mine-border-gj text-none-gj" href="#/bikebon/advancedTime">
                     <div class="mine-bigx-gj">{{user.upscaleTime | roundNum}}</div>
                     <div class="mine-smallx-gj">{{user.upscaleTime | limitTo : -3}}小时</div>
                     <div class="mine-moneyx-gj">高级时间</div>
-                </div>
+                </a>
             </div>
             <ion-item class="item-divider-yxq"></ion-item>
             <ion-item class="item-icon-left item-icon-right" href="#/bikebon/myCoupon">

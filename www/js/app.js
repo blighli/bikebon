@@ -97,6 +97,14 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
         },
         cache: false
       })
+      .state('bikebon.myBalance',{
+          url:'/myBalance',
+          views:{
+              'bike-mine':{
+                  templateUrl: 'templates/mine/myBalance.html'
+              }
+          }
+      })
       .state('bikebon.normalTime',{
           url:'/normalTime',
           views:{
