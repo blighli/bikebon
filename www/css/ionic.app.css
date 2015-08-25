@@ -5460,9 +5460,9 @@ a.item-content {
     display: inline-block;
     margin: 0px 3px;
     width: 15px;
-    color: #000;
+    color: #90B821;
     text-decoration: none;
-    opacity: 0.3; }
+    opacity: 0.2; }
     .slider-pager .slider-pager-page.active {
       -webkit-transition: opacity 0.4s ease-in;
       transition: opacity 0.4s ease-in;
@@ -6727,7 +6727,7 @@ progress {
         box-shadow: none;
         color: #fff; }
   .button.button-balanced {
-    border-color: #6e8d19;
+    border-color: #90b821;
     background-color: #90b821;
     color: #fff; }
     .button.button-balanced:hover {
@@ -6837,25 +6837,27 @@ progress {
 
 .button-small {
   padding: 2px 4px 1px;
-  min-width: 28px;
+  min-width: 80px;
   min-height: 30px;
   font-size: 12px;
-  line-height: 26px; }
+  line-height: 26px;
+  border-radius: 4px}
   .button-small .icon:before, .button-small.icon:before, .button-small.icon-left:before, .button-small.icon-right:before {
     font-size: 16px;
     line-height: 19px;
     margin-top: 3px; }
 
 .button-large {
-  padding: 0 16px;
-  min-width: 68px;
-  min-height: 59px;
-  font-size: 20px;
-  line-height: 53px; }
+  padding: 0 30px;
+  min-width: 130px;
+  min-height: 40px;
+  font-size: 18px;
+  line-height: 40px;
+  border-radius: 6px}
   .button-large .icon:before, .button-large.icon:before, .button-large.icon-left:before, .button-large.icon-right:before {
     padding-bottom: 2px;
     font-size: 32px;
-    line-height: 51px; }
+    line-height: 40px; }
 
 .button-icon {
   -webkit-transition: opacity .1s;
