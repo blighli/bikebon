@@ -137,6 +137,14 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           }
         }
       })
+      .state('bikebon.orderDetail',{
+          url:'/orderDetail',
+          views:{
+              'bike-mine':{
+                  templateUrl: 'templates/main/orderDetail.html'
+              }
+          }
+      })
       .state('bikebon.evaluateOrder',{
           url:'/evaluateOrder',
           views:{
