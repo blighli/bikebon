@@ -4794,7 +4794,7 @@ a.item {
 .item-complex .item-content, .item-radio .item-content {
   position: relative;
   z-index: 2;
-  padding: 16px 49px 16px 16px;
+  padding: 16px 16px 16px 16px;
   border: none;
   background-color: #fff; }
 
@@ -5460,9 +5460,9 @@ a.item-content {
     display: inline-block;
     margin: 0px 3px;
     width: 15px;
-    color: #90B821;
+    color: #000;
     text-decoration: none;
-    opacity: 0.2; }
+    opacity: 0.3; }
     .slider-pager .slider-pager-page.active {
       -webkit-transition: opacity 0.4s ease-in;
       transition: opacity 0.4s ease-in;
