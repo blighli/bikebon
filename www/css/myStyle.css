@@ -9,10 +9,10 @@
     overflow: hidden;
     padding-bottom: 0px;
 }
-/*.slide-box img{*/
-    /*width: 100%;*/
-    /*height: auto;*/
-/*}*/
+.slide-box img{
+    width: 100%;
+    height: auto;
+}
 .home-middle{
     margin-bottom: 0px;
 }
@@ -198,92 +198,20 @@
     margin-left: 10px;
     margin-right: 10px;
 }
-.coupon-font2-gj{
-    position: absolute;
-    top: 65px;
-    left: 10px;
-    font-size: 24px;
-    color: #90B622;
-}
-.coupon-font3-gj{
-    position: absolute;
-    top: 45px;
-    left: 20px;
-    font-size: 75px;
-    color: #90B622;
-    margin-right: 8px;
-}
-.coupon-font4-gj{
-    position: absolute;
-    top: 35px;
-    left: 110px;
-    font-size: 16px;
-    color: #111111;
-}
-.coupon-font5-gj{
-    position: absolute;
-    top: 65px;
-    left: 112px;
-    font-size: 12px;
-    color: #999;
-}
-.coupono-font2-gj{
-    position: absolute;
-    top: 40px;
-    left: 10px;
-    font-size: 24px;
-    color: #FEB849;
-}
-.coupono-font3-gj{
+.couponoo-font2-gj{
     position: absolute;
     top: 20px;
-    left: 20px;
-    font-size: 75px;
-    color: #FEB849;
-    margin-right: 8px;
-}
-.coupono-font4-gj{
-    position: absolute;
-    top: 10px;
-    left: 110px;
-    font-size: 16px;
-    color: #111111;
-}
-.coupono-font5-gj{
-    position: absolute;
-    top: 40px;
-    left: 110px;
-    font-size: 12px;
-    color: #999;
-}
-.couponx-font2-gj{
-    position: absolute;
-    top: 55px;
     left: 10px;
     font-size: 75px;
     color: #90B622;
 }
-.couponx-font3-gj{
+.couponoo-font3-gj{
     position: absolute;
-    top: 77px;
+    top: 42px;
     left: 60px;
     font-size: 15px;
     color: #90B622;
     margin-right: 8px;
-}
-.couponx-font4-gj{
-    position: absolute;
-    top: 45px;
-    left: 110px;
-    font-size: 16px;
-    color: #111111;
-}
-.couponx-font5-gj{
-    position: absolute;
-    top: 75px;
-    left: 110px;
-    font-size: 12px;
-    color: #999;
 }
 .couponox-font2-gj{
     position: absolute;
@@ -431,7 +359,7 @@
 .login-cancel-yxq{
     position: absolute;
     right: 15px;
-    bottom: 10px;
+    bottom: 13px;
 }
 .font-13-yxq{
     font-size: 13px;
@@ -652,6 +580,12 @@
     padding-left: 10px;
     padding-right: 10px;
 }
+.text-left-gj{
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 8px;
+}
 .text-center{
     text-align:center;
 }
@@ -740,6 +674,12 @@ p{
     background-color: #f2f2f2;
 }
 .item-divider-gj{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    min-height: 20px;
+    background-color: #f2f2f2;
+}
+.item-divider{
     padding-top: 2px;
     padding-bottom: 2px;
     min-height: 20px;
