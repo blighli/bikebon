@@ -4,14 +4,14 @@
             <button class="button icon ion-location button-clear" menu-toggle="left">&nbsp软院</button>
         </ion-nav-buttons>
         <ion-nav-buttons side="right">
-            <button class="button button-clear" menu-toggle="right">地图</button>
+            <a class="button button-clear" menu-toggle="right" href="#/map">地图</a>
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content scrollbar-y="false">
         <div class="home">
             <ion-slide-box does-continue="true" auto-play="true" show-pager="true">
                 <ion-slide ng-repeat="img in imgs">
-                    <div class="slide-box">
+                    <div class="slide-box"  style="width: 100%;height: auto;">
                         <img src={{img.imgUrl}}/>
                     </div>
                 </ion-slide>

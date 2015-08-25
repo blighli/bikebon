@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'myicon';
-	src:url('fonts/myicon.eot?owo1e');
-	src:url('fonts/myicon.eot?#iefixowo1e') format('embedded-opentype'),
-		url('fonts/myicon.ttf?owo1e') format('truetype'),
-		url('fonts/myicon.woff?owo1e') format('woff'),
-		url('fonts/myicon.svg?owo1e#myicon') format('svg');
+	src:url('fonts/myicon.eot?52geub');
+	src:url('fonts/myicon.eot?#iefix52geub') format('embedded-opentype'),
+		url('fonts/myicon.ttf?52geub') format('truetype'),
+		url('fonts/myicon.woff?52geub') format('woff'),
+		url('fonts/myicon.svg?52geub#myicon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -23,6 +23,21 @@
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.yxq_about:before {
+	content: "\e60a";
+}
+.yxq_order:before {
+	content: "\e60c";
+}
+.yxq_share:before {
+	content: "\e60d";
+}
+.yxq_coupon:before {
+	content: "\e60e";
+}
+.yxq_feedback:before {
+	content: "\e60f";
+}
 .yxq_rent_outline:before {
 	content: "\e600";
 }
@@ -46,13 +61,4 @@
 }
 .yxq_mine:before {
 	content: "\e609";
-}
-.yxq_wallet:before {
-	content: "\e60b";
-}
-.yxq_feedback:before {
-	content: "\e606";
-}
-.yxq_about:before {
-	content: "\e607";
 }
