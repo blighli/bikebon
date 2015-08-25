@@ -4894,7 +4894,7 @@ a.item-content {
   position: absolute;
   top: 0;
   height: 100%;
-  font-size: 32px; }
+  font-size: 24px; }
   .item-icon-left .icon:before, .item-icon-right .icon:before {
     display: block;
     width: 32px;
@@ -4906,24 +4906,24 @@ a.item-content {
   font-size: 28px; }
 
 .item-icon-left {
-  padding-left: 54px; }
+  padding-left: 48px; }
   .item-icon-left .icon {
     left: 11px; }
 
 .item-complex.item-icon-left {
   padding-left: 0; }
   .item-complex.item-icon-left .item-content {
-    padding-left: 54px; }
+    padding-left: 48px; }
 
 .item-icon-right {
-  padding-right: 54px; }
+  padding-right: 48px; }
   .item-icon-right .icon {
     right: 11px; }
 
 .item-complex.item-icon-right {
   padding-right: 0; }
   .item-complex.item-icon-right .item-content {
-    padding-right: 54px; }
+    padding-right: 48px; }
 
 .item-icon-left.item-icon-right .icon:first-child {
   right: auto; }
