@@ -35,6 +35,10 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: 'templates/login.html',
         controller: 'loginCtrl'
       })
+      .state('map',{
+          url: '/map',
+          templateUrl: 'templates/map.html'
+      })
       .state('mySchedule',{
           url: '/mySchedule',
           templateUrl: 'templates/main/mySchedule.html'
