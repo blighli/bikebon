@@ -124,7 +124,7 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
             "userName": "无名氏",
             "verifyTag": false
         };
-        if(temp !== "undefined" && temp !== undefined){
+        if("undefined" !== temp && undefined !== temp){
             $scope.loginFlag = true;
             $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
             $http.get(baseUrl + '/user')
