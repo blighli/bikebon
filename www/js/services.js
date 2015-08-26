@@ -19,8 +19,9 @@ ionicSer.factory('imgSer', ['$resource', 'baseUrl',
  * */
 ionicSer.factory('lenderSer', ['$resource', 'baseUrl', 'lender_id',
     function($resource, baseUrl, lender_id){
-        return $resource(baseUrl + '/lender/:lender_id',
-            {lender_id: lender_id}
+        return $resource(baseUrl + '/lenders/:lender_id',
+            {lender_id: '@lender_id'},
+            {query: {method: 'GET', isArray: false}}
         );
 }]);
 

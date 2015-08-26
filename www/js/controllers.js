@@ -5,8 +5,8 @@ var ionicCtrl = angular.module("starter.controllers",[]);
  *  desc：
  *  author：yxq
  * */
-ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$location', 'baseUrl', '$state',
-    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $location, baseUrl, $state){
+ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$location', 'baseUrl',
+    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $location, baseUrl){
         //获取验证码
         $scope.getCode = function(flag, phone){
             if(true == flag){
@@ -79,10 +79,11 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
  *  desc：问题－租车点图片的加载(如主页)
  *  author：yxq
  * */
-ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer',
-    function($scope, lenderSer, bikeTypeSer){
+ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$localStorage',
+    function($scope, lenderSer, bikeTypeSer, $localStorage){
         //租车点信息的获取
-        lenderSer.get({}, function(data){
+        var lender_id = $localStorage.get("lender_id");
+        lenderSer.get({lender_id: lender_id}, function(data){
             $scope.rentStop = data;
         });
         //车信息的获取
@@ -115,13 +116,13 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
         var temp = $localStorage.get("token");
         $scope.loginFlag = false;
         $scope.user = {
-            "baseTime": "0.00",
-            "deposit": "0.00",
-            "gender": "",
+            "baseTime": " ",
+            "deposit": " ",
+            "gender": " ",
             "portraitUrl": "",
             "school": "",
-            "upscaleTime": "0.00",
-            "userName": "无名氏",
+            "upscaleTime": " ",
+            "userName": " ",
             "verifyTag": false
         };
         if("undefined" !== temp && undefined !== temp){
@@ -148,11 +149,16 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
 
 /**
  *  name：身份认证界面控制器（mine/identity.html）
- *  desc：仅仅实现了ActionSheet的弹出（ios取消键的取消功能，android无取消键）
+ *  desc：
  *  author：yxq
  * */
-ionicCtrl.controller('identityCtrl', ['$scope', '$ionicActionSheet',
-    function($scope, $ionicActionSheet){
+ionicCtrl.controller('identityCtrl', ['$scope', '$ionicActionSheet', 'lenderSer',
+    function($scope, $ionicActionSheet, lenderSer){
+        //获取租车点列表
+        lenderSer.query({}, function(data){
+            $scope.lenders = data.lender_lists;
+        });
+        //实现了ActionSheet的弹出（ios取消键的取消功能，android无取消键）
         $scope.show = function(){
             var hideSheet = $ionicActionSheet.show({
                 buttons: [
