@@ -71,6 +71,36 @@
     text-decoration: none;
     color: white;
 }
+.schedule-img-gj{
+    width: 140px;
+    height: 180px;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+.schedule-img-gj img{
+    width: 140px;
+    height: 140px;
+    opacity: 0.6;
+}
+.schedule-word-gj{
+    margin-top: 18px;
+    margin-left: 25px;
+}
+.cancellationOrder-img-gj{
+    width: 123px;
+    height: 180px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.cancellationOrder-img-gj img{
+    width: 123px;
+    height: 140px;
+    opacity: 0.6;
+}
+.cancellationOrder-word-gj{
+    margin-top: 18px;
+    margin-left: 16px;
+}
 .schedule-div-up{
     background: #ffffff;
     margin-bottom: 15px;
@@ -310,6 +340,21 @@
 }
 .color-bg-jx{
     background-color: #f2f2f2;
+}
+.text-bottom-gj{
+    margin-bottom: 15px;
+}
+.text-120-gj{
+    width: 100%;
+    height: 60px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #ECECEC;
+}
+.text-100-gj{
+    width: 100%;
+    height: 50px;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #ECECEC;
 }
 .font-left-yxq {
     width: 100%;

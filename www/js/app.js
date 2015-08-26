@@ -160,6 +160,22 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
               }
           }
       })
+      .state('bikebon.immediatePay',{
+          url:'/immediatePay',
+          views:{
+              'bike-mine':{
+                  templateUrl: 'templates/main/immediatePay.html'
+              }
+          }
+      })
+      .state('bikebon.cancellationOrder',{
+          url:'/cancellationOrder',
+          views:{
+              'bike-mine':{
+                  templateUrl: 'templates/main/cancellationOrder.html'
+              }
+          }
+      })
       .state('bikebon.feedback',{
           url:'/feedback',
           views:{
