@@ -28,9 +28,7 @@
             <label class="item item-input item-select">
                 <span class="input-label">租车点</span>
                 <select>
-                    <option>软院</option>
-                    <option>玉泉</option>
-                    <option>紫金港</option>
+                    <option ng-repeat="lender in lenders">{{lender.name}}</option>
                 </select>
             </label>
             <label class="item item-input">

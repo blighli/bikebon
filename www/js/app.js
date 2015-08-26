@@ -9,6 +9,9 @@ ionicApp.run(function($ionicPlatform, $localStorage) {
   if($localStorage.get("token") === "undefined" || $localStorage.get("token") === undefined){
       $localStorage.set("token", "");
   }
+  if($localStorage.get("lender_id") === "undefined" || $localStorage.get("lender_id") === undefined){
+      $localStorage.set("lender_id", 1);
+  }
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
