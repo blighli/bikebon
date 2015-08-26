@@ -17,8 +17,8 @@ ionicSer.factory('imgSer', ['$resource', 'baseUrl',
  *  desc：
  *  author：yxq
  * */
-ionicSer.factory('lenderSer', ['$resource', 'baseUrl', 'lender_id',
-    function($resource, baseUrl, lender_id){
+ionicSer.factory('lenderSer', ['$resource', 'baseUrl',
+    function($resource, baseUrl){
         return $resource(baseUrl + '/lenders/:lender_id',
             {lender_id: '@lender_id'},
             {query: {method: 'GET', isArray: false}}
@@ -30,10 +30,10 @@ ionicSer.factory('lenderSer', ['$resource', 'baseUrl', 'lender_id',
  *  desc：包括所有车子及某一种车的信息
  *  author：yxq
  * */
-ionicSer.factory('bikeTypeSer', ['$resource', 'baseUrl', 'lender_id',
-    function($resource, baseUrl, lender_id){
+ionicSer.factory('bikeTypeSer', ['$resource', 'baseUrl',
+    function($resource, baseUrl){
         return $resource(baseUrl + '/lender/:lender_id/biketype/:bike_type_id',
-            {lender_id: lender_id, bike_type_id:'@bike_type_id'},
+            {lender_id: '@lender_id', bike_type_id:'@bike_type_id'},
             {query: {method: 'GET', isArray: false}}
         );
 }]);

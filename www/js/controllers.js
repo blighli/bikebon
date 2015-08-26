@@ -87,7 +87,7 @@ ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$lo
             $scope.rentStop = data;
         });
         //车信息的获取
-        bikeTypeSer.query({}, function(data){
+        bikeTypeSer.query({lender_id: lender_id}, function(data){
             $scope.bikes = data.types;
         });
 }]);
@@ -97,10 +97,11 @@ ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$lo
  *  desc：问题－页面标题的显示(待完善)
  *  author：yxq
  * */
-ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
-    function($scope, $stateParams, bikeTypeSer){
+ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer', '$localStorage',
+    function($scope, $stateParams, bikeTypeSer, $localStorage){
+        var lender_id = $localStorage.get("lender_id");
         bikeTypeSer.get(
-            {bike_type_id: $stateParams.bike_type_id},
+            {lender_id: lender_id, bike_type_id: $stateParams.bike_type_id},
             function(data){
                 $scope.bike = data;
         });
