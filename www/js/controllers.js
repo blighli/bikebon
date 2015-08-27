@@ -52,7 +52,7 @@ ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', 
  * */
 ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
     function($scope, imgSer){
-/*        $scope.imgs = [
+         $scope.imgs = [
             {
                 "imgLink": "",
                 "imgUrl": "img/home/home_pic1.jpg",
@@ -68,10 +68,10 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
                 "imgUrl": "img/home/home_pic3.jpg",
                 "imgTitle": "Bike Three"
             }
-        ];*/
-       imgSer.query({}, function(data){
+        ];
+/*       imgSer.query({}, function(data){
            $scope.imgs = data.imgs;
-        });
+        });*/
 }]);
 
 /**
@@ -87,7 +87,7 @@ ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$lo
             $scope.rentStop = data;
         });
         //车信息的获取
-        bikeTypeSer.query({}, function(data){
+        bikeTypeSer.query({lender_id: lender_id}, function(data){
             $scope.bikes = data.types;
         });
 }]);
@@ -97,10 +97,11 @@ ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$lo
  *  desc：问题－页面标题的显示(待完善)
  *  author：yxq
  * */
-ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
-    function($scope, $stateParams, bikeTypeSer){
+ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer', '$localStorage',
+    function($scope, $stateParams, bikeTypeSer, $localStorage){
+        var lender_id = $localStorage.get("lender_id");
         bikeTypeSer.get(
-            {bike_type_id: $stateParams.bike_type_id},
+            {lender_id: lender_id, bike_type_id: $stateParams.bike_type_id},
             function(data){
                 $scope.bike = data;
         });
@@ -115,16 +116,6 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
     function($localStorage, $scope, $http, Base64, baseUrl){
         var temp = $localStorage.get("token");
         $scope.loginFlag = false;
-        $scope.user = {
-            "baseTime": " ",
-            "deposit": " ",
-            "gender": " ",
-            "portraitUrl": "",
-            "school": "",
-            "upscaleTime": " ",
-            "userName": " ",
-            "verifyTag": false
-        };
         if("undefined" !== temp && undefined !== temp){
             $scope.loginFlag = true;
             $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
@@ -171,11 +162,12 @@ ionicCtrl.controller('identityCtrl', ['$scope', '$ionicActionSheet', 'lenderSer'
                     hideSheet();
                 },
                 buttonClicked: function(index){
-                    if(index == 0){
+                    if(0 == index){
                         console.log("拍照");
-                    }
-                    if(index == 1){
+                    }else if(1 == index){
                         console.log("从相册选择");
+                    }else{
+                    	console.log("点错啦～");
                     }
                     return true;
                 }
