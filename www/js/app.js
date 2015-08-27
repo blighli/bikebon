@@ -140,7 +140,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
         url:'/myOrder',
         views:{
           'bike-mine':{
-            templateUrl: 'templates/mine/myOrder.html'
+            templateUrl: 'templates/mine/myOrder.html',
+            controller: 'myOrderCtrl'
           }
         }
       })
