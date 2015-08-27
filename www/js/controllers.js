@@ -116,6 +116,16 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
     function($localStorage, $scope, $http, Base64, baseUrl){
         var temp = $localStorage.get("token");
         $scope.loginFlag = false;
+        $scope.user = {
+            "baseTime": " ",
+            "deposit": " ",
+            "gender": " ",
+            "portraitUrl": "",
+            "school": "",
+            "upscaleTime": " ",
+            "userName": " ",
+            "verifyTag": false
+        };
         if("undefined" !== temp && undefined !== temp){
             $scope.loginFlag = true;
             $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
