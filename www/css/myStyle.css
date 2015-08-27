@@ -1,5 +1,6 @@
 .login-bg-yxq{
-    background: url(../img/bg.jpg) no-repeat 100% 100%;
+    min-height: 500px;
+    background:#F5D5B6 url(../img/bg.jpg) no-repeat 100% 100%;
     text-align: center;
     padding-top: 25%;
 }
@@ -402,6 +403,7 @@
     text-decoration: none;
 }
 .login-cancel-yxq{
+    padding-top: 800px;
     position: absolute;
     right: 15px;
     bottom: 13px;

@@ -46,6 +46,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           url: '/mySchedule',
           templateUrl: 'templates/main/mySchedule.html'
       })
+
       .state('bikebon',{
         url: '/bikebon',
         abstract: true,
