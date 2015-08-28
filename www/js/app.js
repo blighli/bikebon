@@ -219,6 +219,14 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
               }
           }
       })
+      .state('bikebon.paySuccess',{
+          url:'/paySuccess',
+          views:{
+              'bike-mine':{
+                  templateUrl: 'templates/main/paySuccess.html'
+              }
+          }
+      })
       .state('bikebon.feedback',{
           url:'/feedback',
           views:{
