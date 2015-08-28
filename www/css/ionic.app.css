@@ -6598,6 +6598,17 @@ progress {
     .button.button-light:hover {
       color: #444;
       text-decoration: none; }
+
+    /*自己加_gj*/
+  .button.button-lightw {
+    border-color: #90B620;
+    background-color: #fff;
+    color: #444; }
+  .button.button-lightw:hover {
+    color: #90B620;
+    text-decoration: none; }
+
+
     .button.button-light.active, .button.button-light.activated {
       border-color: #ccc;
       background-color: #fafafa;
