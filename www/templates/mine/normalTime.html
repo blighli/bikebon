@@ -1,7 +1,7 @@
 <ion-view hide-tabs view-title="普通时间">
     <ion-content scrollbar-y="false">
         <ion-list style="background: #f2f2f2">
-            <div class="balanced-yuan-gj text-center" style="color: #4C7CEA">21.00<span style="font-size: 12px">小时</span></div>
+            <div class="balanced-yuan-gj text-center" style="color: #4C7CEA">{{local}}<span style="font-size: 12px">小时</span></div>
             <div class="time-money-gj">套餐一&nbsp&nbsp50<span style="font-size: 10px">元</span>／50<span style="font-size: 10px">小时</span>
                 <a class="button button-balanced button-small" style="margin-top: 4px;position: absolute;right: 16px">充值</a>
             </div>
@@ -11,74 +11,14 @@
             <ion-item class="item-balanced-gj">
                 最近30天消费记录
             </ion-item>
-            <div class="balanced-online-gj">
+            <div class="balanced-online-gj" ng-repeat="d in data">
                 <div class="balanced-left-gj">
-                    <p>在线支付</p>
-                    <p style="color: #868887;font-size: 12px">剩余时长：26.00</p>
+                    <p>{{d.billSource}}</p>
+                    <p class="font-12-yxq color-86-gj">剩余时长：{{d.baseTimeAfterPay}}</p>
                 </div>
-                <div class="balanced-right-gj">
-                    <p style="color: #7F8382;font-size: 12px">2015-07-25</p>
-                    <p style="color: #FF0101;font-size: 12px">-15.00</p>
-                </div>
-            </div>
-            <div class="balanced-online-gj">
-                <div class="balanced-left-gj">
-                    <p>在线支付</p>
-                    <p style="color: #868887;font-size: 12px">剩余时长：21.00</p>
-                </div>
-                <div class="balanced-right-gj">
-                    <p style="color: #7F8382;font-size: 12px">2015-07-23</p>
-                    <p style="color: #90B623;font-size: 12px">+15.00</p>
-                </div>
-            </div>
-            <div class="balanced-online-gj">
-                <div class="balanced-left-gj">
-                    <p>在线支付</p>
-                    <p style="color: #868887;font-size: 12px">剩余时长：21.00</p>
-                </div>
-                <div class="balanced-right-gj">
-                    <p style="color: #7F8382;font-size: 12px">2015-07-23</p>
-                    <p style="color: #90B623;font-size: 12px">+15.00</p>
-                </div>
-            </div>
-            <div class="balanced-online-gj">
-                <div class="balanced-left-gj">
-                    <p>在线支付</p>
-                    <p style="color: #868887;font-size: 12px">剩余时长：21.00</p>
-                </div>
-                <div class="balanced-right-gj">
-                    <p style="color: #7F8382;font-size: 12px">2015-07-23</p>
-                    <p style="color: #90B623;font-size: 12px">+15.00</p>
-                </div>
-            </div>
-            <div class="balanced-online-gj">
-                <div class="balanced-left-gj">
-                    <p>在线支付</p>
-                    <p style="color: #868887;font-size: 12px">剩余时长：21.00</p>
-                </div>
-                <div class="balanced-right-gj">
-                    <p style="color: #7F8382;font-size: 12px">2015-07-23</p>
-                    <p style="color: #90B623;font-size: 12px">+15.00</p>
-                </div>
-            </div>
-            <div class="balanced-online-gj">
-                <div class="balanced-left-gj">
-                    <p>在线支付</p>
-                    <p style="color: #868887;font-size: 12px">剩余时长：21.00</p>
-                </div>
-                <div class="balanced-right-gj">
-                    <p style="color: #7F8382;font-size: 12px">2015-07-23</p>
-                    <p style="color: #90B623;font-size: 12px">+15.00</p>
-                </div>
-            </div>
-            <div class="balanced-online-gj">
-                <div class="balanced-left-gj">
-                    <p>在线支付</p>
-                    <p style="color: #868887;font-size: 12px">剩余时长：21.00</p>
-                </div>
-                <div class="balanced-right-gj">
-                    <p style="color: #7F8382;font-size: 12px">2015-07-23</p>
-                    <p style="color: #90B623;font-size: 12px">+15.00</p>
+                <div class="balanced-right-gj font-12-yxq">
+                    <p class="color-7f-gj">{{d.finishTime}}</p>
+                    <p ng-class="{true:'color-ff-gj', false:'color-90-gj'}[{{d.billFee | plusFlag}}]"><span ng-hide="d.billFee | plusFlag">+</span>{{d.billFee}}</p>
                 </div>
             </div>
             <ion-item class="item-divider-gj"></ion-item>

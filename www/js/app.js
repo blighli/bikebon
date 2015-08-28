@@ -12,6 +12,9 @@ ionicApp.run(function($ionicPlatform, $localStorage, Push) {
   if("undefined" === $localStorage.get("lender_id")  || undefined === $localStorage.get("lender_id")){
       $localStorage.set("lender_id", 1);
   }
+  if("undefined" === $localStorage.get("userName")  || undefined === $localStorage.get("userName")){
+      $localStorage.set("username", "   ");
+  }
   if("undefined" === $localStorage.get("remainder")  || undefined === $localStorage.get("remainder")){
       $localStorage.set("remainder", "0.00");
   }
@@ -137,7 +140,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/myBalance',
           views:{
               'bike-mine':{
-                  templateUrl: 'templates/mine/myBalance.html'
+                  templateUrl: 'templates/mine/myBalance.html',
+                  controller: 'balanceCtrl'
               }
           }
       })
@@ -145,7 +149,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/normalTime',
           views:{
               'bike-mine':{
-                  templateUrl: 'templates/mine/normalTime.html'
+                  templateUrl: 'templates/mine/normalTime.html',
+                  controller: 'normalCtrl'
               }
           }
       })
@@ -153,7 +158,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/advancedTime',
           views:{
               'bike-mine':{
-                  templateUrl: 'templates/mine/advancedTime.html'
+                  templateUrl: 'templates/mine/advancedTime.html',
+                  controller: 'advanceCtrl'
               }
           }
       })

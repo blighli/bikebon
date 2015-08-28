@@ -121,13 +121,13 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
         //登录、身份认证模块
         if("undefined" !== temp && undefined !== temp){
             $scope.loginFlag = true;
+            $scope.userName = $localStorage.get("userName");
             $scope.deposit = $localStorage.get("remainder");
             $scope.baseTime = $localStorage.get("normalTime");
             $scope.upscaleTime = $localStorage.get("superTime");
             $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
             $http.get(baseUrl + '/user')
                 .success(function(data){
-                    $scope.user = data;
                     var flag = data.verifyTag;
                     if(flag === true){
                         $scope.verifyFlag = true;
@@ -136,6 +136,8 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
                         $scope.verifyFlag = false;
                         $scope.verifyMess = "认证审核中";
                     }
+                    $localStorage.set("userName", data.userName);
+                    $scope.userName = data.userName;
                     $localStorage.set("remainder", data.deposit);
                     $scope.deposit = data.deposit;
                     $localStorage.set("normalTime", data.baseTime);
@@ -203,6 +205,9 @@ ionicCtrl.controller('identityCtrl', ['$scope', '$ionicActionSheet', 'lenderSer'
 ]);
 
 /**
+ * name: 设置页面控制器（settings.html）
+ * desc: 账号注销功能的实现［清除缓存／跳转到我的页面］
+ * author: yxq
  * */
 ionicCtrl.controller('settingCtrl', ['$scope', '$localStorage', '$location',
     function($scope, $localStorage, $location){
@@ -217,6 +222,73 @@ ionicCtrl.controller('settingCtrl', ['$scope', '$localStorage', '$location',
             $location.path('/bikebon/mine');
         }
 }]);
+
+/**
+ * name: 我的余额界面控制器（myBalance.html）
+ * desc:
+ * author: yxq
+ * */
+ionicCtrl.controller('balanceCtrl', ['$scope', 'mineSer',
+    function($scope, mineSer){
+        mineSer.get(1)
+            .success(function(data){
+                $scope.data = data.bills;
+            })
+            .error(function(){
+                console.log("Sorry, it has an error in balanceCtrl.");
+            });
+}]);
+
+/**
+ * name: 我的余额界面控制器（myBalance.html）
+ * desc:
+ * author: yxq
+ * */
+ionicCtrl.controller('balanceCtrl', ['$scope', 'mineSer', '$localStorage',
+    function($scope, mineSer, $localStorage){
+        $scope.local = $localStorage.get("remainder");
+        mineSer.get(1)
+            .success(function(data){
+                $scope.data = data.bills;
+            })
+            .error(function(){
+                console.log("Sorry, it has an error in balanceCtrl.");
+            });
+    }]);
+
+/**
+ * name: 普通时间界面控制器（normalTime.html）
+ * desc:
+ * author: yxq
+ * */
+ionicCtrl.controller('normalCtrl', ['$scope', 'mineSer', '$localStorage',
+    function($scope, mineSer, $localStorage){
+        $scope.local = $localStorage.get("normalTime");
+        mineSer.get(2)
+            .success(function(data){
+                $scope.data = data.bills;
+            })
+            .error(function(){
+                console.log("Sorry, it has an error in normalCtrl.");
+            });
+    }]);
+
+/**
+ * name: 高级时间界面控制器（advancedTime.html）
+ * desc:
+ * author: yxq
+ * */
+ionicCtrl.controller('advanceCtrl', ['$scope', 'mineSer', '$localStorage',
+    function($scope, mineSer, $localStorage){
+        $scope.local = $localStorage.get("superTime");
+        mineSer.get(3)
+            .success(function(data){
+                $scope.data = data.bills;
+            })
+            .error(function(){
+                console.log("Sorry, it has an error in advanceCtrl.");
+            });
+    }]);
 
 /**
  *  name：所有成功失败提示界面控制器（mine/failOrSuccess.html）
