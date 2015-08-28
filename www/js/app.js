@@ -6,28 +6,35 @@
 var ionicApp = angular.module('starter', ['ionic','starter.values','starter.filters','starter.services','starter.controllers','starter.directives','ngResource']);
 
 ionicApp.run(function($ionicPlatform, $localStorage, Push) {
-  if($localStorage.get("token") === "undefined" || $localStorage.get("token") === undefined){
+  if("undefined" === $localStorage.get("token")  || undefined === $localStorage.get("token")){
       $localStorage.set("token", "");
   }
-  if($localStorage.get("lender_id") === "undefined" || $localStorage.get("lender_id") === undefined){
+  if("undefined" === $localStorage.get("lender_id")  || undefined === $localStorage.get("lender_id")){
       $localStorage.set("lender_id", 1);
   }
-    // push notification callback
-    var notificationCallback = function(data) {
-        console.log('received data :' + data);
-        var notification = angular.fromJson(data);
-        //app 是否处于正在运行状态
-        var isActive = notification.notification;
+  if("undefined" === $localStorage.get("remainder")  || undefined === $localStorage.get("remainder")){
+      $localStorage.set("remainder", "0.00");
+  }
+  if("undefined" === $localStorage.get("normalTime")  || undefined === $localStorage.get("normalTime")){
+      $localStorage.set("normalTime", "0.00");
+  }
+  if("undefined" === $localStorage.get("superTime")  || undefined === $localStorage.get("superTime")){
+      $localStorage.set("superTime", "0.00");
+  }
 
-        // here add your code
+  // push notification callback
+  var notificationCallback = function(data) {
+      console.log('received data :' + data);
+      var notification = angular.fromJson(data);
+      //app 是否处于正在运行状态
+      var isActive = notification.notification;
+      // here add your code
+      //ios
+      if (true) {
+          window.alert(notification);
+      }
+  };
 
-
-        //ios
-        if (true) {
-            window.alert(notification);
-
-        }
-    };
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -40,10 +47,11 @@ ionicApp.run(function($ionicPlatform, $localStorage, Push) {
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
-//初始化
-      Push.init(notificationCallback);
-      //设置别名
-      Push.setAlias("12345678");
+
+    //初始化
+    Push.init(notificationCallback);
+    //设置别名
+    //Push.setAlias("12345678");
   });
 });
 
@@ -213,7 +221,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/settings',
           views:{
               'bike-mine':{
-                  templateUrl: 'templates/mine/settings.html'
+                  templateUrl: 'templates/mine/settings.html',
+                  controller: 'settingCtrl'
               }
           }
       })
@@ -227,38 +236,4 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           }
       });
   $urlRouterProvider.otherwise("/bikebon/home");
-})
-    .factory('Push', function() {
-        var push;
-        return {
-            setBadge: function(badge) {
-                if (push) {
-                    console.log('jpush: set badge', badge);
-                    plugins.jPushPlugin.setBadge(badge);
-                }
-            },
-            setAlias: function(alias) {
-                if (push) {
-                    console.log('jpush: set alias', alias);
-                    plugins.jPushPlugin.setAlias(alias);
-                }
-            },
-            check: function() {
-                if (window.jpush && push) {
-                    plugins.jPushPlugin.receiveNotificationIniOSCallback(window.jpush);
-                    window.jpush = null;
-                }
-            },
-            init: function(notificationCallback) {
-                console.log('jpush: start init-----------------------');
-                push = window.plugins && window.plugins.jPushPlugin;
-                if (push) {
-                    console.log('jpush: init');
-                    plugins.jPushPlugin.init();
-                    plugins.jPushPlugin.setDebugMode(true);
-                    plugins.jPushPlugin.openNotificationInAndroidCallback = notificationCallback;
-                    plugins.jPushPlugin.receiveNotificationIniOSCallback = notificationCallback;
-                }
-            }
-        };
-    });
+});

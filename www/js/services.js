@@ -57,7 +57,7 @@ ionicSer.factory('$localStorage',['$window', function($window){
         getObject: function(key){
             return JSON.parse($window.localStorage[key] || '{}');
         },
-        remove: function(key){
+        delete: function(key){
             $window.localStorage.removeItem(key);
         }
     }
@@ -153,6 +153,45 @@ ionicSer.factory('Base64', function() {
     };
 });
 
+/**
+ *  name：极光推送服务
+ *  desc：从网上直接copy来的［极光推送文档］
+ *  author：yxq
+ * */
+ionicSer.factory('Push', function() {
+    var push;
+    return {
+        setBadge: function(badge) {
+            if (push) {
+                console.log('jpush: set badge', badge);
+                plugins.jPushPlugin.setBadge(badge);
+            }
+        },
+        setAlias: function(alias) {
+            if (push) {
+                console.log('jpush: set alias', alias);
+                plugins.jPushPlugin.setAlias(alias);
+            }
+        },
+        check: function() {
+            if (window.jpush && push) {
+                plugins.jPushPlugin.receiveNotificationIniOSCallback(window.jpush);
+                window.jpush = null;
+            }
+        },
+        init: function(notificationCallback) {
+            console.log('jpush: start init-----------------------');
+            push = window.plugins && window.plugins.jPushPlugin;
+            if (push) {
+                console.log('jpush: init');
+                plugins.jPushPlugin.init();
+                plugins.jPushPlugin.setDebugMode(true);
+                plugins.jPushPlugin.openNotificationInAndroidCallback = notificationCallback;
+                plugins.jPushPlugin.receiveNotificationIniOSCallback = notificationCallback;
+            }
+        }
+    };
+});
 
 
 

@@ -1,11 +1,11 @@
 <ion-view hide-tabs view-title="设置" class="color-bg-jx">
-    <ion-content scrollbar-y="false">
-        <ul class="list" style="margin-top: 25px;">
-            <li class="item item-icon-right" href="#" >
+    <ion-content scrollbar-y="false" style="padding-top: 25px;">
+        <ion-list>
+            <ion-item class="item item-icon-right" href="#/login" >
                 密码修改
                 <i class="icon ion-ios-arrow-right" ></i>
-            </li>
-            <li class="item item-toggle">
+            </ion-item>
+            <ion-item class="item item-toggle">
                 计时提醒
                 <label class="toggle toggle-balanced">
                     <input type="checkbox"/>
@@ -13,8 +13,8 @@
                         <div class="handle"></div>
                     </div>
                 </label>
-            </li>
-            <li class="item item-toggle">
+            </ion-item>
+            <ion-item class="item item-toggle">
                 消息推送
                 <label class="toggle toggle-balanced">
                     <input type="checkbox" checked="checked"/>
@@ -22,9 +22,9 @@
                         <div class="handle"></div>
                     </div>
                 </label>
-            </li>
-        </ul>
-        <button class="button button-full button-light">
+            </ion-item>
+        </ion-list>
+        <button class="button button-full button-light" ng-show="exitFlag" ng-click="exitBtn()">
             退出登录
         </button>
     </ion-content>

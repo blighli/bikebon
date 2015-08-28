@@ -112,22 +112,18 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
  *  desc：
  *  author：yxq
  * */
-ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 'baseUrl',
-    function($localStorage, $scope, $http, Base64, baseUrl){
+ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 'baseUrl', '$location',
+    function($localStorage, $scope, $http, Base64, baseUrl, $location){
+        //我的页面数据初始化[登录认证标记]
         var temp = $localStorage.get("token");
         $scope.loginFlag = false;
-        $scope.user = {
-            "baseTime": " ",
-            "deposit": " ",
-            "gender": " ",
-            "portraitUrl": "",
-            "school": "",
-            "upscaleTime": " ",
-            "userName": " ",
-            "verifyTag": false
-        };
+        $scope.verifyFlag = false;
+        //登录、身份认证模块
         if("undefined" !== temp && undefined !== temp){
             $scope.loginFlag = true;
+            $scope.deposit = $localStorage.get("remainder");
+            $scope.baseTime = $localStorage.get("normalTime");
+            $scope.upscaleTime = $localStorage.get("superTime");
             $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
             $http.get(baseUrl + '/user')
                 .success(function(data){
@@ -140,11 +136,31 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
                         $scope.verifyFlag = false;
                         $scope.verifyMess = "认证审核中";
                     }
+                    $localStorage.set("remainder", data.deposit);
+                    $scope.deposit = data.deposit;
+                    $localStorage.set("normalTime", data.baseTime);
+                    $scope.baseTime = data.baseTime;
+                    $localStorage.set("superTime", data.upscaleTime);
+                    $scope.upscaleTime = data.upscaleTime;
                 }).error(function(){
                     console.log("Sorry, it has an error in mineCtrl.");
                 });
-        }else{
-            console.log("I am in false loginFlag.");
+        }
+        //我的券
+        $scope.couponFun = function(){
+            if("undefined" !== temp && undefined !== temp){
+                $location.path("/bikebon/myCoupon");
+            }else{
+                $location.path("/login");
+            }
+        }
+        //我的订单
+        $scope.orderFun = function(){
+            if("undefined" !== temp && undefined !== temp){
+                $location.path("/bikebon/myOrder");
+            }else{
+                $location.path("/login");
+            }
         }
 }]);
 
@@ -186,7 +202,21 @@ ionicCtrl.controller('identityCtrl', ['$scope', '$ionicActionSheet', 'lenderSer'
     }
 ]);
 
-
+/**
+ * */
+ionicCtrl.controller('settingCtrl', ['$scope', '$localStorage', '$location',
+    function($scope, $localStorage, $location){
+        var temp = $localStorage.get("token");
+        if("undefined" !== temp && undefined !== temp){
+            $scope.exitFlag = true;
+        }else{
+            $scope.exitFlag = false;
+        }
+        $scope.exitBtn = function(){
+            $localStorage.delete("token");
+            $location.path('/bikebon/mine');
+        }
+}]);
 
 /**
  *  name：所有成功失败提示界面控制器（mine/failOrSuccess.html）
