@@ -62,6 +62,10 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: 'templates/login.html',
         controller: 'loginCtrl'
       })
+      .state('aboutUs',{
+          url:'/aboutUs',
+          templateUrl: 'templates/mine/aboutUs.html'
+      })
       .state('map',{
           url: '/map',
           templateUrl: 'templates/map.html'
@@ -160,6 +164,14 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'templates/mine/myCoupon.html'
           }
         }
+      })
+      .state('bikebon.myInformation',{
+          url:'/myInformation',
+          views:{
+              'bike-mine':{
+                  templateUrl: 'templates/mine/myInformation.html'
+              }
+          }
       })
       .state('bikebon.myOrder',{
         url:'/myOrder',
