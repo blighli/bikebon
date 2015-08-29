@@ -883,6 +883,7 @@ p{
 }
 .details-color-gj{
     background-color: white;
+    border-bottom: 1px solid #ECECEC;
 }
 .details-bg-gj{
     position: relative;
