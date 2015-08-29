@@ -393,6 +393,11 @@
 .color-bg-jx{
     background-color: #f2f2f2;
 }
+.detail-bike-gj{
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ECECEC;
+}
 .information-bg-gj{
     margin-top: 20px;
     background-color: #FFFFFF;
@@ -772,6 +777,7 @@
     height: 70px;
     border-bottom: 1px solid #f2f2f2;
     overflow: hidden;
+    background-color: #FFFFFF;
 }
 .balanced-left-gj{
     float: left;
@@ -830,11 +836,13 @@ p{
     font-size: 50px;
     padding-top: 40px;
     padding-bottom: 25px;
+    background-color: #FFFFFF;
 }
 .balanced-yuan-wgj{
     font-size: 35px;
     padding-top: 30px;
     padding-bottom: 15px;
+    background-color: #FFFFFF;
 }
 .time-money-gj{
     width: 100%;
@@ -843,6 +851,7 @@ p{
     border-top: 1px solid #f2f2f2;
     line-height: 40px;
     padding-left: 16px;
+    background-color: #FFFFFF;
 }
 .ios-actionSheet .action-sheet-backdrop{
     -webkit-transition: background-color 150ms ease-in-out;

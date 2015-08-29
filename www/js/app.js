@@ -133,8 +133,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'templates/mine.html',
             controller: 'mineCtrl'
           }
-        },
-        cache: false
+        }
       })
       .state('bikebon.myBalance',{
           url:'/myBalance',
@@ -176,6 +175,14 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           views:{
               'bike-mine':{
                   templateUrl: 'templates/mine/myInformation.html'
+              }
+          }
+      })
+      .state('bikebon.myId',{
+          url:'/myId',
+          views:{
+              'bike-mine':{
+                  templateUrl: 'templates/mine/myId.html'
               }
           }
       })
