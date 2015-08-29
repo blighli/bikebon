@@ -1,4 +1,9 @@
 <ion-view view-title="结算支付">
+    <ion-nav-bar align-title="center" class="bar-balanced">
+        <ion-nav-buttons side="left">
+            <button class="button icon ion-ios-arrow-left button-clear" menu-toggle="left" back-btn></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
     <ion-content scrollbar-y="false" style="background-color: #f2f2f2">
         <ion-list>
             <div class="text-120-gj">
@@ -18,11 +23,11 @@
             <div class="text-120-gj">
                 <span style="font-size: 16px;margin-left: 20px;line-height: 70px">可用优惠</span>
             </div>
-            <div class="text-100-gj" style="overflow: hidden">
-                <span style="font-size: 15px;margin-left: 30px;line-height: 50px">20分钟优惠券</span>
-                <a class="icon ion-ios-arrow-right" style="float: right;line-height: 50px;margin-right: 20px;color: black" href="#/bikebon/myCoupon"></a>
+            <a class="text-100-gj" style="overflow: hidden;text-decoration: none;color: #000000;display: block" href="#/myCoupon">
+                <span style="font-size: 15px;padding-left: 30px;line-height: 50px">20分钟优惠券</span>
+                <i class="icon ion-ios-arrow-right" style="float: right;line-height: 50px;margin-right: 20px;color: black;"></i>
                 <span style="font-size: 12px;line-height: 50px;float:right;margin-right: 8px;color: #AEAEAE">选择更多</span>
-            </div>
+            </a>
         </ion-list>
         <div style="width: 100%;height: 15px;background-color: #f2f2f2"></div>
         <ion-list>
@@ -46,7 +51,7 @@
         </ion-list>
         <div style="width: 100%;height: 15px;background-color: #f2f2f2"></div>
     </ion-content>
-    <a class="bar bar-footer bar-balanced" href="#/bikebon/paySuccess" style="text-decoration: none">
+    <a class="bar bar-footer bar-balanced" href="#/paySuccess" style="text-decoration: none">
         <div class="title">
             确认支付
         </div>

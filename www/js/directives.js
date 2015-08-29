@@ -1,14 +1,14 @@
 var ionicDir = angular.module("starter.directives",[]);
-ionicDir.directive('hideTabs', function($rootScope){
+ionicDir.directive('backBtn', function(){
    return {
-       restrict: 'AE',
-       link: function($scope){
-           $rootScope.hideTabs = 'tabs-item-hide';
-           $scope.$on('$destroy', function(){
-               $rootScope.hideTabs = '';
-           })
+       restrict: 'A',
+       link: function(scope, element, attrs){
+           element.on('click', function(){
+               history.back();
+               scope.$apply();
+           });
        }
-   }
+   };
 });
 ionicDir.directive("appMap", function () {
     return {

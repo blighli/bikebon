@@ -1,4 +1,9 @@
-<ion-view  view-title="订单详情">
+<ion-view view-title="订单详情">
+    <ion-nav-bar align-title="center" class="bar-balanced">
+        <ion-nav-buttons side="left">
+            <button class="button icon ion-ios-arrow-left button-clear" menu-toggle="left" back-btn></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
     <ion-content scrollbar-y="false">
         <ion-list style="background: #f2f2f2">
             <ion-item class="item-divider-yxq"></ion-item>
@@ -95,7 +100,7 @@
             </ion-item>
             <ion-item class="item-divider-gj"></ion-item>
             <div class="text-right text-top-gj details-color-gj">
-                <a class="button button-light button-small" href="#/bikebon/evaluateOrder">评价订单</a>
+                <a class="button button-light button-small" href="#/evaluateOrder">评价订单</a>
                 <button class="button button-balanced button-small" style="margin-right: 20px;margin-left: 15px">再次租用</button>
             </div>
         </ion-list>

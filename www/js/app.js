@@ -60,34 +60,129 @@ ionicApp.run(function($ionicPlatform, $localStorage, Push) {
 
 ionicApp.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
+
+      //20150830-02:30对所有页面的分类整理_gj
+      //login页面
       .state('login',{
         url: '/login',
-        templateUrl: 'templates/login.html',
+        templateUrl: 'templates/root/login.html',
         controller: 'loginCtrl'
       })
+
+      //home页面
       .state('aboutUs',{
           url:'/aboutUs',
-          templateUrl: 'templates/mine/aboutUs.html'
+          templateUrl: 'templates/root/aboutUs.html'
       })
       .state('map',{
           url: '/map',
-          templateUrl: 'templates/map.html'
+          templateUrl: 'templates/home/map.html'
       })
       .state('mySchedule',{
           url: '/mySchedule',
-          templateUrl: 'templates/main/mySchedule.html'
+          templateUrl: 'templates/home/mySchedule.html'
       })
 
+      //rentBike页面
+      .state('bikeList',{
+          url: '/rentBike/:bike_type_id',
+          templateUrl: 'templates/rentBike/bikeDetail.html',
+          controller: 'bikeDetailCtrl'
+      })
+
+      //find页面
+      .state('mySays',{
+          url: '/mySays',
+          templateUrl: 'templates/find/mySays.html'
+      })
+
+      //mine页面
+      .state('myOrder',{
+          url:'/myOrder',
+          templateUrl: 'templates/mine/myOrder.html'
+      })
+      .state('orderDetail',{
+          url:'/orderDetail',
+          templateUrl: 'templates/mine/orderDetail.html'
+      })
+      .state('evaluateOrder',{
+          url:'/evaluateOrder',
+          templateUrl: 'templates/mine/evaluateOrder.html'
+      })
+      .state('immediatePay',{
+          url:'/immediatePay',
+          templateUrl: 'templates/mine/immediatePay.html'
+      })
+      .state('cancellationOrder',{
+          url:'/cancellationOrder',
+          templateUrl: 'templates/mine/cancellationOrder.html'
+      })
+      .state('paySuccess',{
+          url:'/paySuccess',
+          templateUrl: 'templates/mine/paySuccess.html'
+      })
+      .state('myBalance',{
+          url:'/myBalance',
+          templateUrl: 'templates/mine/myBalance.html',
+          controller: 'balanceCtrl'
+      })
+      .state('normalTime',{
+          url:'/normalTime',
+          templateUrl: 'templates/mine/normalTime.html',
+          controller: 'normalCtrl'
+      })
+      .state('advancedTime',{
+          url:'/advancedTime',
+          templateUrl: 'templates/mine/advancedTime.html',
+          controller: 'advanceCtrl'
+      })
+      .state('myCoupon',{
+          url:'/myCoupon',
+                  templateUrl: 'templates/mine/myCoupon.html'
+      })
+      .state('myInformation',{
+          url:'/myInformation',
+          templateUrl: 'templates/mine/myInformation.html',
+          controller: 'identityCtrl'
+      })
+      .state('myId',{
+          url:'/myId',
+          templateUrl: 'templates/mine/myId.html'
+      })
+      .state('mySex',{
+          url:'/mySex',
+          templateUrl: 'templates/mine/mySex.html'
+      })
+      .state('feedback',{
+          url:'/feedback',
+          templateUrl: 'templates/mine/feedback.html'
+      })
+      .state('aboutBikebon',{
+          url:'/aboutBikebon',
+          templateUrl: 'templates/mine/aboutBikebon.html'
+      })
+      .state('settings',{
+          url:'/settings',
+          templateUrl: 'templates/mine/settings.html',
+          controller: 'settingCtrl'
+      })
+      .state('identity',{
+          url:'/identity',
+          templateUrl: 'templates/mine/identity.html',
+          controller: 'identityCtrl'
+      })
+
+      //四个主页面
       .state('bikebon',{
         url: '/bikebon',
         abstract: true,
-        templateUrl: 'templates/bikes.html'
+        templateUrl: 'templates/root/bikes.html'
       })
       .state('bikebon.home',{
         url: '/home',
         views: {
           'bike-home': {
-            templateUrl: 'templates/home.html',
+            templateUrl: 'templates/root/home.html',
             controller: 'homeCtrl'
           }
         }
@@ -96,186 +191,28 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
         url: '/rentBike',
         views: {
           'bike-rentBike': {
-            templateUrl: 'templates/rentBike.html',
+            templateUrl: 'templates/root/rentBike.html',
             controller: 'rentBikeCtrl'
           }
         }
       })
-      .state('bikebon.bikeList',{
-          url: '/rentBike/:bike_type_id',
-          views: {
-              'bike-rentBike': {
-                  templateUrl: 'templates/main/bikeDetail.html',
-                  controller: 'bikeDetailCtrl'
-              }
-          }
-      })
       .state('bikebon.find',{
-        url: '/find',
-        views: {
-          'bike-find': {
-            templateUrl: 'templates/find.html'
-          }
-        }
-      })
-      .state('bikebon.mySays',{
-          url: '/mySays',
+          url: '/find',
           views: {
               'bike-find': {
-                  templateUrl: 'templates/find/mySays.html'
+                  templateUrl: 'templates/root/find.html'
               }
           }
       })
       .state('bikebon.mine',{
-        url: '/mine',
-        views: {
-          'bike-mine': {
-            templateUrl: 'templates/mine.html',
-            controller: 'mineCtrl'
-          }
-        }
-      })
-      .state('bikebon.myBalance',{
-          url:'/myBalance',
-          views:{
-              'bike-mine':{
-                  templateUrl: 'templates/mine/myBalance.html',
-                  controller: 'balanceCtrl'
+          url: '/mine',
+          views: {
+              'bike-mine': {
+                  templateUrl: 'templates/root/mine.html',
+                  controller: 'mineCtrl'
               }
-          }
-      })
-      .state('bikebon.normalTime',{
-          url:'/normalTime',
-          views:{
-              'bike-mine':{
-                  templateUrl: 'templates/mine/normalTime.html',
-                  controller: 'normalCtrl'
-              }
-          }
-      })
-      .state('bikebon.advancedTime',{
-          url:'/advancedTime',
-          views:{
-              'bike-mine':{
-                  templateUrl: 'templates/mine/advancedTime.html',
-                  controller: 'advanceCtrl'
-              }
-          }
-      })
-      .state('bikebon.myCoupon',{
-        url:'/myCoupon',
-        views:{
-          'bike-mine':{
-            templateUrl: 'templates/mine/myCoupon.html'
-          }
-        }
-      })
-      .state('bikebon.myInformation',{
-          url:'/myInformation',
-          views:{
-              'bike-mine':{
-                  templateUrl: 'templates/mine/myInformation.html',
-                  controller: 'informationCtrl'
-              }
-          }
-      })
-      .state('bikebon.myId',{
-          url:'/myId',
-          views:{
-              'bike-mine':{
-                  templateUrl: 'templates/mine/myId.html'
-              }
-          }
-      })
-      .state('bikebon.mySex',{
-          url:'/mySex',
-          views:{
-              'bike-mine':{
-                  templateUrl: 'templates/mine/mySex.html'
-              }
-          }
-      })
-      .state('bikebon.myOrder',{
-        url:'/myOrder',
-        views:{
-          'bike-mine':{
-            templateUrl: 'templates/mine/myOrder.html',
-          }
-        }
-      })
-      .state('bikebon.orderDetail',{
-          url:'/orderDetail',
-          views:{
-              'bike-mine':{
-                  templateUrl: 'templates/main/orderDetail.html'
-              }
-          }
-      })
-      .state('bikebon.evaluateOrder',{
-          url:'/evaluateOrder',
-          views:{
-              'bike-mine':{
-                  templateUrl: 'templates/main/evaluateOrder.html'
-              }
-          }
-      })
-      .state('bikebon.immediatePay',{
-          url:'/immediatePay',
-          views:{
-              'bike-mine':{
-                  templateUrl: 'templates/main/immediatePay.html'
-              }
-          }
-      })
-      .state('bikebon.cancellationOrder',{
-          url:'/cancellationOrder',
-          views:{
-              'bike-mine':{
-                  templateUrl: 'templates/main/cancellationOrder.html'
-              }
-          }
-      })
-      .state('bikebon.paySuccess',{
-          url:'/paySuccess',
-          views:{
-              'bike-mine':{
-                  templateUrl: 'templates/main/paySuccess.html'
-              }
-          }
-      })
-      .state('bikebon.feedback',{
-          url:'/feedback',
-          views:{
-              'bike-mine':{
-                  templateUrl: 'templates/mine/feedback.html'
-              }
-          }
-      })
-      .state('bikebon.aboutBikebon',{
-          url:'/aboutBikebon',
-          views:{
-              'bike-mine':{
-                  templateUrl: 'templates/mine/aboutBikebon.html'
-              }
-          }
-      })
-      .state('bikebon.settings',{
-          url:'/settings',
-          views:{
-              'bike-mine':{
-                  templateUrl: 'templates/mine/settings.html',
-                  controller: 'settingCtrl'
-              }
-          }
-      })
-      .state('bikebon.identity',{
-          url:'/identity',
-          views:{
-              'bike-mine':{
-                  templateUrl: 'templates/mine/identity.html',
-                  controller: 'identityCtrl'
-              }
-          }
+          },
+          cache: false
       });
   $urlRouterProvider.otherwise("/bikebon/home");
 });

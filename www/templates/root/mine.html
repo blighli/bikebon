@@ -1,12 +1,12 @@
 <ion-view view-title="我的">
     <ion-nav-bar align-title="center" class="bar-balanced">
         <ion-nav-buttons side="right">
-            <a class="button icon ion-ios-gear-outline button-clear" menu-toggle="right" href="#/bikebon/settings"></a>
+            <a class="button icon ion-ios-gear-outline button-clear" menu-toggle="right" href="#/settings"></a>
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content class="has-header" scrollbar-y="false">
         <ion-list>
-            <ion-item class="item-thumbnail-left img-gj item-icon-right" href="#/bikebon/myInformation">
+            <ion-item class="item-thumbnail-left img-gj item-icon-right" href="#/myInformation">
                 <div class="photo-gj"><img src="img/headShow/defaultUser_1.png" /></div>
                 <div class="item-center-yxq margin-22-top" ng-show="!loginFlag">
                     <a class="balanced font-18-gj text-none-gj" href="#/login">立即登录</a>
@@ -14,7 +14,7 @@
                 <div class="item-center-yxq margin-18-top" ng-show="loginFlag&&!verifyFlag">
                     <div class="mine-color-gj"><a class="margin-6-bottom font-17-yxq">{{userName}}</a></div>
                     <span class="font-14-yxq color-b3-jx" style="margin-right:7px;">未认证用户</span>
-                    <a class="font-14-yxq balanced text-none-gj" href="#/bikebon/identity">立即认证</a>
+                    <a class="font-14-yxq balanced text-none-gj" href="#/identity">立即认证</a>
                 </div>
                 <div class="item-center-yxq margin-18-top" ng-show="loginFlag&&verifyFlag">
                     <div class="mine-color-gj"><a class="margin-6-bottom font-17-yxq">{{userName}}</a></div>
@@ -23,21 +23,21 @@
                 <i class="icon ion-ios-arrow-right img-right-gj" ng-show="loginFlag"></i>
             </ion-item>
             <div class="mine-time-gj" ng-show="loginFlag">
-                <a class="mine-yuan-gj text-none-gj" href="#/bikebon/myBalance">
+                <a class="mine-yuan-gj text-none-gj" href="#/myBalance">
                     <div class="mine-magin-gj">
                         <div class="mine-big-gj">{{deposit | roundNum}}</div>
                         <div class="mine-small-gj">{{deposit | limitTo : -3}}元</div>
                         <div class="mine-money-gj">我的余额</div>
                     </div>
                 </a>
-                <a class="mine-yuan-gj text-none-gj" href="#/bikebon/normalTime">
+                <a class="mine-yuan-gj text-none-gj" href="#/normalTime">
                     <div class="mine-magin-gj">
                         <div class="mine-bigo-gj">{{baseTime | roundNum}}</div>
                         <div class="mine-smallo-gj">{{baseTime | limitTo : -3}}小时</div>
                         <div class="mine-moneyo-gj">普通时间</div>
                     </div>
                 </a>
-                <a class="mine-yuan-gj mine-border-gj text-none-gj" href="#/bikebon/advancedTime">
+                <a class="mine-yuan-gj mine-border-gj text-none-gj" href="#/advancedTime">
                     <div class="mine-magin-gj">
                         <div class="mine-bigx-gj">{{upscaleTime | roundNum}}</div>
                         <div class="mine-smallx-gj">{{upscaleTime | limitTo : -3}}小时</div>
@@ -62,12 +62,12 @@
                 分享
                 <i class="icon ion-ios-arrow-right"></i>
             </ion-item>
-            <ion-item class="item-icon-left item-icon-right" href="#/bikebon/feedback">
+            <ion-item class="item-icon-left item-icon-right" href="#/feedback">
                 <i class="icon yxq_feedback"></i>
                 反馈
                 <i class="icon ion-ios-arrow-right"></i>
             </ion-item>
-            <ion-item class="item-icon-left item-icon-right" href="#/bikebon/aboutBikebon">
+            <ion-item class="item-icon-left item-icon-right" href="#/aboutBikebon">
                 <i class="icon yxq_about"></i>
                 关于百客邦
                 <i class="icon ion-ios-arrow-right"></i>

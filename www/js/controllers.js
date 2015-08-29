@@ -151,7 +151,7 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
         //我的券
         $scope.couponFun = function(){
             if("undefined" !== temp && undefined !== temp){
-                $location.path("/bikebon/myCoupon");
+                $location.path("/myCoupon");
             }else{
                 $location.path("/login");
             }
@@ -159,7 +159,7 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
         //我的订单
         $scope.orderFun = function(){
             if("undefined" !== temp && undefined !== temp){
-                $location.path("/bikebon/myOrder");
+                $location.path("/myOrder");
             }else{
                 $location.path("/login");
             }
@@ -291,66 +291,37 @@ ionicCtrl.controller('advanceCtrl', ['$scope', 'mineSer', '$localStorage',
     }]);
 
 /**
- *  name：所有成功失败提示界面控制器（mine/failOrSuccess.html）
- *  desc：自己的观点－服务器端只需要返回成功或失败的标记，description要重新写
- *  author：yxq
- * */
-ionicCtrl.controller('successCtrl',function($scope){
-     $scope.fails = [{
-        "id": 1,
-        "title": "身份认证",
-        "img": "img/fail_Success/right.png",
-        "description": "操作成功，系统会在一个工作日内审核"
-    },{
-        "id": 2,
-        "title": "身份认证",
-        "img": "img/fail_Success/wrong.png",
-        "description": "信息填写错误，请重新提交"
-    },{
-        "id": 3,
-        "title": "租用成功",
-        "img": "img/fail_Success/right.png",
-        "description": "订单已成功提交，请在30分钟内到租车点提车"
-    },{
-        "id": 4,
-        "title": "租用失败",
-        "img": "img/fail_Success/wrong.png",
-        "description": "该车型已被抢光，请选其他车型"
-    }];
-});
-
-/**
  *  name：个人信息界面头像上拉菜单的实现（mine/myInformation.html）
  *  desc：自己写
  *  author：wgj
  * */
-ionicCtrl.controller("informationCtrl",function($scope, $ionicActionSheet, $timeout) {
-
-    // Triggered on a button click, or some other target
-    $scope.show = function() {
-
-        // Show the action sheet
-        var hideSheet = $ionicActionSheet.show({
-            buttons: [
-                { text: "拍摄" }
-            ],
-            buttonClicked: function(index) {
-                return true;
-            },
-            cancelText: "取消",
-            cancel: function() {
-                // add cancel code..
-            },
-            destructiveText: "从相册选择",
-            destructiveButtonClicked:function(){
-            }
-        });
-
-        // For example's sake, hide the sheet after two seconds
-        $timeout(function() {
-            //	hideSheet();
-        }, 2000);
-
-    };
-});
+//ionicCtrl.controller("informationCtrl",function($scope, $ionicActionSheet, $timeout) {
+//
+//    // Triggered on a button click, or some other target
+//    $scope.show = function() {
+//
+//        // Show the action sheet
+//        var hideSheet = $ionicActionSheet.show({
+//            buttons: [
+//                { text: "拍摄" }
+//            ],
+//            buttonClicked: function(index) {
+//                return true;
+//            },
+//            cancelText: "取消",
+//            cancel: function() {
+//                // add cancel code..
+//            },
+//            destructiveText: "从相册选择",
+//            destructiveButtonClicked:function(){
+//            }
+//        });
+//
+//        // For example's sake, hide the sheet after two seconds
+//        $timeout(function() {
+//            //	hideSheet();
+//        }, 2000);
+//
+//    };
+//});
 
