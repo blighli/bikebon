@@ -195,7 +195,7 @@ ionicCtrl.controller('identityCtrl', ['$scope', '$ionicActionSheet', 'lenderSer'
                     }else if(1 == index){
                         console.log("从相册选择");
                     }else{
-                    	console.log("点错啦～");
+                        console.log("点错啦～");
                     }
                     return true;
                 }
@@ -291,37 +291,35 @@ ionicCtrl.controller('advanceCtrl', ['$scope', 'mineSer', '$localStorage',
     }]);
 
 /**
- *  name：个人信息界面头像上拉菜单的实现（mine/myInformation.html）
- *  desc：自己写
+ *  name：个人信息界面控制器（mine/myInformation.html）
+ *  desc：弹出拍照、从相册选择对话框
  *  author：wgj
  * */
-//ionicCtrl.controller("informationCtrl",function($scope, $ionicActionSheet, $timeout) {
-//
-//    // Triggered on a button click, or some other target
-//    $scope.show = function() {
-//
-//        // Show the action sheet
-//        var hideSheet = $ionicActionSheet.show({
-//            buttons: [
-//                { text: "拍摄" }
-//            ],
-//            buttonClicked: function(index) {
-//                return true;
-//            },
-//            cancelText: "取消",
-//            cancel: function() {
-//                // add cancel code..
-//            },
-//            destructiveText: "从相册选择",
-//            destructiveButtonClicked:function(){
-//            }
-//        });
-//
-//        // For example's sake, hide the sheet after two seconds
-//        $timeout(function() {
-//            //	hideSheet();
-//        }, 2000);
-//
-//    };
-//});
+ionicCtrl.controller("informationCtrl", ['$scope', '$ionicActionSheet',
+    function($scope, $ionicActionSheet) {
+        //实现了ActionSheet的弹出（ios取消键的取消功能，android无取消键）
+        $scope.show = function(){
+            var hideSheet = $ionicActionSheet.show({
+                buttons: [
+                    {text: '拍照'},
+                    {text: '从相册选择'}
+                ],
+                cancelText: '取消',
+                cssClass: 'ios-actionSheet',
+                cancel: function(){
+                    hideSheet();
+                },
+                buttonClicked: function(index){
+                    if(0 == index){
+                        console.log("拍照");
+                    }else if(1 == index){
+                        console.log("从相册选择");
+                    }else{
+                        console.log("点错啦～");
+                    }
+                    return true;
+                }
+            });
+        }
+}]);
 

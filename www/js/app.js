@@ -143,7 +143,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('myInformation',{
           url:'/myInformation',
           templateUrl: 'templates/mine/myInformation.html',
-          controller: 'identityCtrl'
+          controller: 'informationCtrl'
       })
       .state('myId',{
           url:'/myId',

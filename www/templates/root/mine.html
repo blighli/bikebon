@@ -6,7 +6,7 @@
     </ion-nav-bar>
     <ion-content class="has-header" scrollbar-y="false">
         <ion-list>
-            <ion-item class="item-thumbnail-left img-gj item-icon-right" href="#/myInformation">
+            <ion-item class="item-thumbnail-left img-gj item-icon-right">
                 <div class="photo-gj"><img src="img/headShow/defaultUser_1.png" /></div>
                 <div class="item-center-yxq margin-22-top" ng-show="!loginFlag">
                     <a class="balanced font-18-gj text-none-gj" href="#/login">立即登录</a>
@@ -20,7 +20,7 @@
                     <div class="mine-color-gj"><a class="margin-6-bottom font-17-yxq">{{userName}}</a></div>
                     <div class="font-14-yxq balanced text-none-gj">{{verifyMess}}</div>
                 </div>
-                <i class="icon ion-ios-arrow-right img-right-gj" ng-show="loginFlag"></i>
+                <a class="icon ion-ios-arrow-right img-right-gj text-none-gj" ng-show="loginFlag" href="#/myInformation"></a>
             </ion-item>
             <div class="mine-time-gj" ng-show="loginFlag">
                 <a class="mine-yuan-gj text-none-gj" href="#/myBalance">
