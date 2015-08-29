@@ -174,7 +174,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/myInformation',
           views:{
               'bike-mine':{
-                  templateUrl: 'templates/mine/myInformation.html'
+                  templateUrl: 'templates/mine/myInformation.html',
+                  controller: 'informationCtrl'
               }
           }
       })
@@ -183,6 +184,14 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           views:{
               'bike-mine':{
                   templateUrl: 'templates/mine/myId.html'
+              }
+          }
+      })
+      .state('bikebon.mySex',{
+          url:'/mySex',
+          views:{
+              'bike-mine':{
+                  templateUrl: 'templates/mine/mySex.html'
               }
           }
       })

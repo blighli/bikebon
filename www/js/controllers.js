@@ -318,3 +318,39 @@ ionicCtrl.controller('successCtrl',function($scope){
         "description": "该车型已被抢光，请选其他车型"
     }];
 });
+
+/**
+ *  name：个人信息界面头像上拉菜单的实现（mine/myInformation.html）
+ *  desc：自己写
+ *  author：wgj
+ * */
+ionicCtrl.controller("informationCtrl",function($scope, $ionicActionSheet, $timeout) {
+
+    // Triggered on a button click, or some other target
+    $scope.show = function() {
+
+        // Show the action sheet
+        var hideSheet = $ionicActionSheet.show({
+            buttons: [
+                { text: "拍摄" }
+            ],
+            buttonClicked: function(index) {
+                return true;
+            },
+            cancelText: "取消",
+            cancel: function() {
+                // add cancel code..
+            },
+            destructiveText: "从相册选择",
+            destructiveButtonClicked:function(){
+            }
+        });
+
+        // For example's sake, hide the sheet after two seconds
+        $timeout(function() {
+            //	hideSheet();
+        }, 2000);
+
+    };
+});
+
