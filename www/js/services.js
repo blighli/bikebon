@@ -53,30 +53,35 @@ ionicSer.factory('mineSer', ['$http', 'baseUrl', 'Base64', '$localStorage',
             }
         }
     }
-])
+]);
+
 /**
  *  name：有localStorage相关的服务
  *  desc：本地数据的存储删除［附加JSON格式］
  *  author：yxq
  * */
-ionicSer.factory('$localStorage',['$window', function($window){
-    return {
-        set: function(key, value){
-            $window.localStorage[key] = value;
-        },
-        get: function(key, defaultValue){
-            return $window.localStorage[key] || defaultValue;
-        },
-        setObject: function(key, value){
-            $window.localStorage[key] = JSON.stringify(value);
-        },
-        getObject: function(key){
-            return JSON.parse($window.localStorage[key] || '{}');
-        },
-        delete: function(key){
-            $window.localStorage.removeItem(key);
+ionicSer.factory('$localStorage',['$window',
+    function($window){
+        return {
+            set: function(key, value){
+                $window.localStorage[key] = value;
+            },
+            get: function(key, defaultValue){
+                return $window.localStorage[key] || defaultValue;
+            },
+            setObject: function(key, value){
+                $window.localStorage[key] = JSON.stringify(value);
+            },
+            getObject: function(key){
+                return JSON.parse($window.localStorage[key] || '{}');
+            },
+            delete: function(key){
+                $window.localStorage.removeItem(key);
+            },
+            clear: function(){
+                $window.localStorage.clear();
+            }
         }
-    }
 }]);
 
 /**

@@ -5,8 +5,8 @@ var ionicCtrl = angular.module("starter.controllers",[]);
  *  desc：
  *  author：yxq
  * */
-ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$location', 'baseUrl',
-    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $location, baseUrl){
+ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$location', 'baseUrl', 'Push',
+    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $location, baseUrl, Push){
         //获取验证码
         $scope.getCode = function(flag, phone){
             if(true == flag){
@@ -25,6 +25,7 @@ ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', 
                 $http.get(baseUrl + '/get_token')
                     .success(function(data){
                         $localStorage.set("token", data.token);
+                        Push.setAlias(phone);
                         $location.path('/bikebon/mine');
                     }).error(function(){
                         var p = $ionicPopup.show({title: '登录失败，请重新登录！'});
@@ -50,9 +51,10 @@ ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', 
  *  desc：轮播图的加载（但是图片加载后，CSS样式无法适用）
  *  author：yxq
  * */
-ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
-    function($scope, imgSer){
-         $scope.imgs = [
+ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope',
+    function($scope, imgSer, $rootScope){
+        $rootScope.lender_id = 1;
+        $scope.imgs = [
             {
                 "imgLink": "",
                 "imgUrl": "img/home/home_pic1.jpg",
@@ -79,10 +81,10 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
  *  desc：问题－租车点图片的加载(如主页)
  *  author：yxq
  * */
-ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$localStorage',
-    function($scope, lenderSer, bikeTypeSer, $localStorage){
+ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$rootScope',
+    function($scope, lenderSer, bikeTypeSer, $rootScope){
         //租车点信息的获取
-        var lender_id = $localStorage.get("lender_id");
+        var lender_id = $rootScope.lender_id;
         lenderSer.get({lender_id: lender_id}, function(data){
             $scope.rentStop = data;
         });
@@ -97,9 +99,9 @@ ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$lo
  *  desc：问题－页面标题的显示(待完善)
  *  author：yxq
  * */
-ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer', '$localStorage',
-    function($scope, $stateParams, bikeTypeSer, $localStorage){
-        var lender_id = $localStorage.get("lender_id");
+ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer', '$rootScope',
+    function($scope, $stateParams, bikeTypeSer, $rootScope){
+        var lender_id = $rootScope.lender_id;
         bikeTypeSer.get(
             {lender_id: lender_id, bike_type_id: $stateParams.bike_type_id},
             function(data){
@@ -129,7 +131,7 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
             $http.get(baseUrl + '/user')
                 .success(function(data){
                     var flag = data.verifyTag;
-                    if(flag === true){
+                    if(true === flag){
                         $scope.verifyFlag = true;
                         $scope.verifyMess = "已认证用户";
                     }else{
@@ -195,7 +197,7 @@ ionicCtrl.controller('identityCtrl', ['$scope', '$ionicActionSheet', 'lenderSer'
                     }else if(1 == index){
                         console.log("从相册选择");
                     }else{
-                    	console.log("点错啦～");
+                        console.log("点错啦～");
                     }
                     return true;
                 }
@@ -218,7 +220,7 @@ ionicCtrl.controller('settingCtrl', ['$scope', '$localStorage', '$location',
             $scope.exitFlag = false;
         }
         $scope.exitBtn = function(){
-            $localStorage.delete("token");
+            $localStorage.clear();
             $location.path('/bikebon/mine');
         }
 }]);
@@ -291,37 +293,35 @@ ionicCtrl.controller('advanceCtrl', ['$scope', 'mineSer', '$localStorage',
     }]);
 
 /**
- *  name：个人信息界面头像上拉菜单的实现（mine/myInformation.html）
- *  desc：自己写
+ *  name：个人信息界面控制器（mine/myInformation.html）
+ *  desc：弹出拍照、从相册选择对话框
  *  author：wgj
  * */
-//ionicCtrl.controller("informationCtrl",function($scope, $ionicActionSheet, $timeout) {
-//
-//    // Triggered on a button click, or some other target
-//    $scope.show = function() {
-//
-//        // Show the action sheet
-//        var hideSheet = $ionicActionSheet.show({
-//            buttons: [
-//                { text: "拍摄" }
-//            ],
-//            buttonClicked: function(index) {
-//                return true;
-//            },
-//            cancelText: "取消",
-//            cancel: function() {
-//                // add cancel code..
-//            },
-//            destructiveText: "从相册选择",
-//            destructiveButtonClicked:function(){
-//            }
-//        });
-//
-//        // For example's sake, hide the sheet after two seconds
-//        $timeout(function() {
-//            //	hideSheet();
-//        }, 2000);
-//
-//    };
-//});
+ionicCtrl.controller("informationCtrl", ['$scope', '$ionicActionSheet',
+    function($scope, $ionicActionSheet) {
+        //实现了ActionSheet的弹出（ios取消键的取消功能，android无取消键）
+        $scope.show = function(){
+            var hideSheet = $ionicActionSheet.show({
+                buttons: [
+                    {text: '拍照'},
+                    {text: '从相册选择'}
+                ],
+                cancelText: '取消',
+                cssClass: 'ios-actionSheet',
+                cancel: function(){
+                    hideSheet();
+                },
+                buttonClicked: function(index){
+                    if(0 == index){
+                        console.log("拍照");
+                    }else if(1 == index){
+                        console.log("从相册选择");
+                    }else{
+                        console.log("点错啦～");
+                    }
+                    return true;
+                }
+            });
+        }
+}]);
 
