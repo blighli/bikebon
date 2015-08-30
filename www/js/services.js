@@ -77,6 +77,9 @@ ionicSer.factory('$localStorage',['$window',
             },
             delete: function(key){
                 $window.localStorage.removeItem(key);
+            },
+            clear: function(){
+                $window.localStorage.clear();
             }
         }
 }]);

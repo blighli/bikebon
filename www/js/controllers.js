@@ -5,8 +5,8 @@ var ionicCtrl = angular.module("starter.controllers",[]);
  *  desc：
  *  author：yxq
  * */
-ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$location', 'baseUrl',
-    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $location, baseUrl){
+ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$location', 'baseUrl', 'Push',
+    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $location, baseUrl, Push){
         //获取验证码
         $scope.getCode = function(flag, phone){
             if(true == flag){
@@ -25,6 +25,7 @@ ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', 
                 $http.get(baseUrl + '/get_token')
                     .success(function(data){
                         $localStorage.set("token", data.token);
+                        Push.setAlias(phone);
                         $location.path('/bikebon/mine');
                     }).error(function(){
                         var p = $ionicPopup.show({title: '登录失败，请重新登录！'});
@@ -50,9 +51,10 @@ ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', 
  *  desc：轮播图的加载（但是图片加载后，CSS样式无法适用）
  *  author：yxq
  * */
-ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
-    function($scope, imgSer){
-         $scope.imgs = [
+ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope',
+    function($scope, imgSer, $rootScope){
+        $rootScope.lender_id = 1;
+        $scope.imgs = [
             {
                 "imgLink": "",
                 "imgUrl": "img/home/home_pic1.jpg",
@@ -79,10 +81,10 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer',
  *  desc：问题－租车点图片的加载(如主页)
  *  author：yxq
  * */
-ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$localStorage',
-    function($scope, lenderSer, bikeTypeSer, $localStorage){
+ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$rootScope',
+    function($scope, lenderSer, bikeTypeSer, $rootScope){
         //租车点信息的获取
-        var lender_id = $localStorage.get("lender_id");
+        var lender_id = $rootScope.lender_id;
         lenderSer.get({lender_id: lender_id}, function(data){
             $scope.rentStop = data;
         });
@@ -97,9 +99,9 @@ ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$lo
  *  desc：问题－页面标题的显示(待完善)
  *  author：yxq
  * */
-ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer', '$localStorage',
-    function($scope, $stateParams, bikeTypeSer, $localStorage){
-        var lender_id = $localStorage.get("lender_id");
+ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer', '$rootScope',
+    function($scope, $stateParams, bikeTypeSer, $rootScope){
+        var lender_id = $rootScope.lender_id;
         bikeTypeSer.get(
             {lender_id: lender_id, bike_type_id: $stateParams.bike_type_id},
             function(data){
@@ -129,7 +131,7 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
             $http.get(baseUrl + '/user')
                 .success(function(data){
                     var flag = data.verifyTag;
-                    if(flag === true){
+                    if(true === flag){
                         $scope.verifyFlag = true;
                         $scope.verifyMess = "已认证用户";
                     }else{
@@ -218,7 +220,7 @@ ionicCtrl.controller('settingCtrl', ['$scope', '$localStorage', '$location',
             $scope.exitFlag = false;
         }
         $scope.exitBtn = function(){
-            $localStorage.delete("token");
+            $localStorage.clear();
             $location.path('/bikebon/mine');
         }
 }]);

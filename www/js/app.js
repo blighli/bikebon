@@ -9,9 +9,6 @@ ionicApp.run(function($ionicPlatform, $localStorage, Push) {
   if("undefined" === $localStorage.get("token")  || undefined === $localStorage.get("token")){
       $localStorage.set("token", "");
   }
-  if("undefined" === $localStorage.get("lender_id")  || undefined === $localStorage.get("lender_id")){
-      $localStorage.set("lender_id", 1);
-  }
   if("undefined" === $localStorage.get("userName")  || undefined === $localStorage.get("userName")){
       $localStorage.set("username", "   ");
   }
