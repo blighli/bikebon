@@ -1,0 +1,45 @@
+<ion-view view-title="提现" class="color-bg-jx">
+    <ion-nav-bar align-title="center" class="bar-balanced">
+        <ion-nav-buttons side="left">
+            <button class="button icon ion-ios-arrow-left button-clear" menu-toggle="left" back-btn></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="has-footer" scrollbar-y="false">
+        <div class="list" style="margin-top: 15px;margin-bottom: 0">
+            <label class="item item-input">
+                <span class="input-label">金额(元)</span>
+                <input type="text" placeholder="请输入要充值得金额" ng-model="name" style="font-size: 14px"/>
+            </label>
+        </div>
+        <div style="width: 100%;height: 15px;background-color: #f2f2f2"></div>
+        <ion-list>
+            <div class="text-120-gj">
+                <span style="font-size: 16px;margin-left: 20px;line-height: 70px">选择支付方式</span>
+            </div>
+            <div class="text-100-gj" style="overflow: hidden">
+                <div style="float: left;margin-left: 20px;width: 40px;height: 40px;line-height:80px">
+                    <img src="img/icon_wechat.png" style="height: 100%;width: 100%">
+                </div>
+                <span style="font-size: 15px;margin-left: 8px;line-height: 50px">微信支付</span>
+                <div style="float: right;margin-right: 20px;width: 25px;height: 25px;line-height: 65px">
+                    <img src="img/right.png" style="height: 100%;width: 100%">
+                </div>
+            </div>
+            <div class="text-100-gj" style="overflow: hidden">
+                <div style="float: left;margin-left: 20px;width: 40px;height: 40px;line-height: 80px">
+                    <img src="img/icon_alipay.png" style="height: 100%;width: 100%">
+                </div>
+                <span style="font-size: 15px;margin-left: 8px;line-height: 50px">支付宝支付</span>
+                <div style="float: right;margin-right: 20px;width: 25px;height: 25px;line-height: 65px">
+                    <img src="img/normal.png" style="height: 100%;width: 100%">
+                </div>
+            </div>
+            <div style="margin: 5px 25px;">
+                <a class="button button-block button-balanced" style="border:none;" href="#/getTixian">
+                    确认提现
+                </a>
+            </div>
+        </ion-list>
+
+    </ion-content>
+</ion-view>

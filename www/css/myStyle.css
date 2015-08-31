@@ -129,6 +129,21 @@
     height: 140px;
     opacity: 0.6;
 }
+.getsuccess-img-gj{
+    width: 130px;
+    height: 130px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+.getsuccess-img-gj img{
+    width: 130px;
+    height: 130px;
+    opacity: 0.6;
+}
+.getsuccess-word-gj{
+    margin-top: 18px;
+    margin-left: 40px;
+}
 .cancellationOrder-word-gj{
     margin-top: 18px;
     margin-left: 16px;

@@ -90,7 +90,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       //find页面
       .state('mySays',{
           url: '/mySays',
-          templateUrl: 'templates/find/mySays.html'
+          templateUrl: 'templates/find/mySays.html',
+          controller: 'informationCtrl'
       })
 
       //mine页面
@@ -122,6 +123,22 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/myBalance',
           templateUrl: 'templates/mine/myBalance.html',
           controller: 'balanceCtrl'
+      })
+      .state('myMoney',{
+          url:'/myMoney',
+          templateUrl: 'templates/mine/myMoney.html'
+      })
+      .state('getMoney',{
+          url:'/getMoney',
+          templateUrl: 'templates/mine/getMoney.html'
+      })
+      .state('getSuccess',{
+          url:'/getSuccess',
+          templateUrl: 'templates/mine/getSuccess.html'
+      })
+      .state('getTixian',{
+          url:'/getTixian',
+          templateUrl: 'templates/mine/getTixian.html'
       })
       .state('normalTime',{
           url:'/normalTime',
