@@ -79,12 +79,28 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           url: '/mySchedule',
           templateUrl: 'templates/home/mySchedule.html'
       })
+      .state('myActivity',{
+          url: '/myActivity',
+          templateUrl: 'templates/home/myActivity.html'
+      })
 
       //rentBike页面
       .state('bikeList',{
           url: '/rentBike/:bike_type_id',
           templateUrl: 'templates/rentBike/bikeDetail.html',
           controller: 'bikeDetailCtrl'
+      })
+      .state('myComment',{
+          url: '/myComment',
+          templateUrl: 'templates/rentBike/myComment.html'
+      })
+      .state('commentSuccess',{
+          url: '/commentSuccess',
+          templateUrl: 'templates/rentBike/commentSuccess.html'
+      })
+      .state('myItem',{
+          url: '/myItem',
+          templateUrl: 'templates/rentBike/myItem.html'
       })
 
       //find页面
@@ -105,7 +121,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       })
       .state('evaluateOrder',{
           url:'/evaluateOrder',
-          templateUrl: 'templates/mine/evaluateOrder.html'
+          templateUrl: 'templates/mine/evaluateOrder.html',
+          controller: 'informationCtrl'
       })
       .state('immediatePay',{
           url:'/immediatePay',
@@ -143,6 +160,10 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('identitySuccess',{
           url:'/identitySuccess',
           templateUrl: 'templates/mine/identitySuccess.html'
+      })
+      .state('feedSuccess',{
+          url:'/feedSuccess',
+          templateUrl: 'templates/mine/feedSuccess.html'
       })
       .state('getSuccess',{
           url:'/getSuccess',
