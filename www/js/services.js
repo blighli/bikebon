@@ -39,6 +39,23 @@ ionicSer.factory('bikeTypeSer', ['$resource', 'baseUrl',
 }]);
 
 /**
+ * name: 我的余额以及普通、高级时间服务（bikeDetail.html,未采用rest）
+ * desc:
+ * author: yxq
+ * */
+ionicSer.factory('getUserBikeInfoSer', ['$http', 'baseUrl', 'Base64', '$localStorage',
+    function($http, baseUrl, Base64, $localStorage){
+        return {
+            get: function(id){
+                var temp = $localStorage.get("token");
+                $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
+                return $http.get(baseUrl + '/user/pocket');
+            }
+        }
+    }
+]);
+
+/**
  * name: 我的余额以及普通、高级时间服务（Mine.html,未采用rest）
  * desc:
  * author: yxq
