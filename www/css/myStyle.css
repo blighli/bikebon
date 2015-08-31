@@ -144,6 +144,10 @@
     margin-top: 18px;
     margin-left: 40px;
 }
+.identitysuccess-word-gj{
+    margin-top: 18px;
+    margin-left: 15px;
+}
 .cancellationOrder-word-gj{
     margin-top: 18px;
     margin-left: 16px;
@@ -411,13 +415,11 @@
 .detail-bike-gj{
     width: 100%;
     height: 170px;
-    z-index: 1000;
 }
 .detail-bike-gj img{
     width: 100%;
     height: 100%;
     border-bottom: 1px solid #ECECEC;
-    z-index: 100;
 }
 .information-bg-gj{
     margin-top: 20px;
@@ -460,12 +462,34 @@
     height: 100%;
     float: left;
     text-align: center;
+    line-height: 45px;
+    font-size: 15px;
+    color: #000000;
+    border-right: 1px solid #ECECEC;
+    border-top: 4px solid #90B623;
+}
+.bike-right-gj{
+    width: 50%;
+    height: 100%;
+    float: right;
+    text-align: center;
+    line-height: 50px;
+    font-size: 15px;
+    color: #000000;
+
+}
+.bike-left-wgj{
+    width: 50%;
+    height: 100%;
+    float: left;
+    text-align: center;
     line-height: 50px;
     font-size: 15px;
     color: #000000;
     border-right: 1px solid #ECECEC;
+
 }
-.bike-right-gj{
+.bike-right-wgj{
     width: 50%;
     height: 100%;
     float: right;
@@ -474,6 +498,12 @@
     font-size: 15px;
     color: #000000;
     border-top: 4px solid #90B623;
+}
+.bike-word-wgj{
+    padding: 10px 20px 10px 20px;
+    border-bottom: 1px solid #ECECEC;
+    font-size: 13px;
+    color: #636363;
 }
 .bike-word-gj{
     padding: 10px 20px 5px 20px;
@@ -923,6 +953,15 @@ p{
     padding-bottom: 25px;
     background-color: #FFFFFF;
 }
+.bike-yuan-gj{
+    width: 100%;
+    height: 115px;
+    font-size: 60px;
+    padding-top: 40px;
+    padding-bottom: 8px;
+    background-color: #FFFFFF;
+    position: relative;
+}
 .balanced-yuan-wgj{
     font-size: 35px;
     padding-top: 30px;
@@ -937,6 +976,17 @@ p{
     line-height: 40px;
     padding-left: 16px;
     background-color: #FFFFFF;
+}
+.time-money-wgj{
+    width: 100%;
+    height: 50px;
+    font-size: 15px;
+    border-top: 1px solid #f2f2f2;
+    line-height: 50px;
+    padding-left: 16px;
+    background-color: #FFFFFF;
+    color: #89B301;
+    overflow: hidden;
 }
 .ios-actionSheet .action-sheet-backdrop{
     -webkit-transition: background-color 150ms ease-in-out;

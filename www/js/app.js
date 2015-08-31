@@ -128,9 +128,21 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/myMoney',
           templateUrl: 'templates/mine/myMoney.html'
       })
+      .state('firstMoney',{
+          url:'/firstMoney',
+          templateUrl: 'templates/mine/firstMoney.html'
+      })
+      .state('secondMoney',{
+          url:'/secondMoney',
+          templateUrl: 'templates/mine/secondMoney.html'
+      })
       .state('getMoney',{
           url:'/getMoney',
           templateUrl: 'templates/mine/getMoney.html'
+      })
+      .state('identitySuccess',{
+          url:'/identitySuccess',
+          templateUrl: 'templates/mine/identitySuccess.html'
       })
       .state('getSuccess',{
           url:'/getSuccess',
@@ -170,6 +182,10 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('feedback',{
           url:'/feedback',
           templateUrl: 'templates/mine/feedback.html'
+      })
+      .state('mySecret',{
+          url:'/mySecret',
+          templateUrl: 'templates/mine/mySecret.html'
       })
       .state('aboutBikebon',{
           url:'/aboutBikebon',

@@ -99,14 +99,41 @@ ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$ro
  *  desc：问题－页面标题的显示(待完善)
  *  author：yxq
  * */
-ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer', '$rootScope',
-    function($scope, $stateParams, bikeTypeSer, $rootScope){
+ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer', '$rootScope','$ionicPopup','$timeout','$location',
+    function($scope, $stateParams, bikeTypeSer, $rootScope,$ionicPopup,$timeout,$location){
         var lender_id = $rootScope.lender_id;
         bikeTypeSer.get(
             {lender_id: lender_id, bike_type_id: $stateParams.bike_type_id},
             function(data){
                 $scope.bike = data;
         });
+
+        $scope.confirmRentBike = function() {
+            var confirmPopup = $ionicPopup.confirm({
+                title: '<strong>租车</strong>',
+                template: '确定租车？',
+                okText: '确定',
+                cancelText: '取消'
+            });
+
+            confirmPopup.then(function (res) {
+                if (res) {
+                    var myPopup = $ionicPopup.show({
+                        title: '租车成功!'
+
+                    });
+
+                    $timeout(function () {
+                        myPopup.close();
+                    }, 2000);
+                    $location.path("/myOrder");
+
+                } else {
+                    //取消
+                }
+
+            })
+        }
 }]);
 
 /**
