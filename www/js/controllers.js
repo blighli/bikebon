@@ -5,12 +5,28 @@ var ionicCtrl = angular.module("starter.controllers",[]);
  *  desc：
  *  author：yxq
  * */
-ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$location', 'baseUrl', 'Push',
-    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $location, baseUrl, Push){
+ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$location', 'baseUrl', 'Push','$interval',
+    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $location, baseUrl, Push,$interval){
         //获取验证码
+        $scope.text = '获取密码';
+        $scope.setDisabled = false;
         $scope.getCode = function(flag, phone){
             if(true == flag){
                 $http.post(baseUrl + "/user/confirm_num",{"phone_number": phone});
+                $scope.time = 59;
+                $scope.text = $scope.time + '秒';
+                $scope.setDisabled = true;
+
+                var time = $interval(function(){
+                    $scope.time--;
+                    $scope.text = $scope.time + '秒';
+                    if($scope.time == 0){
+                        $interval.cancel(time);
+                        $scope.setDisabled = false;
+                        $scope.text = '重新发送';
+                    }
+
+                },1000);
             }else{
                 var myPopup = $ionicPopup.show({title: '手机号码输入有误,请重新输入～'});
                 $timeout(function(){

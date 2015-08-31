@@ -9,8 +9,9 @@
         <div class="item item-input">
             <input name="pwd" type="password" ng-model="pwd" placeholder="请输入密码" ng-required="true"/>
             <button class="button button-small button-clear button-balanced font-15-yxq" style="margin-top:-2px;padding-right: 15px;"
+                    ng-disabled="setDisabled"
                     ng-click="getCode(loginForm.phone.$dirty && !loginForm.phone.$error.required && !loginForm.phone.$error.number && !loginForm.phone.$error.pattern, phone)">
-                获取密码
+                {{text}}
             </button>
         </div>
         <div class="margin-10-yxq" style="margin-top: 20px;margin-bottom: 8px">
