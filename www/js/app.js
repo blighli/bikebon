@@ -90,7 +90,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       //find页面
       .state('mySays',{
           url: '/mySays',
-          templateUrl: 'templates/find/mySays.html'
+          templateUrl: 'templates/find/mySays.html',
+          controller: 'informationCtrl'
       })
 
       //mine页面
@@ -123,6 +124,34 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           templateUrl: 'templates/mine/myBalance.html',
           controller: 'balanceCtrl'
       })
+      .state('myMoney',{
+          url:'/myMoney',
+          templateUrl: 'templates/mine/myMoney.html'
+      })
+      .state('firstMoney',{
+          url:'/firstMoney',
+          templateUrl: 'templates/mine/firstMoney.html'
+      })
+      .state('secondMoney',{
+          url:'/secondMoney',
+          templateUrl: 'templates/mine/secondMoney.html'
+      })
+      .state('getMoney',{
+          url:'/getMoney',
+          templateUrl: 'templates/mine/getMoney.html'
+      })
+      .state('identitySuccess',{
+          url:'/identitySuccess',
+          templateUrl: 'templates/mine/identitySuccess.html'
+      })
+      .state('getSuccess',{
+          url:'/getSuccess',
+          templateUrl: 'templates/mine/getSuccess.html'
+      })
+      .state('getTixian',{
+          url:'/getTixian',
+          templateUrl: 'templates/mine/getTixian.html'
+      })
       .state('normalTime',{
           url:'/normalTime',
           templateUrl: 'templates/mine/normalTime.html',
@@ -153,6 +182,10 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('feedback',{
           url:'/feedback',
           templateUrl: 'templates/mine/feedback.html'
+      })
+      .state('mySecret',{
+          url:'/mySecret',
+          templateUrl: 'templates/mine/mySecret.html'
       })
       .state('aboutBikebon',{
           url:'/aboutBikebon',
