@@ -72,6 +72,17 @@
     text-decoration: none;
     color: white;
 }
+.activity-img-gj{
+    margin-top: 8px;
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #E1E1E1;
+}
+.activity-img-gj img{
+    width: 100%;
+    height: auto;
+}
 .schedule-img-gj{
     width: 140px;
     height: 180px;
@@ -147,6 +158,11 @@
 .identitysuccess-word-gj{
     margin-top: 18px;
     margin-left: 15px;
+}
+.feedsuccess-word-gj{
+    margin-top: 18px;
+    margin-left: -5px;
+    margin-right: -10px;
 }
 .cancellationOrder-word-gj{
     margin-top: 18px;
@@ -311,14 +327,21 @@
 }
 .couponox-font4-gj{
     position:absolute;
-    top: 10px;
+    top: 0px;
     left: 110px;
     font-size: 16px;
     color: #111111;
 }
 .couponox-font5-gj{
     position:absolute;
-    top: 40px;
+    top: 25px;
+    left: 110px;
+    font-size: 12px;
+    color: #999;
+}
+.couponox-font6-gj{
+    position:absolute;
+    top: 45px;
     left: 110px;
     font-size: 12px;
     color: #999;
@@ -414,11 +437,11 @@
 }
 .detail-bike-gj{
     width: 100%;
-    height: 170px;
+    height: 160px;
 }
 .detail-bike-gj img{
     width: 100%;
-    height: 100%;
+    height: 160px;
     border-bottom: 1px solid #ECECEC;
 }
 .information-bg-gj{
@@ -956,7 +979,7 @@ p{
 .bike-yuan-gj{
     width: 100%;
     height: 115px;
-    font-size: 60px;
+    font-size: 50px;
     padding-top: 40px;
     padding-bottom: 8px;
     background-color: #FFFFFF;

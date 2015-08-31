@@ -99,6 +99,11 @@ ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$ro
  *  desc：问题－页面标题的显示(待完善)
  *  author：yxq
  * */
+/**
+ *  name：确认租车页面跳转－跳转我的订单页面（main/bikeDetail.html）
+ *  desc：可以成功跳转（确认跳转弹出框颜色需修改）
+ *  author：wgj
+ * */
 ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer', '$rootScope','$ionicPopup','$timeout','$location',
     function($scope, $stateParams, bikeTypeSer, $rootScope,$ionicPopup,$timeout,$location){
         var lender_id = $rootScope.lender_id;
@@ -110,7 +115,7 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
 
         $scope.confirmRentBike = function() {
             var confirmPopup = $ionicPopup.confirm({
-                title: '<strong>租车</strong>',
+                title: '<strong>确认租车</strong>',
                 template: '确定租车？',
                 okText: '确定',
                 cancelText: '取消'
