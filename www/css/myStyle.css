@@ -941,6 +941,12 @@ p{
     min-height: 20px;
     background-color: #f2f2f2;
 }
+.item-divider-wgj{
+    padding-top: 2px;
+    padding-bottom: 2px;
+    min-height: 10px;
+    background-color: #f2f2f2;
+}
 .item-divider{
     padding-top: 2px;
     padding-bottom: 2px;
