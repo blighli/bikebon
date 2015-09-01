@@ -442,7 +442,7 @@ ionicCtrl.controller("informationCtrl", ['$scope', '$ionicActionSheet',
 
 /**
  *  name： 充值界面控制器（mine/myMoney.html）
- *  desc：
+ *  desc： 是mine/myBalanced.html页面的充值页面
  *  author：yxq
  * */
 ionicCtrl.controller('myMoneyCtrl', ['$scope', 'paySer', '$location',
@@ -455,12 +455,13 @@ ionicCtrl.controller('myMoneyCtrl', ['$scope', 'paySer', '$location',
                             "pay_info": data,
                             "sign": 1
                         },function(){
+                            $location.path("/getSuccess/1");
                         },function(){
+                            $location.path("/getSuccess/0");
                         });
                 }).error(function(){
-                    //flag = 0;
+                    $location.path("/getSuccess/0");
                 });
-            //$location.path("/getSuccess/" + flag);
         }
 }]);
 
@@ -479,4 +480,55 @@ ionicCtrl.controller('successCtrl', ['$scope', '$stateParams',
             $scope.success = false;
             $scope.words = "充值失败";
         }
+}]);
+
+/**
+ * name: 充值界面控制器（mine/money.html）
+ * desc: 是mine/normalTime.html(advancedTime.html)页面的充值页面
+ * author: yxq
+ */
+ionicCtrl.controller('moneyCtrl', ['$scope', 'paySer', '$stateParams',
+    function($scope, paySer, $stateParams){
+        var btn = $stateParams.btnId + "";
+        var page = $stateParams.pageId + "";
+        var temp = "1";
+        if("1" == btn){
+            $scope.words = "基础车型50小时（50元）";
+        }else{
+            $scope.words = "基础车型120小时（120元）";
+        }
+        switch(page + "" + btn){
+            case "11":
+                temp = "1";
+                break;
+            case "12":
+                temp = "2";
+                break;
+            case "21":
+                temp = "3";
+                break;
+            case "22":
+                temp = "4";
+                break;
+        }
+        $scope.payMoney = function(){
+            paySer.post(temp, "0.01")
+                .success(function(data){
+                    window.alipay.payment(
+                        {
+                            "pay_info": data,
+                            "sign": 1
+                        },function(){
+                            alert("陈忠忠要对老婆好");
+                            $location.path("/getSuccess/1");
+                        },function(){
+                            alert("忠忠会对老婆好一辈子");
+                            $location.path("/getSuccess/0");
+                        });
+                }).error(function(){
+                    alert("忠忠当然会对老婆好喽～");
+                    $location.path("/getSuccess/0");
+                });
+        }
+
 }]);

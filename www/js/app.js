@@ -146,13 +146,10 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           templateUrl: 'templates/mine/myMoney.html',
           controller: 'myMoneyCtrl'
       })
-      .state('firstMoney',{
-          url:'/firstMoney',
-          templateUrl: 'templates/mine/firstMoney.html'
-      })
-      .state('secondMoney',{
-          url:'/secondMoney',
-          templateUrl: 'templates/mine/secondMoney.html'
+      .state('money',{
+          url:'/money/:pageId/:btnId',
+          templateUrl: 'templates/mine/money.html',
+          controller: 'moneyCtrl'
       })
       .state('getMoney',{
           url:'/getMoney',

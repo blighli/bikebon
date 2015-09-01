@@ -229,6 +229,7 @@ ionicSer.factory('Push', function() {
             if (push) {
                 console.log('jpush: set alias', alias);
                 plugins.jPushPlugin.setAlias(alias);
+                console.log('啊咳啊咳啊咳', alias);
             }
         },
         check: function() {
