@@ -17,3 +17,12 @@ ionicFil.filter('plusFlag', function(){
     };
     return plusFlagFilter;
 });
+ionicFil.filter('limitNum', function(){
+    var limitNumFilter = function(input){
+        if(input.length > 8){
+            input = input.substr(0, 9) + '...';
+        }
+        return input;
+    };
+    return limitNumFilter;
+});

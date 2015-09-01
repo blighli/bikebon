@@ -115,8 +115,8 @@ ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$ro
  *  desc：问题－页面标题的显示(待完善)
  *  author：yxq
  * */
-ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer', '$rootScope','$ionicPopup','$timeout','$location','getUserBikeInfoSer','$http', 'baseUrl', 'Base64', '$localStorage',
-    function($scope, $stateParams, bikeTypeSer, $rootScope,$ionicPopup,$timeout,$location,getUserBikeInfoSer,$http, baseUrl, Base64, $localStorage){
+ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer', '$rootScope', '$ionicPopup', '$timeout', '$location', 'getUserBikeInfoSer', '$http', 'baseUrl', 'Base64', '$localStorage',
+    function($scope, $stateParams, bikeTypeSer, $rootScope, $ionicPopup, $timeout, $location, getUserBikeInfoSer, $http, baseUrl, Base64, $localStorage){
         var lender_id = $rootScope.lender_id;
         bikeTypeSer.get(
             {lender_id: lender_id, bike_type_id: $stateParams.bike_type_id},
@@ -378,8 +378,8 @@ ionicCtrl.controller('balanceCtrl', ['$scope', 'mineSer', '$localStorage',
  * desc:
  * author: yxq
  * */
-ionicCtrl.controller('normalCtrl', ['$scope', 'mineSer', '$localStorage',
-    function($scope, mineSer, $localStorage){
+ionicCtrl.controller('normalCtrl', ['$scope', 'mineSer', '$localStorage', 'paySer',
+    function($scope, mineSer, $localStorage, paySer){
         $scope.local = $localStorage.get("normalTime");
         mineSer.get(2)
             .success(function(data){
@@ -440,3 +440,43 @@ ionicCtrl.controller("informationCtrl", ['$scope', '$ionicActionSheet',
         }
 }]);
 
+/**
+ *  name： 充值界面控制器（mine/myMoney.html）
+ *  desc：
+ *  author：yxq
+ * */
+ionicCtrl.controller('myMoneyCtrl', ['$scope', 'paySer', '$location',
+    function($scope, paySer, $location){
+        $scope.payMoney = function(){
+            paySer.post("0", "0.01")
+                .success(function(data){
+                    window.alipay.payment(
+                        {
+                            "pay_info": data,
+                            "sign": 1
+                        },function(){
+                        },function(){
+                        });
+                }).error(function(){
+                    //flag = 0;
+                });
+            //$location.path("/getSuccess/" + flag);
+        }
+}]);
+
+/**
+ * name: 支付成功（失败）界面控制器（mine/getSuccess.html）
+ * desc:
+ * author: yxq
+ */
+ionicCtrl.controller('successCtrl', ['$scope', '$stateParams',
+    function($scope, $stateParams){
+        var flag = $stateParams.flag;
+        if("1" == flag){
+            $scope.success = true;
+            $scope.words = "充值成功";
+        }else{
+            $scope.success = false;
+            $scope.words = "充值失败";
+        }
+}]);

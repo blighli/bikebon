@@ -143,7 +143,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       })
       .state('myMoney',{
           url:'/myMoney',
-          templateUrl: 'templates/mine/myMoney.html'
+          templateUrl: 'templates/mine/myMoney.html',
+          controller: 'myMoneyCtrl'
       })
       .state('firstMoney',{
           url:'/firstMoney',
@@ -155,7 +156,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       })
       .state('getMoney',{
           url:'/getMoney',
-          templateUrl: 'templates/mine/getMoney.html'
+          templateUrl: 'templates/mine/getMoney.html',
+          cache: false
       })
       .state('identitySuccess',{
           url:'/identitySuccess',
@@ -166,8 +168,9 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           templateUrl: 'templates/mine/feedSuccess.html'
       })
       .state('getSuccess',{
-          url:'/getSuccess',
-          templateUrl: 'templates/mine/getSuccess.html'
+          url:'/getSuccess/:flag',
+          templateUrl: 'templates/mine/getSuccess.html',
+          cache: false
       })
       .state('getTixian',{
           url:'/getTixian',
@@ -185,7 +188,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       })
       .state('myCoupon',{
           url:'/myCoupon',
-                  templateUrl: 'templates/mine/myCoupon.html'
+          templateUrl: 'templates/mine/myCoupon.html'
       })
       .state('myInformation',{
           url:'/myInformation',

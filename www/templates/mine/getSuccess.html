@@ -1,13 +1,17 @@
-<ion-view view-title="充值成功" class="color-bg-jx">
+<ion-view view-title={{words}} class="color-bg-jx">
     <ion-nav-bar align-title="center" class="bar-balanced">
         <ion-nav-buttons side="left">
             <button class="button icon ion-ios-arrow-left button-clear" menu-toggle="left" back-btn></button>
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content scrollbar-y="false">
-        <div class="getsuccess-img-gj">
-            <img src="img/success.png"/>
+        <div class="getsuccess-img-gj" ng-show="success">
+            <img src="img/fail_Success/right.png"/>
             <div class="getsuccess-word-gj" style="color: #91B431;font-size: 15px;">充值成功</div>
+        </div>
+        <div class="getsuccess-img-gj" ng-hide="success">
+            <img src="img/fail_Success/wrong.png"/>
+            <div class="getsuccess-word-gj" style="font-size: 15px;">充值失败</div>
         </div>
     </ion-content>
 </ion-view>

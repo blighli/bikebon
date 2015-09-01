@@ -66,11 +66,31 @@ ionicSer.factory('mineSer', ['$http', 'baseUrl', 'Base64', '$localStorage',
             get: function(id){
                 var temp = $localStorage.get("token");
                 $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
+                console.log($http.get(baseUrl + '/user/bill/1'));
                 return $http.get(baseUrl + '/user/bill/' + id);
             }
         }
     }
 ]);
+
+/**
+ * name: 支付宝相关服务
+ * desc:
+ * author: yxq
+ */
+ionicSer.factory('paySer', ['$http', '$localStorage', 'Base64', 'baseUrl',
+    function($http, $localStorage, Base64, baseUrl){
+        return{
+            post: function(pay_type, total_fee){
+                var temp = $localStorage.get('token');
+                $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
+                return $http.post(baseUrl + '/sign', {
+                        "pay_type": pay_type,
+                        "total_fee": total_fee
+                    });
+            }
+        };
+}]);
 
 /**
  *  name：有localStorage相关的服务
