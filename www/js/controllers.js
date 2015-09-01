@@ -519,14 +519,11 @@ ionicCtrl.controller('moneyCtrl', ['$scope', 'paySer', '$stateParams',
                             "pay_info": data,
                             "sign": 1
                         },function(){
-                            alert("陈忠忠要对老婆好");
                             $location.path("/getSuccess/1");
                         },function(){
-                            alert("忠忠会对老婆好一辈子");
                             $location.path("/getSuccess/0");
                         });
                 }).error(function(){
-                    alert("忠忠当然会对老婆好喽～");
                     $location.path("/getSuccess/0");
                 });
         }
