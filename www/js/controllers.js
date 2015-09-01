@@ -125,7 +125,10 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
         });
 
         /**
-         * desc*/
+         * name:
+         * desc:
+         * author: gj
+         * */
         getUserBikeInfoSer.get()
             .success(function(data){
                 $scope.userBikeInfo = data;
