@@ -8,9 +8,9 @@
         <ion-list style="background: #f2f2f2">
             <ion-item class="item-divider-yxq"></ion-item>
             <ion-item style="padding-top: 0px;padding-bottom: 0px;" class="details-bg-gj">
-                <div class="details-finish-gj"><img src="img/finish.png"/></div>
+                <div class="details-finish-gj"><img src={{orderDetail.img}}/></div>
                 <div class="row font-14-yxq" style="padding-top: 3px;padding-bottom: 3px;">
-                    <a class="col col-50 ">订单号：8795848051</a>
+                    <a class="col col-50 ">订单编号:{{orderDetail.order_id}}</a>
                 </div>
                 <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
                 <div class="row" style="padding-top: 8px;padding-bottom: 8px;">
@@ -19,13 +19,13 @@
                         <img class="order-img-ff" src="img/me_black.png" />
                     </div>
                     <div class="details-word-gj">
-                        <a>张三</a>
+                        <a>{{orderDetail.user_name}}</a>
                     </div>
                     <div style="margin-right: 8px;" class="details-iphone-gj">
                         <img class="order-img-ff" src="img/iphnoe_black.png" />
                     </div>
                     <div class="details-word-gj">
-                        <a>18810237291</a>
+                        <a>{{orderDetail.user_phone}}</a>
                     </div>
 
                 </div>
@@ -34,38 +34,38 @@
             <ion-item class="item-divider-yxq"></ion-item>
             <ion-item style="padding-top: 0px;padding-bottom: 0px;">
                 <div class="row font-14-yxq" style="padding-top: 2px;padding-bottom: 3px;">
-                    <div class="col col-50 ">浙江大学软件学院租车点</div>
+                    <div class="col col-50 ">{{orderDetail.order_lender_belong_to}}</div>
                 </div>
                 <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
                 <div class="row" style="padding-top: 2px;padding-bottom: 3px;">
                     <div style="margin-right: 13px;">
-                        <img class="order-img-gj" src="img/bikes/mountain.png" />
+                        <img class="order-img-gj" src={{orderDetail.order_bike_type_img}} />
                     </div>
                     <div>
-                        <h2>男士山地车S602</h2>
+                        <h2>{{orderDetail.order_bike_type_name}}</h2>
                      <span>
-                         <div class="order-span-gj">JT6S001</div>
-                         <div class="order-span-f">12:00~12:40</div>
+                         <div class="order-span-gj">{{orderDetail.order_bike_name}}</div>
                      </span>
                     </div>
                 </div>
                 <hr class="hr-yxq"/>
-                    <span class="details-flow-gj">
-                        <a class="order-spann-gj details-text-gj">费用：¥15.00</a>
-                         <a class="order-spann-gj details-text-gj">时长：199分钟</a>
+                    <span class="details-flow-gj" ng-show="orderDetail.return_bike_status">
+                        <a class="order-spann-gj details-text-gj" >费用：¥{{orderDetail.order_should_pay | currency:''}}</a>
+                        <a class="order-spann-gj details-text-gj">时长：{{orderDetail.bike_duration_time}}</a>
                      </span>
-                <hr class="hr-gj"/>
+                <hr class="hr-gj" ng-show="orderDetail.return_bike_status"/>
                 <div class="text-right">
-                    <button class="button button-block button-light" style="border:none;border: 1px solid #e5e5e5;border-radius: 8px;">
+                    <button class="button button-block button-balanced" style="border:none;border: 1px solid #e5e5e5;border-radius: 8px;">
                         联系商家
                     </button>
                 </div>
                 <hr class="hr-yxq"/>
-                <p class="order-div-gj details-order-gj">订单形成时间：2015-08-13  11:29</p>
-                <p class="order-div-gj details-order-gj" style="margin-bottom: 5px;">订单完成时间：2015-08-13  14:00</p>
+                <p class="order-div-gj details-order-gj" ng-show="orderDetail.get_bike_status">取车时间:{{orderDetail.order_get_bike_time}}</p>
+                <p class="order-div-gj details-order-gj" style="margin-bottom: 5px;" ng-show="orderDetail.return_bike_status">还车时间:{{orderDetail.order_return_bike_time}}</p>
+                <p class="order-div-gj details-order-gj" ng-show="orderDetail.cancelStatus">取消时间:{{orderDetail.order_cancel_time}}</p>
             </ion-item>
-            <ion-item class="item-divider-yxq"></ion-item>
-            <ion-item style="padding-top: 0px;padding-bottom: 0px;">
+            <ion-item class="item-divider-yxq" ng-show="orderDetail.pay"></ion-item>
+            <ion-item style="padding-top: 0px;padding-bottom: 0px;" ng-show="orderDetail.pay">
                 <div class="row font-14-yxq" style="padding-top: 4px;padding-bottom: 3px;">
                     <div class="col col-50 ">支付方式</div>
                     <div class="col col-50 text-right">余额在线支付</div>
@@ -73,19 +73,28 @@
                 <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
                 <div class="row row-gj" style="padding-top: 2px;padding-bottom: 3px;">
                     <div>
-                        <span>租金总额</span>
+                        <span>计费时长</span>
                     </div>
                     <div style="position: absolute; right: 20px;color: #91B821">
-                        ¥&nbsp;15.00
+                        {{orderDetail.caclulate_time}}&nbsp;小时
                     </div>
                 </div>
                 <hr class="hr-wgj"/>
                 <div class="row row-gj" style="padding-top: 2px;padding-bottom: 3px;">
                     <div>
-                        <span>优惠减免</span>
+                        <span>租金总额</span>
                     </div>
                     <div style="position: absolute; right: 20px;color: #91B821">
-                        ¥&nbsp;3.00
+                        ¥&nbsp;{{orderDetail.order_should_pay | currency:''}}
+                    </div>
+                </div>
+                <hr class="hr-wgj"/>
+                <div class="row row-gj" style="padding-top: 2px;padding-bottom: 3px;">
+                    <div>
+                        <span>时长抵消</span>
+                    </div>
+                    <div style="position: absolute; right: 20px;color: #91B821">
+                        {{orderDetail.time_pay}}&nbsp;小时
                     </div>
                 </div>
                 <hr class="hr-wgj"/>
@@ -94,14 +103,14 @@
                         <span>实际付款</span>
                     </div>
                     <div style="position: absolute; right: 20px;color: #91B821">
-                        ¥&nbsp;12.00
+                        ¥&nbsp;{{orderDetail.order_cost | currency:''}}
                     </div>
                 </div>
             </ion-item>
-            <ion-item class="item-divider-gj"></ion-item>
-            <div class="text-right text-top-gj details-color-gj">
-                <a class="button button-light button-small" href="#/evaluateOrder">评价订单</a>
-                <a class="button button-balanced button-small" style="margin-right: 20px;margin-left: 15px" href="#/rentBike/{{bike.bikeTypeId}}">再次租用</a>
+            <ion-item class="item-divider-gj" ng-show="orderDetail.pay"></ion-item>
+            <div class="text-right text-top-gj details-color-gj" ng-show="orderDetail.pay">
+                <a class="button button-light button-small" href="#/evaluateOrder" ng-show="orderDetail.notEvaluate">评价订单</a>
+                <a class="button button-balanced button-small" style="margin-right: 20px;margin-left: 15px" href="#/bikeDetail">再次租用</a>
             </div>
         </ion-list>
     </ion-content>
