@@ -79,6 +79,10 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           url: '/mySchedule',
           templateUrl: 'templates/home/mySchedule.html'
       })
+      .state('myTravel', {
+          url: '/myTravel',
+          templateUrl: 'templates/home/myTravel.html'
+      })
       .state('myActivity',{
           url: '/myActivity',
           templateUrl: 'templates/home/myActivity.html'
