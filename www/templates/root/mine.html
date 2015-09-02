@@ -12,12 +12,12 @@
                     <a class="balanced font-18-gj text-none-gj" href="#/login">立即登录</a>
                 </div>
                 <div class="item-center-yxq margin-18-top" ng-show="loginFlag&&!verifyFlag">
-                    <div class="mine-color-gj"><a class="margin-6-bottom font-17-yxq">{{userName}}</a></div>
+                    <div class="mine-color-gj"><a class="margin-6-bottom font-17-yxq"><span ng-bind="userName"></span></a></div>
                     <span class="font-14-yxq color-b3-jx" style="margin-right:7px;">未认证用户</span>
                     <a class="font-14-yxq balanced text-none-gj" href="#/identity">立即认证</a>
                 </div>
                 <div class="item-center-yxq margin-18-top" ng-show="loginFlag&&verifyFlag">
-                    <div class="mine-color-gj"><a class="margin-6-bottom font-17-yxq">{{userName}}</a></div>
+                    <div class="mine-color-gj"><a class="margin-6-bottom font-17-yxq"><span ng-bind="userName"></span></a></div>
                     <div class="font-14-yxq balanced text-none-gj">{{verifyMess}}</div>
                 </div>
                 <a class="icon ion-ios-arrow-right img-right-gj text-none-gj" ng-show="loginFlag" href="#/myInformation" style="color: #000000"></a>
@@ -25,22 +25,22 @@
             <div class="mine-time-gj" ng-show="loginFlag">
                 <a class="mine-yuan-gj text-none-gj" href="#/myBalance">
                     <div class="mine-magin-gj">
-                        <div class="mine-big-gj">{{deposit | roundNum}}</div>
-                        <div class="mine-small-gj">{{deposit | limitTo : -3}}元</div>
+                        <div class="mine-big-gj"><span ng-bind="deposit | roundNum"></span></div>
+                        <div class="mine-small-gj"><span ng-bind="baseTime | limitTo : -3"></span>元</div>
                         <div class="mine-money-gj">我的余额</div>
                     </div>
                 </a>
                 <a class="mine-yuan-gj text-none-gj" href="#/normalTime">
                     <div class="mine-magin-gj">
-                        <div class="mine-bigo-gj">{{baseTime | roundNum}}</div>
-                        <div class="mine-smallo-gj">{{baseTime | limitTo : -3}}小时</div>
+                        <div class="mine-bigo-gj"><span ng-bind="baseTime | roundNum"></span></div>
+                        <div class="mine-smallo-gj"><span ng-bind="baseTime | limitTo : -3"></span>小时</div>
                         <div class="mine-moneyo-gj">普通时间</div>
                     </div>
                 </a>
                 <a class="mine-yuan-gj mine-border-gj text-none-gj" href="#/advancedTime">
                     <div class="mine-magin-gj">
-                        <div class="mine-bigx-gj">{{upscaleTime | roundNum}}</div>
-                        <div class="mine-smallx-gj">{{upscaleTime | limitTo : -3}}小时</div>
+                        <div class="mine-bigx-gj"><span ng-bind="upscaleTime | roundNum"></span></div>
+                        <div class="mine-smallx-gj"><span ng-bind="upscaleTime | limitTo : -3"></span>小时</div>
                         <div class="mine-moneyx-gj">高级时间</div>
                     </div>
                 </a>

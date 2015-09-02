@@ -67,8 +67,9 @@ ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', 
  *  desc：轮播图的加载（但是图片加载后，CSS样式无法适用）
  *  author：yxq
  * */
-ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'baseUrl', '$cordovaBarcodeScanner',
-    function($scope, imgSer, $rootScope, $http, baseUrl, $cordovaBarcodeScanner){
+ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'baseUrl', '$cordovaBarcodeScanner', '$localStorage',
+    'Base64', '$ionicPopup', '$timeout',
+    function($scope, imgSer, $rootScope, $http, baseUrl, $cordovaBarcodeScanner, $localStorage, Base64, $ionicPopup, $timeout){
         $rootScope.lender_id = 1;
         $scope.imgs = [
             {
@@ -88,21 +89,59 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'ba
             }
         ];
         $scope.scans = function(){
-            $cordovaBarcodeScanner
-                .scan()
-                .then(function(barcodeData){
-                    var temp = barcodeData.text;
-                    alert(temp);
-                    if(("" !== temp) && ("undefined" !== temp) && (undefined !== temp)){
-                        var last = temp.subString(temp.lastIndexOf("/"), temp.length-1);
-                        //$http.post(baseUrl + "/orders", {"bike_name": last}).success(function(){}).error(function(){});
-                    }else{
-                        alert("Sorry, it has an error in 二维码.");
-                    }
-                }, function(error){
-                    alert("Sorry ,it has an error in $cordovaBarcodeScanner.");
-                });
-        }
+            var temp = $localStorage.get("token");
+            if(("" !== temp) && ("undefined" !== temp) && (undefined !== temp)){
+                $cordovaBarcodeScanner
+                    .scan()
+                    .then(function(barcodeData){
+                        var t = barcodeData.text;
+                        if(("" !== t) && ("undefined" !== t) && (undefined !== t)){
+                            var last = t.subString(t.lastIndexOf("/"), t.length-1);
+                            $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(t + ': ');
+                            $http.post(baseUrl + "/orders", {"bike_name": last})
+                                .success(function(data){
+                                    $location.path("/home/mySchedule.html");
+                                })
+                                .error(function(data,status){
+                                    var message = "";
+                                    switch(status){
+                                        case 5010:
+                                            message = "对不起，您的余额不足！";
+                                            break;
+                                        case 5011:
+                                            message = "对不起，该车还未入库！";
+                                            break;
+                                        case 5012:
+                                            message = "对不起，该车已被租用！";
+                                            break;
+                                        case 5013:
+                                            message = "对不起，该租车点未被您预约！";
+                                            break;
+                                        case 5014:
+                                            message = "对不起，扫描的车型和预约的车型不符！";
+                                            break;
+                                        case 5015:
+                                            message = "对不起，您还有未完成的订单！";
+                                            break;
+                                        case 5016:
+                                            message = "对不起，您未被认证，请立即认证！";
+                                            break;
+                                    }
+                                    var myPopup = $ionicPopup.show({
+                                        title: message
+                                    });
+                                    $timeout(function () {
+                                        myPopup.close();
+                                    }, 3000);
+                                });
+                        }
+                    }, function(error){
+                        console.log("Sorry ,it has an error in $cordovaBarcodeScanner.");
+                    });
+            }else{
+
+            }
+        };
 /*       imgSer.query({}, function(data){
            $scope.imgs = data.imgs;
         });*/
