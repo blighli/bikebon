@@ -68,8 +68,8 @@ ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', 
  *  author：yxq
  * */
 ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'baseUrl', '$cordovaBarcodeScanner', '$localStorage',
-    'Base64', '$ionicPopup', '$timeout',
-    function($scope, imgSer, $rootScope, $http, baseUrl, $cordovaBarcodeScanner, $localStorage, Base64, $ionicPopup, $timeout){
+    'Base64', '$ionicPopup', '$timeout', '$location',
+    function($scope, imgSer, $rootScope, $http, baseUrl, $cordovaBarcodeScanner, $localStorage, Base64, $ionicPopup, $timeout, $location){
         $rootScope.lender_id = 1;
         $scope.imgs = [
             {
@@ -96,11 +96,19 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'ba
                     .then(function(barcodeData){
                         var t = barcodeData.text;
                         if(("" !== t) && ("undefined" !== t) && (undefined !== t)){
-                            var last = t.subString(t.lastIndexOf("/"), t.length-1);
-                            $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(t + ': ');
-                            $http.post(baseUrl + "/orders", {"bike_name": last})
-                                .success(function(data){
-                                    $location.path("/home/mySchedule.html");
+                            var last = t.substring(t.lastIndexOf("/")+1, t.length);
+                            $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
+                            $http.post(baseUrl + "/orders", {bike_name: last})
+                                .success(function(data, status){
+                                    if(200 == status){
+                                        var myPopup = $ionicPopup.show({
+                                            title: "租用成功！"
+                                        });
+                                        $timeout(function () {
+                                            myPopup.close();
+                                        }, 2000);
+                                        $location.path("/mySchedule");
+                                    }
                                 })
                                 .error(function(data,status){
                                     var message = "";
@@ -126,20 +134,33 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'ba
                                         case 5016:
                                             message = "对不起，您未被认证，请立即认证！";
                                             break;
+                                        case 401:
+                                            message = "对不起，请重新登录账号！";
+                                            break;
+                                        default:
+                                            message = "对不起，这辆车无法被租用！";
+                                            break;
                                     }
                                     var myPopup = $ionicPopup.show({
                                         title: message
                                     });
                                     $timeout(function () {
                                         myPopup.close();
-                                    }, 3000);
+                                    }, 2000);
                                 });
+                        }else{
+                            alert("对不起，请重新扫描您的二维码！");
                         }
                     }, function(error){
-                        console.log("Sorry ,it has an error in $cordovaBarcodeScanner.");
+                        console.log("Sorry, it has an error in $cordovaBarcodeScanner.");
                     });
             }else{
-
+                var myPopup = $ionicPopup.show({
+                    title: "请登录后再进行租车！"
+                });
+                $timeout(function () {
+                    myPopup.close();
+                }, 2000);
             }
         };
 /*       imgSer.query({}, function(data){
@@ -826,6 +847,57 @@ ionicCtrl.controller('sexCtrl', ['$scope', '$http', 'baseUrl', '$localStorage', 
                 $http.post(baseUrl + '/user/info', {"tag": 2});
                 $localStorage.set("sex", "女");
             }
-            $location.path('/myInformation');
+            $location.path('/bikebon/mine');
         }
     }]);
+
+/**
+ * name: 密码修改页面控制器（mine/mySecret.html）
+ * desc: 修改密码
+ * author: yxq
+ */
+ionicCtrl.controller('secretCtrl', ['$scope', '$location', '$http', 'baseUrl', '$ionicPopup', '$localStorage', 'Base64', '$timeout',
+    function($scope, $location, $http, baseUrl, $ionicPopup, $localStorage, Base64, $timeout){
+        $scope.saveSecret = function(pwd1, pwd2, pwd3)
+        {
+            if(pwd2 == pwd3){
+                var temp = $localStorage.get("token");
+                if("undefined" !== temp && undefined !== temp){
+                    $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
+                    $http.post(baseUrl + "/user/password", {"old_password":pwd1, "new_password":pwd2})
+                        .success(function(data, status){
+                            if(200 == status){
+                                var myPopup = $ionicPopup.show({
+                                    title: "密码成功！"
+                                });
+                                $timeout(function () {
+                                    myPopup.close();
+                                }, 2000);
+                                $location.path("/login");
+                            }
+                        })
+                        .error(function(data, status){
+                            var ts = "";
+                            if(403 == status){
+                                ts = "原密码错误，请重新输入！";
+                            }else{
+                                ts = "密码错误，请重新输入！";
+                            }
+                            var myPopup = $ionicPopup.show({
+                                title: ts
+                            });
+                            $timeout(function () {
+                                myPopup.close();
+                            }, 2000);
+                        });
+                }
+            }else{
+                var myPopup = $ionicPopup.show({
+                    title: "密码设置错误！"
+                });
+                $timeout(function () {
+                    myPopup.close();
+                }, 2000);
+            }
+        }
+}]);

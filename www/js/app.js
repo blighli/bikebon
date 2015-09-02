@@ -216,7 +216,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       })
       .state('mySecret',{
           url:'/mySecret',
-          templateUrl: 'templates/mine/mySecret.html'
+          templateUrl: 'templates/mine/mySecret.html',
+          controller: 'secretCtrl'
       })
       .state('aboutBikebon',{
           url:'/aboutBikebon',
