@@ -110,14 +110,17 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           controller: 'informationCtrl'
       })
 
-      //mine页面
+
       .state('myOrder',{
           url:'/myOrder',
-          templateUrl: 'templates/mine/myOrder.html'
+          templateUrl: 'templates/mine/myOrder.html',
+          controller: 'OrderCtrl'
       })
+
       .state('orderDetail',{
-          url:'/orderDetail',
-          templateUrl: 'templates/mine/orderDetail.html'
+          url:'/myOrder/:orderId',
+          templateUrl: 'templates/mine/orderDetail.html',
+          controller: 'orderDetailCtrl'
       })
       .state('evaluateOrder',{
           url:'/evaluateOrder',
@@ -190,15 +193,14 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('myInformation',{
           url:'/myInformation',
           templateUrl: 'templates/mine/myInformation.html',
-          controller: 'informationCtrl'
-      })
-      .state('myId',{
-          url:'/myId',
-          templateUrl: 'templates/mine/myId.html'
+          controller: 'informationCtrl',
+          cache: false
       })
       .state('mySex',{
           url:'/mySex',
-          templateUrl: 'templates/mine/mySex.html'
+          templateUrl: 'templates/mine/mySex.html',
+          controller: 'sexCtrl',
+          cache: false
       })
       .state('feedback',{
           url:'/feedback',

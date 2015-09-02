@@ -4,19 +4,26 @@
             <button class="button icon ion-ios-arrow-left button-clear" menu-toggle="left" back-btn></button>
         </ion-nav-buttons>
         <ion-nav-buttons side="right">
-            <a class="button button-clear" menu-toggle="right" style="text-decoration: none" href="#/myInformation">保存</a>
+            <button class="button button-clear" menu-toggle="right" style="text-decoration: none" ng-click="saveSex()">
+                保存
+            </button>
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content scrollbar-y="false">
-        <label class="information-men-gj item item-radio" style="margin-top: 20px;">
-            <input type="radio" name="group" checked>
-            <div class="item-content" style="font-size: 16px;color: #000;padding-left: 20px">男</div>
-            <i class="radio-icon ion-checkmark balanced" style="margin-right: 10px"></i>
-        </label>
-        <label class="information-men-gj item item-radio">
-            <input type="radio" name="group">
-            <div class="item-content" style="font-size: 16px;color: #000;padding-left: 20px">女</div>
-            <i class="radio-icon ion-checkmark balanced" style="margin-right: 10px"></i>
-        </label>
+        <!--<label class="information-men-gj item item-radio" style="margin-top: 20px;">-->
+        <!--<input type="radio" name="group" checked>-->
+        <!--<div class="item-content" style="font-size: 16px;color: #000;padding-left: 20px">男</div>-->
+        <!--<i class="radio-icon ion-checkmark balanced" style="margin-right: 10px"></i>-->
+        <!--</label>-->
+        <!--<label class="information-men-gj item item-radio">-->
+        <!--<input type="radio" name="group">-->
+        <!--<div class="item-content" style="font-size: 16px;color: #000;padding-left: 20px">女</div>-->
+        <!--<i class="radio-icon ion-checkmark balanced" style="margin-right: 10px"></i>-->
+        <!--</label>-->
+
+
+        <ion-radio ng-repeat="item in sexList" ng-value="item.text" ng-model="flag">
+            {{item.text}}
+        </ion-radio>
     </ion-content>
 </ion-view>

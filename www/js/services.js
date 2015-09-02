@@ -66,12 +66,72 @@ ionicSer.factory('mineSer', ['$http', 'baseUrl', 'Base64', '$localStorage',
             get: function(id){
                 var temp = $localStorage.get("token");
                 $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
-                console.log($http.get(baseUrl + '/user/bill/1'));
                 return $http.get(baseUrl + '/user/bill/' + id);
             }
         }
     }
 ]);
+
+/**
+ * name: 获取全部订单服务（myOrder.html,未采用rest）
+ * desc:
+ * author: xk
+ * */
+ionicSer.factory('allOrderSer',['$resource', 'baseUrl',
+    function($resource, baseUrl){
+        return $resource(
+            baseUrl + '/user/orders/status=0&page=1',
+            {}, {'get': {method:'GET'}})
+    }]);
+
+/**
+ * name: 获取待付款订单服务（myOrder.html,未采用rest）
+ * desc:
+ * author: xk
+ * */
+ionicSer.factory('payOrderSer',['$resource', 'baseUrl',
+    function($resource, baseUrl){
+        return $resource(
+            baseUrl + '/user/orders/status=1&page=1',
+            {}, {'get': {method:'GET'}})
+    }]);
+
+/**
+ * name: 获取待评价订单服务（myOrder.html,未采用rest）
+ * desc:
+ * author: xk
+ * */
+ionicSer.factory('evaluateOrderSer',['$resource', 'baseUrl',
+    function($resource, baseUrl){
+        return $resource(
+            baseUrl + '/user/orders/status=2&page=1',
+            {}, {'get': {method:'GET'}})
+    }]);
+
+/**
+ * name: 获取已完成订单服务（myOrder.html,未采用rest）
+ * desc:
+ * author: xk
+ * */
+ionicSer.factory('finishOrderSer',['$resource', 'baseUrl',
+    function($resource, baseUrl){
+        return $resource(
+            baseUrl + '/user/orders/status=3&page=1',
+            {}, {'get': {method:'GET'}})
+    }]);
+
+/**
+ * name: 获取订单详细信息服务(orderDetail.html)
+ * desc:
+ * authorBy: xk
+ * */
+ionicSer.factory('orderDetailSer',['$resource', 'baseUrl',
+    function($resource, baseUrl){
+        return $resource(
+            baseUrl + '/user/orders/:orderId',
+            {orderId: '@orderId'},
+            {'query': {method:'GET', isArray: false}})
+    }]);
 
 /**
  * name: 支付宝相关服务
@@ -229,7 +289,6 @@ ionicSer.factory('Push', function() {
             if (push) {
                 console.log('jpush: set alias', alias);
                 plugins.jPushPlugin.setAlias(alias);
-                console.log('啊咳啊咳啊咳', alias);
             }
         },
         check: function() {
