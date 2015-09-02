@@ -67,8 +67,8 @@ ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', 
  *  desc：轮播图的加载（但是图片加载后，CSS样式无法适用）
  *  author：yxq
  * */
-ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'baseUrl',
-    function($scope, imgSer, $rootScope, $http, baseUrl){
+ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'baseUrl', '$cordovaBarcodeScanner',
+    function($scope, imgSer, $rootScope, $http, baseUrl, $cordovaBarcodeScanner){
         $rootScope.lender_id = 1;
         $scope.imgs = [
             {
@@ -92,6 +92,7 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'ba
                 .scan()
                 .then(function(barcodeData){
                     var temp = barcodeData.text;
+                    alert(temp);
                     if(("" !== temp) && ("undefined" !== temp) && (undefined !== temp)){
                         var last = temp.subString(temp.lastIndexOf("/"), temp.length-1);
                         //$http.post(baseUrl + "/orders", {"bike_name": last}).success(function(){}).error(function(){});
@@ -547,8 +548,8 @@ ionicCtrl.controller('identityCtrl', ['$scope', '$ionicActionSheet', 'lenderSer'
  * desc: 账号注销功能的实现［清除缓存／跳转到我的页面］
  * author: yxq
  * */
-ionicCtrl.controller('settingCtrl', ['$scope', '$localStorage', '$location',
-    function($scope, $localStorage, $location){
+ionicCtrl.controller('settingCtrl', ['$scope', '$localStorage', '$location', '$ionicHistory',
+    function($scope, $localStorage, $location, $ionicHistory){
         var temp = $localStorage.get("token");
         if("undefined" !== temp && undefined !== temp){
             $scope.exitFlag = true;
@@ -556,6 +557,8 @@ ionicCtrl.controller('settingCtrl', ['$scope', '$localStorage', '$location',
             $scope.exitFlag = false;
         }
         $scope.exitBtn = function(){
+            $ionicHistory.clearCache();
+            $ionicHistory.clearHistory();
             $localStorage.clear();
             $location.path('/bikebon/mine');
         }

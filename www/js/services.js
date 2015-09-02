@@ -123,7 +123,7 @@ ionicSer.factory('finishOrderSer',['$resource', 'baseUrl',
 /**
  * name: 获取订单详细信息服务(orderDetail.html)
  * desc:
- * authorBy: xk
+ * author: xk
  * */
 ionicSer.factory('orderDetailSer',['$resource', 'baseUrl',
     function($resource, baseUrl){

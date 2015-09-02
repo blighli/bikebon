@@ -455,7 +455,9 @@ body {
     height: 96px;
 }
 .information-men-gj{
+    width: 100%;
     height: 50px;
+    border-right: none;
 }
 .text-bottom-gj{
     margin-bottom: 15px;

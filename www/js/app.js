@@ -114,7 +114,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('myOrder',{
           url:'/myOrder',
           templateUrl: 'templates/mine/myOrder.html',
-          controller: 'OrderCtrl'
+          controller: 'OrderCtrl',
+          cache: false
       })
 
       .state('orderDetail',{
@@ -142,7 +143,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('myBalance',{
           url:'/myBalance',
           templateUrl: 'templates/mine/myBalance.html',
-          controller: 'balanceCtrl'
+          controller: 'balanceCtrl',
+          cache: false
       })
       .state('myMoney',{
           url:'/myMoney',
@@ -179,12 +181,14 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('normalTime',{
           url:'/normalTime',
           templateUrl: 'templates/mine/normalTime.html',
-          controller: 'normalCtrl'
+          controller: 'normalCtrl',
+          cache: false
       })
       .state('advancedTime',{
           url:'/advancedTime',
           templateUrl: 'templates/mine/advancedTime.html',
-          controller: 'advanceCtrl'
+          controller: 'advanceCtrl',
+          cache: false
       })
       .state('myCoupon',{
           url:'/myCoupon',
