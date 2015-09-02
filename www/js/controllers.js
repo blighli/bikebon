@@ -112,8 +112,8 @@ ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$ro
 
 /**
  *  name：租车详情界面控制器（main/bikeDetail.html）
- *  desc：问题－页面标题的显示(待完善)
- *  author：yxq
+ *  desc：
+ *  author：xk
  * */
 ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer', '$rootScope', '$ionicPopup', '$timeout', '$location', 'getUserBikeInfoSer', '$http', 'baseUrl', 'Base64', '$localStorage',
     function($scope, $stateParams, bikeTypeSer, $rootScope, $ionicPopup, $timeout, $location, getUserBikeInfoSer, $http, baseUrl, Base64, $localStorage){
@@ -124,8 +124,7 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
                 $scope.bike = data;
         });
 
-        /**
-         * desc*/
+        //判断用户当前能否租车以及预约车辆
         getUserBikeInfoSer.get()
             .success(function(data){
                 $scope.userBikeInfo = data;
@@ -223,6 +222,211 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
             })
         }
 }]);
+
+/**
+ * desc: 我的订单列表控制器
+ * authorBy: xk
+ * */
+ionicCtrl.controller('OrderCtrl',['$scope','allOrderSer','payOrderSer','evaluateOrderSer','finishOrderSer','$localStorage','$ionicPopup',
+    '$timeout','$http','Base64','baseUrl',
+    function($scope, allOrderSer, payOrderSer, evaluateOrderSer,finishOrderSer,$localStorage,$ionicPopup,$timeout,$http,Base64,baseUrl) {
+        //获取全部订单信息
+        allOrderSer.get({},
+            function(data) {
+                $scope.order_list_all = data.orderList;
+                console.log('order_all:' + $scope.order_list_all[0].orderStatus);
+                if ($scope.order_list_all == '') {
+                    $scope.order_list_all_status = false;
+                } else {
+                    $scope.order_list_all_status = true;
+
+                    for (var i = 0; i < $scope.order_list_all.length; i++) {
+                        switch ( $scope.order_list_all[i].orderStatus ) {
+                            case '0':
+                                $scope.order_list_all[i].order_status = '已取消';
+                                $scope.order_list_all[i].orderColor = "color: #B3B3B3";
+                                $scope.order_list_all[i].orderShouldPayStatus = false;
+                                $scope.order_list_all[i].orderDurationStatus = false;
+                                break;
+                            case '1':
+                                $scope.order_list_all[i].order_status = '待审核';
+                                $scope.order_list_all[i].orderColor = "color: #F6AC00";
+                                $scope.order_list_all[i].orderShouldPayStatus = false;
+                                $scope.order_list_all[i].orderDurationStatus = false;
+                                $scope.order_list_all[i].cancelStatus = true;
+                                $scope.order_list_book_status = true;
+                                var token = $localStorage.get("token");
+                                //待审核订单，商家未确认，可取消
+                                $scope.cancelOrder = function (orderId) {
+                                    var confirmPopup = $ionicPopup.confirm({
+                                        title: '<strong>取消订单</strong>',
+                                        template: '确定取消此订单？',
+                                        okText: '确定',
+                                        cancelText: '取消'
+                                    });
+
+                                    confirmPopup.then(function (res) {
+                                        if (res) {
+                                            $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(token + ':');
+                                            $http.put(baseUrl + '/user/orders/' + orderId, {process_tag: 0}).
+                                                success(function (data, status, headers, config) {
+                                                    var myPopup = $ionicPopup.show({
+                                                        title: '订单已取消'
+                                                    });
+                                                    $timeout(function () {
+                                                        myPopup.close();
+                                                    }, 2000);
+                                                }).
+                                                error(function (data, status, headers, config) {
+                                                    var myPopup = $ionicPopup.show({
+                                                        title: '订单取消失败!'
+                                                    });
+                                                    $timeout(function () {
+                                                        myPopup.close();
+                                                    }, 2000);
+                                                });
+                                        } else {
+                                            //取消
+                                        }
+                                    });
+                                };
+
+                                break;
+                            case '2':
+                                $scope.order_list_all[i].order_status = '未付款';
+                                $scope.order_list_all[i].orderColor = "color: #4B7CEA";
+                                $scope.order_list_all[i].orderShouldPayStatus = true;
+                                $scope.order_list_all[i].orderDurationStatus = true;
+                                $scope.order_list_all[i].payStatus = true;
+                                break;
+                            case '3':
+                                $scope.order_list_all[i].order_status = '未评价';
+                                $scope.order_list_all[i].orderColor = "color: #90B821";
+                                $scope.order_list_all[i].orderShouldPayStatus = true;
+                                $scope.order_list_all[i].orderDurationStatus = true;
+                                $scope.order_list_all[i].evaluateStatus = true;
+                                break;
+                            case '4':
+                                $scope.order_list_all[i].order_status = '已评价';
+                                $scope.order_list_all[i].orderColor = "color: #90B821";
+                                $scope.order_list_all[i].orderShouldPayStatus = true;
+                                $scope.order_list_all[i].orderDurationStatus = true;
+                                $scope.order_list_all[i].checkStatus = true;
+                                break;
+                            case '5':
+                                $scope.order_list_all[i].order_status = '已确认';
+                                $scope.order_list_all[i].orderColor = "color: #F6AC00";
+                                $scope.order_list_all[i].orderShouldPayStatus = false;
+                                $scope.order_list_all[i].orderDurationStatus = false;
+                                break;
+                            case '6':
+                                $scope.order_list_all[i].order_status = '进行中';
+                                $scope.order_list_all[i].orderColor = "color: #FF5252";
+                                $scope.order_list_all[i].orderShouldPayStatus = false;
+                                $scope.order_list_all[i].orderDurationStatus = false;
+                                break;
+                        }
+                    }
+                }
+            });
+
+        //获取待付款订单信息
+        payOrderSer.get({},
+            function(data) {
+                $scope.order_list_pay = data.orderList;               //待付款
+
+                if ($scope.order_list_pay == '') {
+                    $scope.order_list_pay_status = false;
+                } else {
+                    $scope.order_list_pay_status = true;
+                }
+            });
+
+        //获取待评价订单信息
+        evaluateOrderSer.get({},
+            function(data) {
+
+                $scope.order_list_evaluate = data.orderList;               //待评价
+                if ($scope.order_list_evaluate == '') {
+                    $scope.order_list_evaluate_status = false;
+                } else {
+                    $scope.order_list_evaluate_status = true;
+                }
+            });
+
+        //获取已完成订单信息
+        finishOrderSer.get({},
+            function(data) {
+                $scope.order_list_finish = data.orderList;               //已完成
+                if ($scope.order_list_finish == '') {
+                    $scope.order_list_finish_status = false;
+                } else {
+                    $scope.order_list_finish_status = true;
+                    for(var i=0; i<$scope.order_list_finish.length; i++){
+                        switch($scope.order_list_finish[i].orderStatus){
+                            case '3':
+                                $scope.order_list_finish[i].order_status = '未评价';
+                                $scope.order_list_finish[i].evaluateStatus = true;
+                                break;
+                            case '4':
+                                $scope.order_list_finish[i].order_status = '已评价';
+                                $scope.order_list_finish[i].checkStatus = true;
+                                break;
+                        }
+                    }
+                }
+            });
+    }]);
+
+/**
+ * desc: 订单详细信息控制器（orderDetail.html）
+ * authorBy: xk
+ * */
+ionicCtrl.controller('orderDetailCtrl',['$scope','orderDetailSer', '$stateParams',
+    function($scope, orderDetailSer,$stateParams){
+        orderDetailSer.get(
+            {orderId: $stateParams.orderId},
+            function(data){
+                $scope.orderDetail = data;
+               /* $scope.orderDetail.orderId = $stateParams.orderId;*/
+
+                switch ($scope.orderDetail.order_status) {
+                    case 0:   //已取消
+                        $scope.orderDetail.img = "img/cancel.png";
+                        $scope.orderDetail.cancelStatus = true;
+                        break;
+                    case 1:   //待审核
+                        $scope.orderDetail.img = "img/book.png";
+                        break;
+                    case 2:   //未付款
+                        $scope.orderDetail.img = "img/pay.png";
+                        $scope.orderDetail.get_bike_status = true;
+                        $scope.orderDetail.return_bike_status = true;
+                        break;
+                    case 3:   //未评价
+                        $scope.orderDetail.img = "img/finish.png";
+                        $scope.orderDetail.get_bike_status = true;
+                        $scope.orderDetail.return_bike_status = true;
+                        $scope.orderDetail.pay = true;
+                        $scope.orderDetail.notEvaluate = true;
+                        break;
+                    case 4:   //已评价
+                        $scope.orderDetail.img = "img/finish.png";
+                        $scope.orderDetail.get_bike_status = true;
+                        $scope.orderDetail.return_bike_status = true;
+                        $scope.orderDetail.pay = true;
+                        break;
+                    case 5:   //已确认
+                        $scope.orderDetail.img = "img/book.png";
+                        break;
+                    case 6:   //进行中
+                        $scope.orderDetail.img = "img/ing.png";
+                        $scope.orderDetail.get_bike_status = true;
+                        break;
+                }
+            }
+        )
+    }]);
 
 /**
  *  name：我的界面控制器（mine.html）

@@ -110,14 +110,17 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           controller: 'informationCtrl'
       })
 
-      //mine页面
+
       .state('myOrder',{
           url:'/myOrder',
-          templateUrl: 'templates/mine/myOrder.html'
+          templateUrl: 'templates/mine/myOrder.html',
+          controller: 'OrderCtrl'
       })
+
       .state('orderDetail',{
-          url:'/orderDetail',
-          templateUrl: 'templates/mine/orderDetail.html'
+          url:'/myOrder/:orderId',
+          templateUrl: 'templates/mine/orderDetail.html',
+          controller: 'orderDetailCtrl'
       })
       .state('evaluateOrder',{
           url:'/evaluateOrder',

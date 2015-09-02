@@ -8,167 +8,51 @@
         <ion-tab title="全部订单">
             <ion-view class="color-bg-jx">
                 <ion-content scrollbar-y="false">
-                    <ion-list style="background: #f2f2f2">
+                    <div ng-show="!order_list_all_status">
+                        <div class="cancellationOrder-img-gj">
+                            <img src="img/paper.png"/>
+                            <div class="cancellationOrder-word-gj" style="color: #B2B2B2;font-size: 15px;">当前没有订单</div>
+                        </div>
+                    </div>
+                    <ion-list style="background: #f2f2f2" ng-show="order_list_all_status">
                         <ion-item class="item-divider-wgj"></ion-item>
-                        <ion-item style="padding-top: 3px;padding-bottom: 0px;">
+                        <ion-item style="padding-top: 3px;padding-bottom: 0px;" ng-repeat="order_all in order_list_all">
                             <div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">
-                                <div class="col col-50 ">浙大软院租车点</div>
-                                <div class="col col-50 text-right color-b3-jx" style="color: #6C6BD0">订单待支付</div>
+                                <div class="col col-50 ">{{order_all.lenderName}}</div>
+                                <div class="col col-50 text-right color-b3-jx" style={{order_all.orderColor}}>订单{{order_all.order_status}}</div>
                             </div>
                             <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
-                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/orderDetail">
+                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/myOrder/{{order_all.orderId}}">
                                 <div style="margin-right: 13px;">
                                     <img class="order-img-f" src="img/bikes/mountain.png" />
                                 </div>
                                 <div>
-                                    <h2>山地车</h2>
-                                 <span>
-                                     <div class="order-span-f">费用： 0.00元</div>
-                                     <div class="order-span-f">时长： 0分钟</div>
+                                    <h2>{{order_all.BikeTypeName}}</h2>
+                                 <span ng-show="order_all.orderShouldPayStatus">
+                                     <div class="order-span-f">费用:{{order_all.orderShouldPay}}元</div>
+                                     <div class="order-span-f">时长:{{order_all.orderDuration}}</div>
+                                 </span>
+                                 <span ng-show="!order_all.orderShouldPayStatus">
+                                     <div class="order-span-f">费用:--</div>
+                                     <div class="order-span-f">时长:--</div>
                                  </span>
                                 </div>
-                                <div style="position: absolute; right: 20px;color: #585858">
-                                    ¥&nbsp;0.00
+                                <div style="position: absolute; right: 20px;color: #585858" ng-show="order_all.orderShouldPayStatus">
+                                    ¥&nbsp;{{order_all.orderShouldPay}}
                                 </div>
                             </a>
                             <hr class="hr-yxq"/>
                             <div class="text-right" style="margin-bottom: 8px">
-                                <a class="button button-light button-small" href="#/immediatePay">立即支付</a>
+                                <a class="button button-light button-small" href="#/immediatePay" ng-show="order_all.payStatus">立即支付</a>
                             </div>
-                        </ion-item>
-                        <ion-item class="item-divider-wgj"></ion-item>
-                        <ion-item style="padding-top: 3px;padding-bottom: 0px;">
-                            <div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">
-                                <div class="col col-50 ">浙大软院租车点</div>
-                                <div class="col col-50 text-right balanced">订单已完成</div>
-                            </div>
-                            <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
-                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/orderDetail">
-                                <div style="margin-right: 13px;">
-                                    <img class="order-img-f" src="img/bikes/mountain.png" />
-                                </div>
-                                <div>
-                                    <h2>山地车</h2>
-                                 <span>
-                                     <div class="order-span-f">费用： 15.00元</div>
-                                     <div class="order-span-f">时长： 40分钟</div>
-                                 </span>
-                                </div>
-                                <div style="position: absolute; right: 20px;color: #585858">
-                                    ¥&nbsp;15.00
-                                </div>
-                            </a>
-                            <hr class="hr-yxq"/>
                             <div class="text-right" style="margin-bottom: 8px">
-                                <a class="button button-light button-small" href="#/evaluateOrder">评价订单</a>
+                                <a class="button button-light button-small" href="#/evaluateOrder" ng-show="order_all.evaluateStatus">评价订单</a>
                             </div>
-                        </ion-item>
-                        <ion-item class="item-divider-wgj"></ion-item>
-                        <ion-item style="padding-top: 0px;padding-bottom: 0px;">
-                            <div class="row font-14-yxq" style="padding-top: 3px;padding-bottom: 3px;">
-                                <div class="col col-50 ">浙大软院租车点</div>
-                                <div class="col col-50 text-right color-ora-jx">订单审核中</div>
-                            </div>
-                            <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
-                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none" href="#/orderDetail">
-                                <div style="margin-right: 13px;">
-                                    <img class="order-img-f" src="img/bikes/mountain.png" />
-                                </div>
-                                <div>
-                                    <h2>山地车</h2>
-                                 <span>
-                                     <div class="order-span-f">费用： 0.00元</div>
-                                     <div class="order-span-f">时长： 0分钟</div>
-                                 </span>
-                                </div>
-                                <div style="position: absolute; right: 20px;color: #585858">
-                                    ¥&nbsp;0.00
-                                </div>
-                            </a>
-                            <hr class="hr-yxq"/>
                             <div class="text-right" style="margin-bottom: 8px">
-                                <a class="button button-light button-small" href="#/cancellationOrder">取消订单</a>
+                                <a class="button button-light button-small" ng-click="cancelOrder(order_all.orderId)" ng-show="order_all.cancelStatus">取消订单</a>
                             </div>
-                        </ion-item>
-                        <ion-item class="item-divider-wgj"></ion-item>
-                        <ion-item style="padding-top: 3px;padding-bottom: 0px;">
-                            <div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">
-                                <div class="col col-50 ">浙大软院租车点</div>
-                                <div class="col col-50 text-right balanced">订单已完成</div>
-                            </div>
-                            <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
-                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/orderDetail">
-                                <div style="margin-right: 13px;">
-                                    <img class="order-img-f" src="img/bikes/mountain.png" />
-                                </div>
-                                <div>
-                                    <h2>山地车</h2>
-                                 <span>
-                                     <div class="order-span-f">费用： 15.00元</div>
-                                     <div class="order-span-f">时长： 40分钟</div>
-                                 </span>
-                                </div>
-                                <div style="position: absolute; right: 20px;color: #585858">
-                                    ¥&nbsp;15.00
-                                </div>
-                            </a>
-                            <hr class="hr-yxq"/>
                             <div class="text-right" style="margin-bottom: 8px">
-                                <a class="button button-light button-small" href="#/evaluateOrder">评价订单</a>
-                            </div>
-                        </ion-item>
-                        <ion-item class="item-divider-wgj"></ion-item>
-                        <ion-item style="padding-top: 3px;padding-bottom: 0px;">
-                            <div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">
-                                <div class="col col-50 ">浙大软院租车点</div>
-                                <div class="col col-50 text-right color-b3-jx" style="color: #6C6BD0">订单待支付</div>
-                            </div>
-                            <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
-                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/orderDetail">
-                                <div style="margin-right: 13px;">
-                                    <img class="order-img-f" src="img/bikes/mountain.png" />
-                                </div>
-                                <div>
-                                    <h2>山地车</h2>
-                                 <span>
-                                     <div class="order-span-f">费用： 0.00元</div>
-                                     <div class="order-span-f">时长： 0分钟</div>
-                                 </span>
-                                </div>
-                                <div style="position: absolute; right: 20px;color: #585858">
-                                    ¥&nbsp;0.00
-                                </div>
-                            </a>
-                            <hr class="hr-yxq"/>
-                            <div class="text-right" style="margin-bottom: 8px">
-                                <a class="button button-light button-small" href="#/immediatePay">立即支付</a>
-                            </div>
-                        </ion-item>
-                        <ion-item class="item-divider-wgj"></ion-item>
-                        <ion-item style="padding-top: 0px;padding-bottom: 0px;">
-                            <div class="row font-14-yxq" style="padding-top: 3px;padding-bottom: 3px;">
-                                <div class="col col-50 ">浙大软院租车点</div>
-                                <div class="col col-50 text-right color-ora-jx">订单审核中</div>
-                            </div>
-                            <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
-                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none" href="#/orderDetail">
-                                <div style="margin-right: 13px;">
-                                    <img class="order-img-f" src="img/bikes/mountain.png" />
-                                </div>
-                                <div>
-                                    <h2>山地车</h2>
-                                 <span>
-                                     <div class="order-span-f">费用： 0.00元</div>
-                                     <div class="order-span-f">时长： 0分钟</div>
-                                 </span>
-                                </div>
-                                <div style="position: absolute; right: 20px;color: #585858">
-                                    ¥&nbsp;0.00
-                                </div>
-                            </a>
-                            <hr class="hr-yxq"/>
-                            <div class="text-right" style="margin-bottom: 8px">
-                                <a class="button button-light button-small" href="#/cancellationOrder">取消订单</a>
+                                <a class="button button-light button-small" href="#/orderDetail" ng-show="order_all.checkStatus">查看订单</a>
                             </div>
                         </ion-item>
                     </ion-list>
@@ -178,27 +62,33 @@
         <ion-tab title="待付款">
             <ion-view class="color-bg-jx">
                 <ion-content scrollbar-y="false">
-                    <ion-list style="background: #f2f2f2">
+                    <div ng-show="!order_list_pay_status">
+                        <div class="cancellationOrder-img-gj">
+                            <img src="img/paper.png"/>
+                            <div class="cancellationOrder-word-gj" style="color: #B2B2B2;font-size: 15px;">当前没有待付款订单</div>
+                        </div>
+                    </div>
+                    <ion-list style="background: #f2f2f2" ng-show="order_list_pay_status">
                         <ion-item class="item-divider-wgj"></ion-item>
-                        <ion-item style="padding-top: 3px;padding-bottom: 0px;">
+                        <ion-item style="padding-top: 3px;padding-bottom: 0px;" ng-repeat="order_pay in order_list_pay">
                             <div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">
-                                <div class="col col-50 ">浙大软院租车点</div>
+                                <div class="col col-50 ">{{order_pay.lenderName}}</div>
                                 <div class="col col-50 text-right color-b3-jx" style="color: #6C6BD0">订单待支付</div>
                             </div>
                             <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
-                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/orderDetail">
+                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/myOrder/{{order_pay.orderId}}">
                                 <div style="margin-right: 13px;">
                                     <img class="order-img-f" src="img/bikes/mountain.png" />
                                 </div>
                                 <div>
-                                    <h2>山地车</h2>
+                                    <h2>{{order_pay.BikeTypeName}}</h2>
                                  <span>
-                                     <div class="order-span-f">费用： 0.00元</div>
-                                     <div class="order-span-f">时长： 0分钟</div>
+                                     <div class="order-span-f">费用:{{order_pay.orderShouldPay | currency:''}}元</div>
+                                     <div class="order-span-f">时长:{{order_pay.orderDuration}}分钟</div>
                                  </span>
                                 </div>
                                 <div style="position: absolute; right: 20px;color: #585858">
-                                    ¥&nbsp;0.00
+                                    ¥&nbsp;{{order_pay.orderShouldPay | currency:''}}
                                 </div>
                             </a>
                             <hr class="hr-yxq"/>
@@ -206,61 +96,6 @@
                                 <a class="button button-light button-small" href="#/immediatePay">立即支付</a>
                             </div>
                         </ion-item>
-                        <ion-item class="item-divider-wgj"></ion-item>
-                        <ion-item style="padding-top: 3px;padding-bottom: 0px;">
-                            <div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">
-                                <div class="col col-50 ">浙大软院租车点</div>
-                                <div class="col col-50 text-right color-b3-jx" style="color: #6C6BD0">订单待支付</div>
-                            </div>
-                            <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
-                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/orderDetail">
-                                <div style="margin-right: 13px;">
-                                    <img class="order-img-f" src="img/bikes/mountain.png" />
-                                </div>
-                                <div>
-                                    <h2>山地车</h2>
-                                 <span>
-                                     <div class="order-span-f">费用： 0.00元</div>
-                                     <div class="order-span-f">时长： 0分钟</div>
-                                 </span>
-                                </div>
-                                <div style="position: absolute; right: 20px;color: #585858">
-                                    ¥&nbsp;0.00
-                                </div>
-                            </a>
-                            <hr class="hr-yxq"/>
-                            <div class="text-right" style="margin-bottom: 8px">
-                                <a class="button button-light button-small" href="#/immediatePay">立即支付</a>
-                            </div>
-                        </ion-item>
-                        <ion-item class="item-divider-wgj"></ion-item>
-                        <ion-item style="padding-top: 3px;padding-bottom: 0px;">
-                            <div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">
-                                <div class="col col-50 ">浙大软院租车点</div>
-                                <div class="col col-50 text-right color-b3-jx" style="color: #6C6BD0">订单待支付</div>
-                            </div>
-                            <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
-                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/orderDetail">
-                                <div style="margin-right: 13px;">
-                                    <img class="order-img-f" src="img/bikes/mountain.png" />
-                                </div>
-                                <div>
-                                    <h2>山地车</h2>
-                                 <span>
-                                     <div class="order-span-f">费用： 0.00元</div>
-                                     <div class="order-span-f">时长： 0分钟</div>
-                                 </span>
-                                </div>
-                                <div style="position: absolute; right: 20px;color: #585858">
-                                    ¥&nbsp;0.00
-                                </div>
-                            </a>
-                            <hr class="hr-yxq"/>
-                            <div class="text-right" style="margin-bottom: 8px">
-                                <a class="button button-light button-small" href="#/immediatePay">立即支付</a>
-                            </div>
-                        </ion-item>
-
                     </ion-list>
                 </ion-content>
             </ion-view>
@@ -268,81 +103,33 @@
         <ion-tab title="待评价">
             <ion-view class="color-bg-jx">
                 <ion-content scrollbar-y="false">
-                    <ion-list style="background: #f2f2f2">
+                    <div ng-show="!order_list_evaluate_status">
+                        <div class="cancellationOrder-img-gj">
+                            <img src="img/paper.png"/>
+                            <div class="cancellationOrder-word-gj" style="color: #B2B2B2;font-size: 15px;">当前没有待评价订单</div>
+                        </div>
+                    </div>
+                    <ion-list style="background: #f2f2f2" ng-show="order_list_evaluate_status">
                         <ion-item class="item-divider-wgj"></ion-item>
-                        <ion-item style="padding-top: 3px;padding-bottom: 0px;">
+                        <ion-item style="padding-top: 3px;padding-bottom: 0px;" ng-repeat="order_evaluate in order_list_evaluate">
                             <div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">
-                                <div class="col col-50 ">浙大软院租车点</div>
+                                <div class="col col-50 ">{{order_evaluate.lenderName}}</div>
                                 <div class="col col-50 text-right balanced">订单已完成</div>
                             </div>
                             <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
-                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/orderDetail">
+                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/myOrder/{{order_evaluate.orderId}}">
                                 <div style="margin-right: 13px;">
                                     <img class="order-img-f" src="img/bikes/mountain.png" />
                                 </div>
                                 <div>
-                                    <h2>山地车</h2>
+                                    <h2>{{order_evaluate.BikeTypeName}}</h2>
                                  <span>
-                                     <div class="order-span-f">费用： 15.00元</div>
-                                     <div class="order-span-f">时长： 40分钟</div>
+                                     <div class="order-span-f">费用:{{order_evaluate.orderShouldPay | currency:''}}元</div>
+                                     <div class="order-span-f">时长:{{order_evaluate.orderDuration}}分钟</div>
                                  </span>
                                 </div>
                                 <div style="position: absolute; right: 20px;color: #585858">
-                                    ¥&nbsp;15.00
-                                </div>
-                            </a>
-                            <hr class="hr-yxq"/>
-                            <div class="text-right" style="margin-bottom: 8px">
-                                <a class="button button-light button-small" href="#/evaluateOrder">评价订单</a>
-                            </div>
-                        </ion-item>
-                        <ion-item class="item-divider-wgj"></ion-item>
-                        <ion-item style="padding-top: 3px;padding-bottom: 0px;">
-                            <div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">
-                                <div class="col col-50 ">浙大软院租车点</div>
-                                <div class="col col-50 text-right balanced">订单已完成</div>
-                            </div>
-                            <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
-                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/orderDetail">
-                                <div style="margin-right: 13px;">
-                                    <img class="order-img-f" src="img/bikes/mountain.png" />
-                                </div>
-                                <div>
-                                    <h2>山地车</h2>
-                                 <span>
-                                     <div class="order-span-f">费用： 15.00元</div>
-                                     <div class="order-span-f">时长： 40分钟</div>
-                                 </span>
-                                </div>
-                                <div style="position: absolute; right: 20px;color: #585858">
-                                    ¥&nbsp;15.00
-                                </div>
-                            </a>
-                            <hr class="hr-yxq"/>
-                            <div class="text-right" style="margin-bottom: 8px">
-                                <a class="button button-light button-small" href="#/evaluateOrder">评价订单</a>
-                            </div>
-                        </ion-item>
-                        <ion-item class="item-divider-wgj"></ion-item>
-                        <ion-item style="padding-top: 3px;padding-bottom: 0px;">
-                            <div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">
-                                <div class="col col-50 ">浙大软院租车点</div>
-                                <div class="col col-50 text-right balanced">订单已完成</div>
-                            </div>
-                            <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
-                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/orderDetail">
-                                <div style="margin-right: 13px;">
-                                    <img class="order-img-f" src="img/bikes/mountain.png" />
-                                </div>
-                                <div>
-                                    <h2>山地车</h2>
-                                 <span>
-                                     <div class="order-span-f">费用： 15.00元</div>
-                                     <div class="order-span-f">时长： 40分钟</div>
-                                 </span>
-                                </div>
-                                <div style="position: absolute; right: 20px;color: #585858">
-                                    ¥&nbsp;15.00
+                                    ¥&nbsp;{{order_evaluate.orderShouldPay | currency:''}}
                                 </div>
                             </a>
                             <hr class="hr-yxq"/>
@@ -357,86 +144,41 @@
         <ion-tab title="已完成">
             <ion-view class="color-bg-jx">
                 <ion-content scrollbar-y="false">
-                    <ion-list style="background: #f2f2f2">
+                    <div ng-show="!order_list_finish_status">
+                        <div class="cancellationOrder-img-gj">
+                            <img src="img/paper.png"/>
+                            <div class="cancellationOrder-word-gj" style="color: #B2B2B2;font-size: 15px;">当前没有已完成订单</div>
+                        </div>
+                    </div>
+                    <ion-list style="background: #f2f2f2" ng-show="order_list_finish_status">
                         <ion-item class="item-divider-wgj"></ion-item>
-                        <ion-item style="padding-top: 3px;padding-bottom: 0px;">
+                        <ion-item style="padding-top: 3px;padding-bottom: 0px;" ng-repeat="order_finish in order_list_finish">
                             <div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">
-                                <div class="col col-50 ">浙大软院租车点</div>
-                                <div class="col col-50 text-right balanced">订单已完成</div>
+                                <div class="col col-50 ">{{order_finish.lenderName}}</div>
+                                <div class="col col-50 text-right balanced">订单{{order_finish.order_status}}</div>
                             </div>
                             <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
-                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/orderDetail">
+                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/myOrder/{{order_finish.orderId}}">
                                 <div style="margin-right: 13px;">
                                     <img class="order-img-f" src="img/bikes/mountain.png" />
                                 </div>
                                 <div>
-                                    <h2>山地车</h2>
+                                    <h2>{{order_finish.BikeTypeName}}</h2>
                                  <span>
-                                     <div class="order-span-f">费用： 15.00元</div>
-                                     <div class="order-span-f">时长： 40分钟</div>
+                                     <div class="order-span-f">费用:{{order_finish.orderShouldPay | currency:''}}元</div>
+                                     <div class="order-span-f">时长:{{order_finish.orderDuration}}分钟</div>
                                  </span>
                                 </div>
                                 <div style="position: absolute; right: 20px;color: #585858">
-                                    ¥&nbsp;15.00
+                                    ¥&nbsp;{{order_finish.orderShouldPay | currency:''}}
                                 </div>
                             </a>
                             <hr class="hr-yxq"/>
                             <div class="text-right" style="margin-bottom: 8px">
-                                <a class="button button-light button-small" href="#/evaluateOrder">评价订单</a>
+                                <a class="button button-light button-small" href="#/evaluateOrder" ng-show="order_finish.evaluateStatus">评价订单</a>
                             </div>
-                        </ion-item>
-                        <ion-item class="item-divider-wgj"></ion-item>
-                        <ion-item style="padding-top: 3px;padding-bottom: 0px;">
-                            <div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">
-                                <div class="col col-50 ">浙大软院租车点</div>
-                                <div class="col col-50 text-right balanced">订单已完成</div>
-                            </div>
-                            <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
-                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/orderDetail">
-                                <div style="margin-right: 13px;">
-                                    <img class="order-img-f" src="img/bikes/mountain.png" />
-                                </div>
-                                <div>
-                                    <h2>山地车</h2>
-                                 <span>
-                                     <div class="order-span-f">费用： 15.00元</div>
-                                     <div class="order-span-f">时长： 40分钟</div>
-                                 </span>
-                                </div>
-                                <div style="position: absolute; right: 20px;color: #585858">
-                                    ¥&nbsp;15.00
-                                </div>
-                            </a>
-                            <hr class="hr-yxq"/>
                             <div class="text-right" style="margin-bottom: 8px">
-                                <a class="button button-light button-small" href="#/orderDetail">查看订单</a>
-                            </div>
-                        </ion-item>
-                        <ion-item class="item-divider-wgj"></ion-item>
-                        <ion-item style="padding-top: 3px;padding-bottom: 0px;">
-                            <div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">
-                                <div class="col col-50 ">浙大软院租车点</div>
-                                <div class="col col-50 text-right balanced">订单已完成</div>
-                            </div>
-                            <hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>
-                            <a class="row" style="padding-top: 2px;padding-bottom: 3px;text-decoration: none;" href="#/orderDetail">
-                                <div style="margin-right: 13px;">
-                                    <img class="order-img-f" src="img/bikes/mountain.png" />
-                                </div>
-                                <div>
-                                    <h2>山地车</h2>
-                                 <span>
-                                     <div class="order-span-f">费用： 15.00元</div>
-                                     <div class="order-span-f">时长： 40分钟</div>
-                                 </span>
-                                </div>
-                                <div style="position: absolute; right: 20px;color: #585858">
-                                    ¥&nbsp;15.00
-                                </div>
-                            </a>
-                            <hr class="hr-yxq"/>
-                            <div class="text-right" style="margin-bottom: 8px">
-                                <a class="button button-light button-small" href="#/orderDetail">查看订单</a>
+                                <a class="button button-light button-small" href="#/orderDetail" ng-show="order_finish.checkStatus">查看订单</a>
                             </div>
                         </ion-item>
                     </ion-list>
@@ -445,97 +187,3 @@
         </ion-tab>
     </ion-tabs>
 </ion-view>
-
-
-
-
-
-
-
-<!--<ion-view view-title="订单" hide-tabs>-->
-    <!--<ion-content scrollbar-y="false">-->
-        <!--<ion-list style="background: #f2f2f2">-->
-            <!--<ion-item class="item-divider-gj"></ion-item>-->
-            <!--<ion-item style="padding-top: 0px;padding-bottom: 0px;" href="#/bikebon/orderDetail">-->
-                <!--<div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">-->
-                    <!--<div class="col col-50 ">浙大软院租车点</div>-->
-                    <!--<div class="col col-50 text-right balanced">订单已完成</div>-->
-                <!--</div>-->
-                <!--<hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>-->
-                <!--<div class="row" style="padding-top: 2px;padding-bottom: 3px;">-->
-                    <!--<div style="margin-right: 13px;">-->
-                        <!--<img class="order-img-f" src="img/bikes/mountain.png" />-->
-                    <!--</div>-->
-                    <!--<div>-->
-                        <!--<h2>山地车</h2>-->
-                     <!--<span>-->
-                         <!--<div class="order-span-f">费用： 15.00元</div>-->
-                         <!--<div class="order-span-f">时长： 40分钟</div>-->
-                     <!--</span>-->
-                    <!--</div>-->
-                    <!--<div style="position: absolute; right: 20px;">-->
-                        <!--¥&nbsp;15.00-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<hr class="hr-yxq"/>-->
-                <!--<div class="text-right">-->
-                    <!--<a class="button button-light button-small" href="#/bikebon/evaluateOrder">评价订单</a>-->
-                <!--</div>-->
-            <!--</ion-item>-->
-            <!--<ion-item class="item-divider-gj"></ion-item>-->
-            <!--<ion-item style="padding-top: 0px;padding-bottom: 0px;" href="#/bikebon/orderDetail">-->
-                <!--<div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">-->
-                    <!--<div class="col col-50 ">浙大软院租车点</div>-->
-                    <!--<div class="col col-50 text-right color-b3-jx" style="color: #6C6BD0">订单待支付</div>-->
-                <!--</div>-->
-                <!--<hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>-->
-                <!--<div class="row" style="padding-top: 2px;padding-bottom: 3px;">-->
-                    <!--<div style="margin-right: 13px;">-->
-                        <!--<img class="order-img-f" src="img/bikes/mountain.png" />-->
-                    <!--</div>-->
-                    <!--<div>-->
-                        <!--<h2>山地车</h2>-->
-                     <!--<span>-->
-                         <!--<div class="order-span-f">费用： 0.00元</div>-->
-                         <!--<div class="order-span-f">时长： 0分钟</div>-->
-                     <!--</span>-->
-                    <!--</div>-->
-                    <!--<div style="position: absolute; right: 20px;">-->
-                        <!--¥&nbsp;0.00-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<hr class="hr-yxq"/>-->
-                <!--<div class="text-right">-->
-                    <!--<a class="button button-light button-small" href="#/bikebon/immediatePay">立即支付</a>-->
-                <!--</div>-->
-            <!--</ion-item>-->
-            <!--<ion-item class="item-divider-gj"></ion-item>-->
-            <!--<ion-item style="padding-top: 0px;padding-bottom: 0px;" href="#/bikebon/orderDetail">-->
-                <!--<div class="row font-14-yxq" style="padding-top: 0px;padding-bottom: 3px;">-->
-                    <!--<div class="col col-50 ">浙大软院租车点</div>-->
-                    <!--<div class="col col-50 text-right color-ora-jx">订单审核中</div>-->
-                <!--</div>-->
-                <!--<hr class="hr-yxq" style="margin-top: 0px; padding-top: 0px;"/>-->
-                <!--<div class="row" style="padding-top: 2px;padding-bottom: 3px;">-->
-                    <!--<div style="margin-right: 13px;">-->
-                        <!--<img class="order-img-f" src="img/bikes/mountain.png" />-->
-                    <!--</div>-->
-                    <!--<div>-->
-                        <!--<h2>山地车</h2>-->
-                     <!--<span>-->
-                         <!--<div class="order-span-f">费用： 0.00元</div>-->
-                         <!--<div class="order-span-f">时长： 0分钟</div>-->
-                     <!--</span>-->
-                    <!--</div>-->
-                    <!--<div style="position: absolute; right: 20px;">-->
-                        <!--¥&nbsp;0.00-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--<hr class="hr-yxq"/>-->
-                <!--<div class="text-right">-->
-                    <!--<a class="button button-light button-small" href="#/bikebon/cancellationOrder">取消订单</a>-->
-                <!--</div>-->
-            <!--</ion-item>-->
-        <!--</ion-list>-->
-    <!--</ion-content>-->
-<!--</ion-view>-->
