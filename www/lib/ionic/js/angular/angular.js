@@ -47,7 +47,6 @@ function minErr(module, ErrorConstructor) {
 
     message = prefix + template.replace(/\{\d+\}/g, function(match) {
       var index = +match.slice(1, -1), arg;
-
       if (index + 2 < templateArgs.length) {
         return toDebugString(templateArgs[index + 2]);
       }

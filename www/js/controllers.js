@@ -883,8 +883,8 @@ ionicCtrl.controller('moneyCtrl', ['$scope', 'paySer', '$stateParams',
 
 /**
  * name: 性别修改页面控制器（mine/mySex.html）
- * desc: 修改性别
- * author: yxq
+ * desc: 性别修改保存
+ * author: wgj
  */
 ionicCtrl.controller('sexCtrl', ['$scope', '$http', 'baseUrl', '$localStorage', '$location',
     function ($scope, $http, baseUrl, $localStorage, $location) {
@@ -892,9 +892,9 @@ ionicCtrl.controller('sexCtrl', ['$scope', '$http', 'baseUrl', '$localStorage', 
             {text: "男"},
             {text: "女"}
         ];
-        $scope.flag = {
-            sex: '男'
-        };
+        //$scope.flag = {
+        //    sex: '男'
+        //};
         var temp = $localStorage.get("sex");
         if ("女" === temp) {
             $scope.flag = "女";
