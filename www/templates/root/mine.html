@@ -11,14 +11,23 @@
                 <div class="item-center-yxq margin-22-top" ng-show="!loginFlag">
                     <a class="balanced font-18-gj text-none-gj" href="#/login">立即登录</a>
                 </div>
-                <div class="item-center-yxq margin-18-top" ng-show="loginFlag&&!verifyFlag">
+                <div class="item-center-yxq margin-18-top" ng-show="loginFlag && unauthenticated">
                     <div class="mine-color-gj"><a class="margin-6-bottom font-17-yxq"><span ng-bind="userName"></span></a></div>
                     <span class="font-14-yxq color-b3-jx" style="margin-right:7px;">未认证用户</span>
                     <a class="font-14-yxq balanced text-none-gj" href="#/identity">立即认证</a>
                 </div>
-                <div class="item-center-yxq margin-18-top" ng-show="loginFlag&&verifyFlag">
+                <div class="item-center-yxq margin-18-top" ng-show="loginFlag && checking">
                     <div class="mine-color-gj"><a class="margin-6-bottom font-17-yxq"><span ng-bind="userName"></span></a></div>
-                    <div class="font-14-yxq balanced text-none-gj">{{verifyMess}}</div>
+                    <div class="font-14-yxq balanced text-none-gj">信息审核中</div>
+                </div>
+                <div class="item-center-yxq margin-18-top" ng-show="loginFlag && authenticated">
+                    <div class="mine-color-gj"><a class="margin-6-bottom font-17-yxq"><span ng-bind="userName"></span></a></div>
+                    <div class="font-14-yxq balanced text-none-gj">已认证</div>
+                </div>
+                <div class="item-center-yxq margin-18-top" ng-show="loginFlag && notCertified">
+                    <div class="mine-color-gj"><a class="margin-6-bottom font-17-yxq"><span ng-bind="userName"></span></a></div>
+                    <span class="font-14-yxq color-b3-jx" style="margin-right:7px;">审核未通过，请重新提交</span>
+                    <a class="font-14-yxq balanced text-none-gj" href="#/identity">立即认证</a>
                 </div>
                 <a class="icon ion-ios-arrow-right img-right-gj text-none-gj" ng-show="loginFlag" href="#/myInformation" style="color: #000000"></a>
             </ion-item>

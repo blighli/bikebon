@@ -148,6 +148,33 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'ba
 }]);
 
 /**
+ *  name：我的行程界面控制器（myTravel.html）
+ *
+ *  author：xk
+ * */
+ionicCtrl.controller('travelCtrl', ['$scope','$http','Base64','baseUrl','$localStorage',
+    function($scope,$http,Base64,baseUrl,$localStorage){
+        var temp = $localStorage.get('token');
+        $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
+        $http.get(baseUrl + "/currentjourney")
+            .success(function(data,status){
+                $scope.travelInfo = data;
+            }).error(function(data,status){
+            });
+
+        setInterval(function(){
+            $scope.$apply(function(){
+                $http.get(baseUrl + "/currentjourney")
+                    .success(function(data,status){
+                        $scope.travelInfo = data;
+                    }).error(function(data,status){
+                    });
+            });
+        },60000);
+
+    }]);
+
+/**
  *  name：租车界面控制器（rentBike.html）
  *  desc：问题－租车点图片的加载(如主页)
  *  author：yxq
@@ -218,9 +245,20 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
                                     $location.path("/myOrder");
                                 }, 2000);
                             }
+
                         }).error(function(data,status){
 
                             switch (status){
+                                case 401:
+                                    var myPopup = $ionicPopup.show({
+                                        title: '您还未登录，请登录后再试'
+                                    });
+
+                                    $timeout(function () {
+                                        myPopup.close();
+                                        $location.path("/login");
+                                    }, 2000);
+                                    break;
                                 case 5000:
                                     var myPopup = $ionicPopup.show({
                                         title: '您已有预约车辆'
@@ -262,6 +300,25 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
                                 case 5004:
                                     var myPopup = $ionicPopup.show({
                                         title: '您有未支付订单，若要预约请先完成支付'
+                                    });
+
+                                    $timeout(function () {
+                                        myPopup.close();
+                                    }, 2000);
+                                    break;
+                                case 5005:
+                                    var myPopup = $ionicPopup.show({
+                                        title: '您还未认证，请先通过认证'
+                                    });
+
+                                    $timeout(function () {
+                                        myPopup.close();
+                                        $location.path("/login");
+                                    }, 2000);
+                                    break;
+                                case 5006:
+                                    var myPopup = $ionicPopup.show({
+                                        title: '认证尚未通过，请耐心等待'
                                     });
 
                                     $timeout(function () {
@@ -493,7 +550,7 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
         //我的页面数据初始化[登录认证标记]
         var temp = $localStorage.get("token");
         $scope.loginFlag = false;
-        $scope.verifyFlag = false;
+
         //登录、身份认证模块
         if("undefined" !== temp && undefined !== temp){
             $scope.loginFlag = true;
@@ -505,13 +562,21 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
             $http.get(baseUrl + '/user')
                 .success(function(data){
                     var flag = data.verifyTag;
-                    if(true === flag){
-                        $scope.verifyFlag = true;
-                        $scope.verifyMess = "已认证用户";
-                    }else{
-                        $scope.verifyFlag = false;
-                        $scope.verifyMess = "认证审核中";
+                    switch (flag){
+                        case 1:
+                            $scope.unauthenticated = true;
+                            break;
+                        case 2:
+                            $scope.checking = true;
+                            break;
+                        case 3:
+                            $scope.authenticated = true;
+                            break;
+                        case 4:
+                            $scope.notCertified = true;
+                            break;
                     }
+
                     $localStorage.set("userName", data.userName);
                     $scope.userName = data.userName;
                     $localStorage.set("remainder", data.deposit);
