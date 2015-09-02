@@ -503,7 +503,7 @@ ionicCtrl.controller('OrderCtrl',['$scope','allOrderSer','payOrderSer','evaluate
                                 break;
                             case '4':
                                 $scope.order_list_finish[i].order_status = '已评价';
-                                $scope.order_list_finish[i].checkStatus = true;
+                                //$scope.order_list_finish[i].checkStatus = true;
                                 break;
                         }
                     }
