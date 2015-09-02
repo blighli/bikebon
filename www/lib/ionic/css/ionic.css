@@ -6844,27 +6844,14 @@ progress {
 
 .button-large {
   padding: 0 16px;
-  min-width: 130px;
-  min-height: 40px;
-  font-size: 18px;
-  line-height: 40px; }
+  min-width: 68px;
+  min-height: 59px;
+  font-size: 20px;
+  line-height: 53px; }
   .button-large .icon:before, .button-large.icon:before, .button-large.icon-left:before, .button-large.icon-right:before {
     padding-bottom: 2px;
     font-size: 32px;
-    line-height: 40px; }
-
-
-  /*自己增加_gj*/
-/*.button-wang {*/
-  /*padding: 0 16px;*/
-  /*min-width: 165px;*/
-  /*min-height: 40px;*/
-  /*font-size: 16px;*/
-  /*line-height: 40px; }*/
-/*.button-wang .icon:before, .button-wang.icon:before, .button-wang.icon-left:before, .button-wang.icon-right:before {*/
-  /*padding-bottom: 2px;*/
-  /*font-size: 32px;*/
-  /*line-height: 40px; }*/
+    line-height: 51px; }
 
 .button-icon {
   -webkit-transition: opacity 0.1s;

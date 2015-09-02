@@ -67,8 +67,8 @@ ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', 
  *  desc：轮播图的加载（但是图片加载后，CSS样式无法适用）
  *  author：yxq
  * */
-ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope',
-    function($scope, imgSer, $rootScope){
+ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'baseUrl',
+    function($scope, imgSer, $rootScope, $http, baseUrl){
         $rootScope.lender_id = 1;
         $scope.imgs = [
             {
@@ -87,6 +87,21 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope',
                 "imgTitle": "Bike Three"
             }
         ];
+        $scope.scans = function(){
+            $cordovaBarcodeScanner
+                .scan()
+                .then(function(barcodeData){
+                    var temp = barcodeData.text;
+                    if(("" !== temp) && ("undefined" !== temp) && (undefined !== temp)){
+                        var last = temp.subString(temp.lastIndexOf("/"), temp.length-1);
+                        //$http.post(baseUrl + "/orders", {"bike_name": last}).success(function(){}).error(function(){});
+                    }else{
+                        alert("Sorry, it has an error in 二维码.");
+                    }
+                }, function(error){
+                    alert("Sorry ,it has an error in $cordovaBarcodeScanner.");
+                });
+        }
 /*       imgSer.query({}, function(data){
            $scope.imgs = data.imgs;
         });*/
