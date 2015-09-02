@@ -261,6 +261,8 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
                     $scope.baseTime = data.baseTime;
                     $localStorage.set("superTime", data.upscaleTime);
                     $scope.upscaleTime = data.upscaleTime;
+                    $localStorage.set("sex", data.gender);
+                    $localStorage.set("phoneID", data.ID);
                 }).error(function(){
                     console.log("Sorry, it has an error in mineCtrl.");
                 });
@@ -412,8 +414,8 @@ ionicCtrl.controller('advanceCtrl', ['$scope', 'mineSer', '$localStorage',
  *  desc：弹出拍照、从相册选择对话框
  *  author：wgj
  * */
-ionicCtrl.controller("informationCtrl", ['$scope', '$ionicActionSheet',
-    function($scope, $ionicActionSheet) {
+ionicCtrl.controller("informationCtrl", ['$scope', '$ionicActionSheet', '$localStorage',
+    function ($scope, $ionicActionSheet, $localStorage) {
         //实现了ActionSheet的弹出（ios取消键的取消功能，android无取消键）
         $scope.show = function(){
             var hideSheet = $ionicActionSheet.show({
@@ -438,6 +440,8 @@ ionicCtrl.controller("informationCtrl", ['$scope', '$ionicActionSheet',
                 }
             });
         }
+        $scope.ID = $localStorage.get("phoneID");
+        $scope.sex = $localStorage.get("sex");
 }]);
 
 /**
@@ -519,16 +523,48 @@ ionicCtrl.controller('moneyCtrl', ['$scope', 'paySer', '$stateParams',
                             "pay_info": data,
                             "sign": 1
                         },function(){
-                            alert("陈忠忠要对老婆好");
                             $location.path("/getSuccess/1");
                         },function(){
-                            alert("忠忠会对老婆好一辈子");
                             $location.path("/getSuccess/0");
                         });
                 }).error(function(){
-                    alert("忠忠当然会对老婆好喽～");
                     $location.path("/getSuccess/0");
                 });
         }
 
 }]);
+
+/**
+ * name: 性别修改页面控制器（mine/mySex.html）
+ * desc: 修改性别
+ * author: yxq
+ */
+ionicCtrl.controller('sexCtrl', ['$scope', '$http', 'baseUrl', '$localStorage', '$location',
+    function ($scope, $http, baseUrl, $localStorage, $location) {
+        $scope.sexList = [
+            {text: "男"},
+            {text: "女"}
+        ];
+        $scope.flag = {
+            sex: '男'
+        };
+        var temp = $localStorage.get("sex");
+        if ("女" === temp) {
+            $scope.flag = "女";
+        } else {
+            $scope.flag = "男";
+        }
+        $scope.saveSex = function () {
+            if ("女" === $scope.flag) {
+                //tag 为1表示改为男，2表示改为女
+                //console.log("男");
+                $http.post(baseUrl + '/user/info', {"tag": 1});
+                $localStorage.set("sex", "男");
+            } else {
+                //console.log("女");
+                $http.post(baseUrl + '/user/info', {"tag": 2});
+                $localStorage.set("sex", "女");
+            }
+            $location.path('/myInformation');
+        }
+    }]);

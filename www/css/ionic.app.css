@@ -3204,7 +3204,7 @@ a.subdued {
       font-weight: 300;
       font-size: 17px; }
       .bar .button.button-clear .icon:before, .bar .button.button-clear.icon:before, .bar .button.button-clear.icon-left:before, .bar .button.button-clear.icon-right:before {
-        font-size: 28px;
+        font-size: 26px;
         line-height: 32px; }
     .bar .button.back-button {
       display: block;

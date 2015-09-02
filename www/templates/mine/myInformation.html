@@ -11,14 +11,16 @@
                 <img src="img/headShow/defaultUser_1.png" style="width: 60px;height: 60px;float: right"  ng-click="show()"/>
                 <i class="icon ion-ios-arrow-right"></i>
             </ion-item>
-            <ion-item class="information-men-gj item-icon-right" href="#/myId">
-                <span style="font-size: 16px;color: #000;">ID</span>
-                <span style="font-size: 15px;color: #A6A6A6;float: right">18810525301</span>
-                <i class="icon ion-ios-arrow-right"></i>
-            </ion-item>
+            <div class="information-men-gj">
+                <span style="font-size: 16px;color: #000;line-height: 50px;margin-left: 20px">ID</span>
+                <span style="font-size: 15px;float: right;line-height: 50px;margin-right: 20px"><span
+                        ng-bind="ID"></span></span>
+            </div>
             <ion-item class="information-men-gj item-icon-right" href="#/mySex">
                 <span style="font-size: 16px;color: #000;">性别</span>
-                <span style="font-size: 15px;color: #A6A6A6;float: right">女</span>
+                <span style="font-size: 15px;color: #A6A6A6;float: right">
+                    <span ng-bind="sex"></span>
+                </span>
                 <i class="icon ion-ios-arrow-right"></i>
             </ion-item>
         </div>

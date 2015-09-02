@@ -190,15 +190,14 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('myInformation',{
           url:'/myInformation',
           templateUrl: 'templates/mine/myInformation.html',
-          controller: 'informationCtrl'
-      })
-      .state('myId',{
-          url:'/myId',
-          templateUrl: 'templates/mine/myId.html'
+          controller: 'informationCtrl',
+          cache: false
       })
       .state('mySex',{
           url:'/mySex',
-          templateUrl: 'templates/mine/mySex.html'
+          templateUrl: 'templates/mine/mySex.html',
+          controller: 'sexCtrl',
+          cache: false
       })
       .state('feedback',{
           url:'/feedback',
