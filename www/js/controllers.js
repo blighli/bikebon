@@ -104,8 +104,14 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'ba
                                     var message = "";
                                     switch(data.status){
                                         case 200:
-                                            alert("租用成功！");
+                                            var myPopup = $ionicPopup.show({
+                                                title: "租用成功"
+                                            });
+                                            $timeout(function () {
+                                                myPopup.close();
+                                            }, 2000);
                                             $location.path("/myTravel");
+                                            break;
                                         case 5010:
                                             message = "对不起，您的余额不足！";
                                             break;
@@ -135,7 +141,12 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'ba
                                             break;
                                     }
                                     if("" !== message){
-                                        alert(message);
+                                        var myPopup = $ionicPopup.show({
+                                            title: message
+                                        });
+                                        $timeout(function () {
+                                            myPopup.close();
+                                        }, 2000);
                                     }
                                 })
                                 .error(function(){
@@ -248,7 +259,6 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
                         .success(function(data){
                             $scope.orderId = data.orderId;
                             $scope.status = data.status;
-
                             switch ($scope.status){
                                 case 200:
                                     var myPopup = $ionicPopup.show({
@@ -917,8 +927,8 @@ ionicCtrl.controller('successCtrl', ['$scope', '$stateParams',
  * desc: 是mine/normalTime.html(advancedTime.html)页面的充值页面
  * author: yxq
  */
-ionicCtrl.controller('moneyCtrl', ['$scope', 'paySer', '$stateParams',
-    function($scope, paySer, $stateParams){
+ionicCtrl.controller('moneyCtrl', ['$scope', 'paySer', '$stateParams', '$http', 'baseUrl', '$location',
+    function($scope, paySer, $stateParams, $http, baseUrl, $location){
         var btn = $stateParams.btnId + "";
         var page = $stateParams.pageId + "";
         var temp = "1";
@@ -944,12 +954,22 @@ ionicCtrl.controller('moneyCtrl', ['$scope', 'paySer', '$stateParams',
         $scope.payMoney = function(){
             paySer.post(temp, "0.01")
                 .success(function(data){
+                    var out_trade_no = data.out_trade_no;
                     window.alipay.payment(
                         {
-                            "pay_info": data,
+                            "pay_info": data.string,
                             "sign": 1
                         },function(){
-                            $location.path("/getSuccess/1");
+                            $http.post(baseUrl + '/payresult', {"out_trade_no": out_trade_no})
+                                .success(function(data){
+                                    if("True" === data.info)
+                                    {
+                                        $location.path("/getSuccess/1");
+                                    }
+                                })
+                                .error(function(){
+                                    $location.path("/getSuccess/0");
+                                });
                         },function(){
                             $location.path("/getSuccess/0");
                         });
