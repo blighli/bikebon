@@ -82,7 +82,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('myTravel', {
           url: '/myTravel',
           templateUrl: 'templates/home/myTravel.html',
-          controller: 'travelCtrl'
+          controller: 'travelCtrl',
+          cache: false
       })
       .state('myActivity',{
           url: '/myActivity',
@@ -93,7 +94,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('bikeList',{
           url: '/rentBike/:bike_type_id',
           templateUrl: 'templates/rentBike/bikeDetail.html',
-          controller: 'bikeDetailCtrl'
+          controller: 'bikeDetailCtrl',
+          cache: false
       })
       .state('myComment',{
           url: '/myComment',

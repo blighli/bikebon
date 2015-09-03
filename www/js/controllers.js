@@ -5,8 +5,9 @@ var ionicCtrl = angular.module("starter.controllers",[]);
  *  desc：
  *  author：yxq
  * */
-ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$location', 'baseUrl', 'Push','$interval',
-    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $location, baseUrl, Push,$interval){
+ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$location', 'baseUrl', 'Push','$interval','$ionicHistory',
+    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $location, baseUrl, Push,$interval,$ionicHistory){
+
         //获取验证码
         $scope.text = '获取密码';
         $scope.setDisabled = false;
@@ -108,8 +109,8 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'ba
                                         });
                                         $timeout(function () {
                                             myPopup.close();
+                                            $location.path("/myTravel");
                                         }, 2000);
-                                        $location.path("/mySchedule");
                                     }
                                 })
                                 .error(function(data,status){
@@ -166,9 +167,6 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'ba
                 }, 2000);
             }
         };
-/*       imgSer.query({}, function(data){
-           $scope.imgs = data.imgs;
-        });*/
 }]);
 
 /**
@@ -207,6 +205,7 @@ ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$ro
     function($scope, lenderSer, bikeTypeSer, $rootScope){
         //租车点信息的获取
         var lender_id = $rootScope.lender_id;
+
         lenderSer.get({lender_id: lender_id}, function(data){
             $scope.rentStop = data;
         });
@@ -221,14 +220,15 @@ ionicCtrl.controller('rentBikeCtrl', ['$scope', 'lenderSer', 'bikeTypeSer', '$ro
  *  desc：
  *  author：xk
  * */
-ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer', '$rootScope', '$ionicPopup', '$timeout', '$location', 'getUserBikeInfoSer', '$http', 'baseUrl', 'Base64', '$localStorage',
+ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer', '$rootScope', '$ionicPopup', '$timeout', '$location', 'getUserBikeInfoSer',
+    '$http', 'baseUrl', 'Base64', '$localStorage',
     function($scope, $stateParams, bikeTypeSer, $rootScope, $ionicPopup, $timeout, $location, getUserBikeInfoSer, $http, baseUrl, Base64, $localStorage){
         var lender_id = $rootScope.lender_id;
         bikeTypeSer.get(
             {lender_id: lender_id, bike_type_id: $stateParams.bike_type_id},
             function(data){
                 $scope.bike = data;
-        });
+            });
 
         //判断用户当前能否租车以及预约车辆
         getUserBikeInfoSer.get()
@@ -257,16 +257,16 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
                     $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(token + ': ');
                     $http.post(baseUrl + '/lender/' + lender_id + '/bike_type/' + $stateParams.bike_type_id + '/order_form')
                         .success(function(data,status){
-                            $scope.result = data;
+                            $scope.orderId = data.orderId;
 
                             if(status == 200){
                                 var myPopup = $ionicPopup.show({
                                     title: '预约成功'
                                 });
-
                                 $timeout(function () {
                                     myPopup.close();
-                                    $location.path("/myOrder");
+                                    //预约成功后跳转到订单详情页面
+                                    $location.path("/myOrder/" + $scope.orderId);
                                 }, 2000);
                             }
 
@@ -277,17 +277,15 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
                                     var myPopup = $ionicPopup.show({
                                         title: '您还未登录，请登录后再试'
                                     });
-
                                     $timeout(function () {
                                         myPopup.close();
-                                        $location.path("/login");
+                                        $location.path('/login');
                                     }, 2000);
                                     break;
                                 case 5000:
                                     var myPopup = $ionicPopup.show({
                                         title: '您已有预约车辆'
                                     });
-
                                     $timeout(function () {
                                         myPopup.close();
                                     }, 2000);
@@ -337,7 +335,7 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
 
                                     $timeout(function () {
                                         myPopup.close();
-                                        $location.path("/login");
+                                        $location.path("/bikebon/mine");
                                     }, 2000);
                                     break;
                                 case 5006:
@@ -347,6 +345,7 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
 
                                     $timeout(function () {
                                         myPopup.close();
+                                        $location.path("/bikebon/mine");
                                     }, 2000);
                                     break;
                             }
@@ -370,10 +369,11 @@ ionicCtrl.controller('OrderCtrl',['$scope','allOrderSer','payOrderSer','evaluate
         allOrderSer.get({},
             function(data) {
                 $scope.order_list_all = data.orderList;
-                console.log('order_all:' + $scope.order_list_all[0].orderStatus);
                 if ($scope.order_list_all == '') {
+                    //当前状态没有订单
                     $scope.order_list_all_status = false;
                 } else {
+                    //当前状态有订单
                     $scope.order_list_all_status = true;
 
                     for (var i = 0; i < $scope.order_list_all.length; i++) {
@@ -382,89 +382,84 @@ ionicCtrl.controller('OrderCtrl',['$scope','allOrderSer','payOrderSer','evaluate
                                 $scope.order_list_all[i].order_status = '已取消';
                                 $scope.order_list_all[i].orderColor = "color: #B3B3B3";
                                 $scope.order_list_all[i].orderShouldPayStatus = false;
-                                $scope.order_list_all[i].orderDurationStatus = false;
                                 break;
                             case '1':
                                 $scope.order_list_all[i].order_status = '待审核';
                                 $scope.order_list_all[i].orderColor = "color: #F6AC00";
                                 $scope.order_list_all[i].orderShouldPayStatus = false;
-                                $scope.order_list_all[i].orderDurationStatus = false;
                                 $scope.order_list_all[i].cancelStatus = true;
-                                $scope.order_list_book_status = true;
-                                var token = $localStorage.get("token");
-                                //待审核订单，商家未确认，可取消
-                                $scope.cancelOrder = function (orderId) {
-                                    var confirmPopup = $ionicPopup.confirm({
-                                        title: '<strong>取消订单</strong>',
-                                        template: '确定取消此订单？',
-                                        okText: '确定',
-                                        cancelText: '取消'
-                                    });
-
-                                    confirmPopup.then(function (res) {
-                                        if (res) {
-                                            $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(token + ':');
-                                            $http.put(baseUrl + '/user/orders/' + orderId, {process_tag: 0}).
-                                                success(function (data, status, headers, config) {
-                                                    var myPopup = $ionicPopup.show({
-                                                        title: '订单已取消'
-                                                    });
-                                                    $timeout(function () {
-                                                        myPopup.close();
-                                                    }, 2000);
-                                                }).
-                                                error(function (data, status, headers, config) {
-                                                    var myPopup = $ionicPopup.show({
-                                                        title: '订单取消失败!'
-                                                    });
-                                                    $timeout(function () {
-                                                        myPopup.close();
-                                                    }, 2000);
-                                                });
-                                        } else {
-                                            //取消
-                                        }
-                                    });
-                                };
-
+                                //$scope.order_list_book_status = true;
                                 break;
                             case '2':
                                 $scope.order_list_all[i].order_status = '未付款';
                                 $scope.order_list_all[i].orderColor = "color: #4B7CEA";
                                 $scope.order_list_all[i].orderShouldPayStatus = true;
-                                $scope.order_list_all[i].orderDurationStatus = true;
                                 $scope.order_list_all[i].payStatus = true;
                                 break;
                             case '3':
                                 $scope.order_list_all[i].order_status = '未评价';
                                 $scope.order_list_all[i].orderColor = "color: #90B821";
                                 $scope.order_list_all[i].orderShouldPayStatus = true;
-                                $scope.order_list_all[i].orderDurationStatus = true;
                                 $scope.order_list_all[i].evaluateStatus = true;
                                 break;
                             case '4':
                                 $scope.order_list_all[i].order_status = '已评价';
                                 $scope.order_list_all[i].orderColor = "color: #90B821";
                                 $scope.order_list_all[i].orderShouldPayStatus = true;
-                                $scope.order_list_all[i].orderDurationStatus = true;
                                 $scope.order_list_all[i].checkStatus = true;
                                 break;
                             case '5':
                                 $scope.order_list_all[i].order_status = '已确认';
                                 $scope.order_list_all[i].orderColor = "color: #F6AC00";
                                 $scope.order_list_all[i].orderShouldPayStatus = false;
-                                $scope.order_list_all[i].orderDurationStatus = false;
+                                $scope.order_list_all[i].cancelStatus = true;
                                 break;
                             case '6':
                                 $scope.order_list_all[i].order_status = '进行中';
                                 $scope.order_list_all[i].orderColor = "color: #FF5252";
                                 $scope.order_list_all[i].orderShouldPayStatus = false;
-                                $scope.order_list_all[i].orderDurationStatus = false;
                                 break;
                         }
                     }
                 }
             });
+
+        //订单取消
+        var token = $localStorage.get("token");
+        //待审核订单，商家未确认，可取消
+        $scope.cancelOrder = function (orderId) {
+            var confirmPopup = $ionicPopup.confirm({
+                title: '<strong>取消订单</strong>',
+                template: '确定取消此订单？',
+                okText: '确定',
+                cancelText: '取消'
+            });
+
+            confirmPopup.then(function (res) {
+                if (res) {
+                    $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(token + ':');
+                    $http.put(baseUrl + '/user/orders/' + orderId, {process_tag: 0}).
+                        success(function (data, status, headers, config) {
+                            var myPopup = $ionicPopup.show({
+                                title: '订单已取消'
+                            });
+                            $timeout(function () {
+                                myPopup.close();
+                            }, 2000);
+                        }).
+                        error(function (data, status, headers, config) {
+                            var myPopup = $ionicPopup.show({
+                                title: '订单取消失败!'
+                            });
+                            $timeout(function () {
+                                myPopup.close();
+                            }, 2000);
+                        });
+                } else {
+                    //取消
+                }
+            });
+        };
 
         //获取待付款订单信息
         payOrderSer.get({},
@@ -528,36 +523,50 @@ ionicCtrl.controller('orderDetailCtrl',['$scope','orderDetailSer', '$stateParams
 
                 switch ($scope.orderDetail.order_status) {
                     case 0:   //已取消
-                        $scope.orderDetail.img = "img/cancel.png";
-                        $scope.orderDetail.cancelStatus = true;
+                        $scope.orderDetail.cancelStatus = true;       //控制照片、取消时间的显示
+                        $scope.orderDetail.calculateStatus = false;               //控制时长、费用的显示
+                        $scope.orderDetail.payStatus = false;         //控制支付详情的显示
                         break;
                     case 1:   //待审核
-                        $scope.orderDetail.img = "img/book.png";
+                        $scope.orderDetail.checkingStatus = true;
+                        $scope.orderDetail.calculateStatus = false;
+                        $scope.orderDetail.payStatus = false;
                         break;
                     case 2:   //未付款
-                        $scope.orderDetail.img = "img/pay.png";
-                        $scope.orderDetail.get_bike_status = true;
-                        $scope.orderDetail.return_bike_status = true;
+                        $scope.orderDetail.notPayStatus = true;
+                        $scope.orderDetail.getBikeStatus = true;
+                        $scope.orderDetail.returnBikeStatus = true;
+                        $scope.orderDetail.calculateStatus = true;
+                        $scope.orderDetail.payStatus = false;
+
                         break;
                     case 3:   //未评价
-                        $scope.orderDetail.img = "img/finish.png";
-                        $scope.orderDetail.get_bike_status = true;
-                        $scope.orderDetail.return_bike_status = true;
-                        $scope.orderDetail.pay = true;
-                        $scope.orderDetail.notEvaluate = true;
+                        $scope.orderDetail.notEvaluateStatus = true;
+                        $scope.orderDetail.getBikeStatus = true;
+                        $scope.orderDetail.returnBikeStatus = true;
+                        $scope.orderDetail.calculateStatus = true;
+                        $scope.orderDetail.payStatus = true;
+
                         break;
                     case 4:   //已评价
-                        $scope.orderDetail.img = "img/finish.png";
-                        $scope.orderDetail.get_bike_status = true;
-                        $scope.orderDetail.return_bike_status = true;
-                        $scope.orderDetail.pay = true;
+                        $scope.orderDetail.Evaluated = true;
+                        $scope.orderDetail.getBikeStatus = true;
+                        $scope.orderDetail.returnBikeStatus = true;
+                        $scope.orderDetail.calculateStatus = true;
+                        $scope.orderDetail.payStatus = true;
+
                         break;
-                    case 5:   //已确认
-                        $scope.orderDetail.img = "img/book.png";
+                    case 5:   //已预订
+                        $scope.orderDetail.bookStatus = true;
+                        $scope.orderDetail.calculateStatus = false;
+                        $scope.orderDetail.payStatus = false;
+
                         break;
                     case 6:   //进行中
-                        $scope.orderDetail.img = "img/ing.png";
-                        $scope.orderDetail.get_bike_status = true;
+                        $scope.orderDetail.ingStatus = true;
+                        $scope.orderDetail.getBikeStatus = true;
+                        $scope.orderDetail.calculateStatus = false;
+                        $scope.orderDetail.payStatus = false;
                         break;
                 }
             }
@@ -622,7 +631,7 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
             }else{
                 $location.path("/login");
             }
-        }
+        };
         //我的订单
         $scope.orderFun = function(){
             if("undefined" !== temp && undefined !== temp){
