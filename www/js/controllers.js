@@ -98,25 +98,14 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'ba
                         var t = barcodeData.text;
                         if(("" !== t) && ("undefined" !== t) && (undefined !== t)){
                             var last = t.substring(t.lastIndexOf("/")+1, t.length);
-                            alert(last);
                             $http.defaults.headers.post.Authorization = 'Basic ' + Base64.encode(temp + ': ');
                             $http.post(baseUrl + "/orders", {bike_name: last})
-                                .success(function(data, status){
-                                    alert("success---status" + status);
-                                    if(200 === status){
-                                        var myPopup = $ionicPopup.show({
-                                            title: "租用成功！"
-                                        });
-                                        $timeout(function () {
-                                            myPopup.close();
-                                            $location.path("/myTravel");
-                                        }, 2000);
-                                    }
-                                })
-                                .error(function(data,status){
-                                    alert("fail---status:" + status);
+                                .success(function(data){
                                     var message = "";
-                                    switch(status){
+                                    switch(data.status){
+                                        case 200:
+                                            alert("租用成功！");
+                                            $location.path("/myTravel");
                                         case 5010:
                                             message = "对不起，您的余额不足！";
                                             break;
@@ -145,12 +134,12 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'ba
                                             message = "对不起，这辆车无法被租用！";
                                             break;
                                     }
-                                    var myPopup = $ionicPopup.show({
-                                        title: message
-                                    });
-                                    $timeout(function () {
-                                        myPopup.close();
-                                    }, 2000);
+                                    if("" !== message){
+                                        alert(message);
+                                    }
+                                })
+                                .error(function(){
+                                    console.log("Sorry, it has an error in homeCtrl.");
                                 });
                         }else{
                             alert("对不起，请重新扫描您的二维码！");
@@ -587,10 +576,6 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
         //登录、身份认证模块
         if("undefined" !== temp && undefined !== temp){
             $scope.loginFlag = true;
-            $scope.userName = $localStorage.get("userName");
-            $scope.deposit = $localStorage.get("remainder");
-            $scope.baseTime = $localStorage.get("normalTime");
-            $scope.upscaleTime = $localStorage.get("superTime");
             $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
             $http.get(baseUrl + '/user')
                 .success(function(data){
@@ -609,14 +594,9 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
                             $scope.notCertified = true;
                             break;
                     }
-
-                    $localStorage.set("userName", data.userName);
                     $scope.userName = data.userName;
-                    $localStorage.set("remainder", data.deposit);
                     $scope.deposit = data.deposit;
-                    $localStorage.set("normalTime", data.baseTime);
                     $scope.baseTime = data.baseTime;
-                    $localStorage.set("superTime", data.upscaleTime);
                     $scope.upscaleTime = data.upscaleTime;
                     $localStorage.set("sex", data.gender);
                     $localStorage.set("phoneID", data.ID);
@@ -706,9 +686,14 @@ ionicCtrl.controller('settingCtrl', ['$scope', '$localStorage', '$location', '$i
  * desc:
  * author: yxq
  * */
-ionicCtrl.controller('balanceCtrl', ['$scope', 'mineSer', '$localStorage',
-    function($scope, mineSer, $localStorage){
-        $scope.local = $localStorage.get("remainder");
+ionicCtrl.controller('balanceCtrl', ['$scope', 'mineSer', '$http', 'baseUrl',
+    function($scope, mineSer, $http, baseUrl){
+        $http.get(baseUrl + '/user')
+            .success(function(data){
+                $scope.local = data.deposit;
+            }).error(function(){
+                console.log("Sorry, it has an error in normalCtrl.");
+            });
         mineSer.get(1)
             .success(function(data){
                 $scope.data = data.bills;
@@ -723,9 +708,14 @@ ionicCtrl.controller('balanceCtrl', ['$scope', 'mineSer', '$localStorage',
  * desc:
  * author: yxq
  * */
-ionicCtrl.controller('normalCtrl', ['$scope', 'mineSer', '$localStorage', 'paySer',
-    function($scope, mineSer, $localStorage, paySer){
-        $scope.local = $localStorage.get("normalTime");
+ionicCtrl.controller('normalCtrl', ['$scope', 'mineSer', '$http', 'baseUrl',
+    function($scope, mineSer, $http, baseUrl){
+        $http.get(baseUrl + '/user')
+            .success(function(data){
+                $scope.local = data.baseTime;
+            }).error(function(){
+                console.log("Sorry, it has an error in normalCtrl.");
+            });
         mineSer.get(2)
             .success(function(data){
                 $scope.data = data.bills;
@@ -740,9 +730,14 @@ ionicCtrl.controller('normalCtrl', ['$scope', 'mineSer', '$localStorage', 'paySe
  * desc:
  * author: yxq
  * */
-ionicCtrl.controller('advanceCtrl', ['$scope', 'mineSer', '$localStorage',
-    function($scope, mineSer, $localStorage){
-        $scope.local = $localStorage.get("superTime");
+ionicCtrl.controller('advanceCtrl', ['$scope', 'mineSer', '$http', 'baseUrl',
+    function($scope, mineSer, $http, baseUrl){
+        $http.get(baseUrl + '/user')
+            .success(function(data){
+                $scope.local = data.upscaleTime;
+            }).error(function(){
+                console.log("Sorry, it has an error in advanceCtrl.");
+            });
         mineSer.get(3)
             .success(function(data){
                 $scope.data = data.bills;

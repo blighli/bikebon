@@ -9,18 +9,6 @@ ionicApp.run(function($ionicPlatform, $localStorage, Push) {
   if("undefined" === $localStorage.get("token")  || undefined === $localStorage.get("token")){
       $localStorage.set("token", "");
   }
-  if("undefined" === $localStorage.get("userName")  || undefined === $localStorage.get("userName")){
-      $localStorage.set("username", "   ");
-  }
-  if("undefined" === $localStorage.get("remainder")  || undefined === $localStorage.get("remainder")){
-      $localStorage.set("remainder", "0.00");
-  }
-  if("undefined" === $localStorage.get("normalTime")  || undefined === $localStorage.get("normalTime")){
-      $localStorage.set("normalTime", "0.00");
-  }
-  if("undefined" === $localStorage.get("superTime")  || undefined === $localStorage.get("superTime")){
-      $localStorage.set("superTime", "0.00");
-  }
 
   // push notification callback
   var notificationCallback = function(data) {
