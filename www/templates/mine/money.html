@@ -16,32 +16,33 @@
             <div class="text-120-gj">
                 <span style="font-size: 16px;margin-left: 20px;line-height: 70px">选择支付方式</span>
             </div>
-
-
-            <div class="text-100-gj" style="overflow: hidden">
-                <div style="float: left;margin-left: 20px;width: 40px;height: 40px;line-height:80px">
-                    <img src="img/icon_wechat.png" style="height: 100%;width: 100%">
-                </div>
-                <span style="font-size: 15px;margin-left: 8px;line-height: 50px">微信支付</span>
-                <div style="float: right;margin-right: 20px;width: 25px;height: 25px;line-height: 65px">
-                    <img src="img/normal.png" style="height: 100%;width: 100%">
-                </div>
-            </div>
-            <div class="text-100-gj" style="overflow: hidden">
-                <div style="float: left;margin-left: 20px;width: 40px;height: 40px;line-height: 80px">
-                    <img src="img/icon_alipay.png" style="height: 100%;width: 100%">
-                </div>
-                <span style="font-size: 15px;margin-left: 8px;line-height: 50px">支付宝支付</span>
-                <div style="float: right;margin-right: 20px;width: 25px;height: 25px;line-height: 65px">
-                    <img src="img/right.png" style="height: 100%;width: 100%">
-                </div>
+            <div class="text-150-gj">
+                <ul class="list">
+                    <li class="item item-checkbox" style="padding-top: 8px;padding-bottom: 8px">
+                        <div class="checkbox">
+                            <input type="radio" name="pays" />
+                        </div>
+                        <div style="float: left;margin-left: 0px;width: 40px;height: 40px;line-height:70px">
+                            <img ng-src="img/icon_wechat.png" style="height: 100%;width: 100%">
+                        </div>
+                        <div style="line-height: 40px;padding-left: 50px">微信支付</div>
+                    </li>
+                    <li class="item item-checkbox" style="padding-top: 8px;padding-bottom: 8px">
+                        <div class="checkbox">
+                            <input type="radio" name="pays" checked>
+                        </div>
+                        <div style="float: left;margin-left: 0px;width: 40px;height: 40px;line-height: 70px">
+                            <img ng-src="img/icon_alipay.png" style="height: 100%;width: 100%">
+                        </div>
+                        <div style="line-height: 40px;padding-left: 50px">支付宝支付</div>
+                    </li>
+                </ul>
             </div>
             <div style="margin: 5px 25px;">
-                <button class="button button-block button-balanced" style="border:none;" ng-click="payMoney()">
+                <button class="button button-block button-balanced" style="border:none;" ng-disabled="moneyForm.money.$error.required || moneyForm.money.$error.pattern" ng-click="payMoney()">
                     确认充值
                 </button>
             </div>
         </ion-list>
-
     </ion-content>
 </ion-view>

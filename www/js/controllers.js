@@ -97,10 +97,12 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'ba
                         var t = barcodeData.text;
                         if(("" !== t) && ("undefined" !== t) && (undefined !== t)){
                             var last = t.substring(t.lastIndexOf("/")+1, t.length);
-                            $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
+                            alert(last);
+                            $http.defaults.headers.post.Authorization = 'Basic ' + Base64.encode(temp + ': ');
                             $http.post(baseUrl + "/orders", {bike_name: last})
                                 .success(function(data, status){
-                                    if(200 == status){
+                                    alert("success---status" + status);
+                                    if(200 === status){
                                         var myPopup = $ionicPopup.show({
                                             title: "租用成功！"
                                         });
@@ -111,6 +113,7 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'ba
                                     }
                                 })
                                 .error(function(data,status){
+                                    alert("fail---status:" + status);
                                     var message = "";
                                     switch(status){
                                         case 5010:
@@ -694,22 +697,6 @@ ionicCtrl.controller('settingCtrl', ['$scope', '$localStorage', '$location', '$i
  * desc:
  * author: yxq
  * */
-ionicCtrl.controller('balanceCtrl', ['$scope', 'mineSer',
-    function($scope, mineSer){
-        mineSer.get(1)
-            .success(function(data){
-                $scope.data = data.bills;
-            })
-            .error(function(){
-                console.log("Sorry, it has an error in balanceCtrl.");
-            });
-}]);
-
-/**
- * name: 我的余额界面控制器（myBalance.html）
- * desc:
- * author: yxq
- * */
 ionicCtrl.controller('balanceCtrl', ['$scope', 'mineSer', '$localStorage',
     function($scope, mineSer, $localStorage){
         $scope.local = $localStorage.get("remainder");
@@ -796,17 +783,27 @@ ionicCtrl.controller("informationCtrl", ['$scope', '$ionicActionSheet', '$localS
  *  desc： 是mine/myBalanced.html页面的充值页面
  *  author：yxq
  * */
-ionicCtrl.controller('myMoneyCtrl', ['$scope', 'paySer', '$location',
-    function($scope, paySer, $location){
+ionicCtrl.controller('myMoneyCtrl', ['$scope', 'paySer', '$location', '$http', 'baseUrl',
+    function($scope, paySer, $location, $http, baseUrl){
         $scope.payMoney = function(){
             paySer.post("0", "0.01")
                 .success(function(data){
+                    var out_trade_no = data.out_trade_no;
                     window.alipay.payment(
                         {
-                            "pay_info": data,
+                            "pay_info": data.string,
                             "sign": 1
                         },function(){
-                            $location.path("/getSuccess/1");
+                            $http.post(baseUrl + '/payresult', {"out_trade_no": out_trade_no})
+                                .success(function(data){
+                                    if("True" === data.info)
+                                    {
+                                        $location.path("/getSuccess/1");
+                                    }
+                                })
+                                .error(function(){
+                                    $location.path("/getSuccess/0");
+                                });
                         },function(){
                             $location.path("/getSuccess/0");
                         });
@@ -892,9 +889,6 @@ ionicCtrl.controller('sexCtrl', ['$scope', '$http', 'baseUrl', '$localStorage', 
             {text: "男"},
             {text: "女"}
         ];
-        //$scope.flag = {
-        //    sex: '男'
-        //};
         var temp = $localStorage.get("sex");
         if ("女" === temp) {
             $scope.flag = "女";

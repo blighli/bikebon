@@ -107,6 +107,10 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           url: '/myItem',
           templateUrl: 'templates/rentBike/myItem.html'
       })
+      .state('rentStop', {
+          url: '/rentStop',
+          templateUrl: 'templates/rentBike/rentStop.html'
+      })
 
       //find页面
       .state('mySays',{
@@ -177,6 +181,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('getSuccess',{
           url:'/getSuccess/:flag',
           templateUrl: 'templates/mine/getSuccess.html',
+          controller: 'successCtrl',
           cache: false
       })
       .state('getTixian',{
