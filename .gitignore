@@ -9,3 +9,4 @@ plugins/*
 hooks/*
 scss/*
 www/lib/*
+resources/*
