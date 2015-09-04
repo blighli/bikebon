@@ -8,7 +8,15 @@
         <ion-list style="background: #f2f2f2">
             <ion-item class="item-divider-yxq"></ion-item>
             <ion-item style="padding-top: 0px;padding-bottom: 0px;" class="details-bg-gj">
-                <div class="details-finish-gj"><img ng-src={{orderDetail.img}}/></div>
+                <div class="details-finish-gj">
+                    <img ng-show="orderDetail.cancelStatus" ng-src="img/cancel.png"/>
+                    <img ng-show="orderDetail.checkingStatus" ng-src="img/check.png"/>
+                    <img ng-show="orderDetail.notPayStatus" ng-src="img/pay.png"/>
+                    <img ng-show="orderDetail.notEvaluateStatus" ng-src="img/finish.png"/>
+                    <img ng-show="orderDetail.Evaluated" ng-src="img/finish.png"/>
+                    <img ng-show="orderDetail.bookStatus" ng-src="img/book.png"/>
+                    <img ng-show="orderDetail.ingStatus" ng-src="img/ing.png"/>
+                </div>
                 <div class="row font-14-yxq" style="padding-top: 3px;padding-bottom: 3px;">
                     <a class="col col-50 ">订单编号:{{orderDetail.order_id}}</a>
                 </div>
@@ -49,9 +57,13 @@
                     </div>
                 </div>
                 <hr class="hr-yxq"/>
-                    <span class="details-flow-gj" ng-show="orderDetail.return_bike_status">
-                        <a class="order-spann-gj details-text-gj" >费用：¥{{orderDetail.order_should_pay | currency:''}}</a>
-                        <a class="order-spann-gj details-text-gj">时长：{{orderDetail.bike_duration_time}}</a>
+                    <span class="details-flow-gj" ng-show="orderDetail.calculateStatus">
+                        <a class="order-spann-gj details-text-gj" >费用：¥&nbsp;{{orderDetail.order_should_pay | currency:''}}</a>
+                        <a class="order-spann-gj details-text-gj">时长：&nbsp;{{orderDetail.bike_duration_time}}</a>
+                     </span>
+                    <span class="details-flow-gj" ng-show="!orderDetail.calculateStatus">
+                        <a class="order-spann-gj details-text-gj" >费用：¥&nbsp;0.00</a>
+                        <a class="order-spann-gj details-text-gj">时长：&nbsp;0分钟</a>
                      </span>
                 <hr class="hr-gj" ng-show="orderDetail.return_bike_status"/>
                 <div class="text-right">
@@ -60,12 +72,12 @@
                     </button>
                 </div>
                 <hr class="hr-yxq"/>
-                <p class="order-div-gj details-order-gj" ng-show="orderDetail.get_bike_status">取车时间:{{orderDetail.order_get_bike_time}}</p>
-                <p class="order-div-gj details-order-gj" style="margin-bottom: 5px;" ng-show="orderDetail.return_bike_status">还车时间:{{orderDetail.order_return_bike_time}}</p>
+                <p class="order-div-gj details-order-gj" ng-show="orderDetail.getBikeStatus">取车时间:{{orderDetail.order_get_bike_time}}</p>
+                <p class="order-div-gj details-order-gj" style="margin-bottom: 5px;" ng-show="orderDetail.returnBikeStatus">还车时间:{{orderDetail.order_return_bike_time}}</p>
                 <p class="order-div-gj details-order-gj" ng-show="orderDetail.cancelStatus">取消时间:{{orderDetail.order_cancel_time}}</p>
             </ion-item>
-            <ion-item class="item-divider-yxq" ng-show="orderDetail.pay"></ion-item>
-            <ion-item style="padding-top: 0px;padding-bottom: 0px;" ng-show="orderDetail.pay">
+            <ion-item class="item-divider-yxq" ng-show="orderDetail.payStatus"></ion-item>
+            <ion-item style="padding-top: 0px;padding-bottom: 0px;" ng-show="orderDetail.payStatus">
                 <div class="row font-14-yxq" style="padding-top: 4px;padding-bottom: 3px;">
                     <div class="col col-50 ">支付方式</div>
                     <div class="col col-50 text-right">余额在线支付</div>
@@ -107,9 +119,10 @@
                     </div>
                 </div>
             </ion-item>
-            <ion-item class="item-divider-gj" ng-show="orderDetail.pay"></ion-item>
-            <div class="text-right text-top-gj details-color-gj" ng-show="orderDetail.pay">
-                <a class="button button-light button-small" href="#/evaluateOrder" ng-show="orderDetail.notEvaluate">评价订单</a>
+            <ion-item class="item-divider-gj" ng-show="orderDetail.payStatus"></ion-item>
+            <div class="text-right text-top-gj details-color-gj" ng-show="orderDetail.payStatus">
+                <a class="button button-light button-small" href="#/evaluateOrder" ng-show="orderDetail.notEvaluateStatus">评价订单</a>
+                <a class="button button-light button-small" ng-show="orderDetail.Evaluated" ng-disabled="true">订单已评</a>
                 <a class="button button-balanced button-small" style="margin-right: 20px;margin-left: 15px" href="#/bikeDetail">再次租用</a>
             </div>
         </ion-list>

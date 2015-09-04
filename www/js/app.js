@@ -9,18 +9,6 @@ ionicApp.run(function($ionicPlatform, $localStorage, Push) {
   if("undefined" === $localStorage.get("token")  || undefined === $localStorage.get("token")){
       $localStorage.set("token", "");
   }
-  if("undefined" === $localStorage.get("userName")  || undefined === $localStorage.get("userName")){
-      $localStorage.set("username", "   ");
-  }
-  if("undefined" === $localStorage.get("remainder")  || undefined === $localStorage.get("remainder")){
-      $localStorage.set("remainder", "0.00");
-  }
-  if("undefined" === $localStorage.get("normalTime")  || undefined === $localStorage.get("normalTime")){
-      $localStorage.set("normalTime", "0.00");
-  }
-  if("undefined" === $localStorage.get("superTime")  || undefined === $localStorage.get("superTime")){
-      $localStorage.set("superTime", "0.00");
-  }
 
   // push notification callback
   var notificationCallback = function(data) {
@@ -82,7 +70,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('myTravel', {
           url: '/myTravel',
           templateUrl: 'templates/home/myTravel.html',
-          controller: 'travelCtrl'
+          controller: 'travelCtrl',
+          cache: false
       })
       .state('myActivity',{
           url: '/myActivity',
@@ -93,7 +82,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('bikeList',{
           url: '/rentBike/:bike_type_id',
           templateUrl: 'templates/rentBike/bikeDetail.html',
-          controller: 'bikeDetailCtrl'
+          controller: 'bikeDetailCtrl',
+          cache: false
       })
       .state('myComment',{
           url: '/myComment',
@@ -106,6 +96,10 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('myItem',{
           url: '/myItem',
           templateUrl: 'templates/rentBike/myItem.html'
+      })
+      .state('rentStop', {
+          url: '/rentStop',
+          templateUrl: 'templates/rentBike/rentStop.html'
       })
 
       //find页面
@@ -177,6 +171,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('getSuccess',{
           url:'/getSuccess/:flag',
           templateUrl: 'templates/mine/getSuccess.html',
+          controller: 'successCtrl',
           cache: false
       })
       .state('getTixian',{
