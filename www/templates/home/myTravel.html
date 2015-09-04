@@ -5,24 +5,31 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content scrollbar-y="false">
-        <div class="detail-bike-gj">
-            <img src="img/bikes/mountain_l.jpg" alt=""/>
-            <!--<img src={{travelInfo.imgUrl}} alt=""/>-->
+        <div class="schedule-img-gj" ng-show="!travelTag">
+            <img src="img/schedule-gj.png"/>
+            <div class="schedule-word-gj" style="color: #B2B2B2;font-size: 15px;">当前没有行程</div>
         </div>
-        <div class="text-bike-gj text-center" style="margin-top: -5px">
-            <span style="font-size: 15px;line-height: 50px">{{travelInfo.bikeType}}</span>
-            <span style="font-size: 13px;color: #A6A6A6;line-height: 50px;">(编号{{travelInfo.bikeName}})</span>
+        <div ng-show="travelTag">
+            <div class="detail-bike-gj">
+                <!--<img src={{travelInfo.imgUrl}} alt=""/>-->
+                <img src="img/bikes/mountain_l.jpg">
+            </div>
+            <div class="text-bike-gj text-center" style="margin-top: -5px">
+                <span style="font-size: 15px;line-height: 50px">{{travelInfo.bikeType}}</span>
+                <span style="font-size: 13px;color: #A6A6A6;line-height: 50px;">(编号{{travelInfo.bikeName}})</span>
+            </div>
+            <div class="bike-yuan-gj text-center" style="color: #5D5D5D;margin-top: 15px">
+                <div style="font-size: 15px;color: #5D5D5D;position: absolute;left: 35%;top: 8px"> 实际计费时长</div>
+                {{travelInfo.currentTimeCost}}<span style="font-size: 20px">小时</span>
+                <p style="color: #B5B5B5;font-size: 10px;margin-top: 15px">开始租车时间&nbsp&nbsp{{travelInfo.orderStartTime}}</p>
+            </div>
+            <div class="bike-yuan-gj text-center"
+                 style="color: #90B621;margin-top: 15px;line-height: 60px;position: relative">
+                <div style="font-size: 16px;color: #5D5D5D;position: absolute;left: 35%;top: 0px">租车费用</div>
+                <span style="font-size: 30px">￥</span>{{travelInfo.currentPrice}}</span>
+            </div>
         </div>
-        <div class="bike-yuan-gj text-center" style="color: #5D5D5D;margin-top: 15px;padding-top: 50px;">
-            <div style="font-size: 14px;color: #5D5D5D;position: absolute;left: 30%;top: 10px">实际计费时长</div>
-            {{travelInfo.currentTimeCost}}<span style="font-size: 16px">小时</span>
-            <p style="color: #B5B5B5;font-size: 10px;margin-top: 8px">开始租车时间&nbsp&nbsp{{travelInfo.orderStartTime}}</p>
-        </div>
-        <div class="bike-yuan-gj text-center"
-             style="color: #90B621;margin-top: 15px;line-height: 60px;position: relative">
-            <div style="font-size: 14px;color: #5D5D5D;position: absolute;left: 30%;top: 0px">租车费用</div>
-            <span style="font-size: 26px">￥</span>{{travelInfo.currentPrice}}</span>
-        </div>
+
 
 
     </ion-content>

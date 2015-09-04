@@ -5,8 +5,8 @@ var ionicCtrl = angular.module("starter.controllers",[]);
  *  desc：
  *  author：yxq
  * */
-ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$location', 'baseUrl', 'Push','$interval','$ionicHistory',
-    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $location, baseUrl, Push,$interval,$ionicHistory){
+ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', '$localStorage', 'Base64', '$location', 'baseUrl', 'Push','$interval',
+    function($scope, $http, $ionicPopup, $timeout, $localStorage, Base64, $location, baseUrl, Push,$interval){
 
         //获取验证码
         $scope.text = '获取密码';
@@ -45,13 +45,13 @@ ionicCtrl.controller('loginCtrl',['$scope', '$http', '$ionicPopup', '$timeout', 
                         Push.setAlias(phone);
                         $location.path('/bikebon/mine');
                     }).error(function(){
-                        var p = $ionicPopup.show({title: '登录失败，请重新登录！'});
+                        var p = $ionicPopup.show({title: '用户名或密码错误，请重新输入'});
                         $timeout(function(){
                             p.close();
                         }, 2500);
                     });
             }else{
-                var myPopup = $ionicPopup.show({title: '密码不正确，请重新输入～'});
+                var myPopup = $ionicPopup.show({title: '用户名或密码不能为空'});
                 $timeout(function(){
                    myPopup.close();
                 }, 2500);
@@ -98,25 +98,14 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'ba
                         var t = barcodeData.text;
                         if(("" !== t) && ("undefined" !== t) && (undefined !== t)){
                             var last = t.substring(t.lastIndexOf("/")+1, t.length);
-                            alert(last);
                             $http.defaults.headers.post.Authorization = 'Basic ' + Base64.encode(temp + ': ');
                             $http.post(baseUrl + "/orders", {bike_name: last})
-                                .success(function(data, status){
-                                    alert("success---status" + status);
-                                    if(200 === status){
-                                        var myPopup = $ionicPopup.show({
-                                            title: "租用成功！"
-                                        });
-                                        $timeout(function () {
-                                            myPopup.close();
-                                            $location.path("/myTravel");
-                                        }, 2000);
-                                    }
-                                })
-                                .error(function(data,status){
-                                    alert("fail---status:" + status);
+                                .success(function(data){
                                     var message = "";
-                                    switch(status){
+                                    switch(data.status){
+                                        case 200:
+                                            alert("租用成功！");
+                                            $location.path("/myTravel");
                                         case 5010:
                                             message = "对不起，您的余额不足！";
                                             break;
@@ -145,12 +134,12 @@ ionicCtrl.controller('homeCtrl', ['$scope', 'imgSer', '$rootScope', '$http', 'ba
                                             message = "对不起，这辆车无法被租用！";
                                             break;
                                     }
-                                    var myPopup = $ionicPopup.show({
-                                        title: message
-                                    });
-                                    $timeout(function () {
-                                        myPopup.close();
-                                    }, 2000);
+                                    if("" !== message){
+                                        alert(message);
+                                    }
+                                })
+                                .error(function(){
+                                    console.log("Sorry, it has an error in homeCtrl.");
                                 });
                         }else{
                             alert("对不起，请重新扫描您的二维码！");
@@ -181,6 +170,11 @@ ionicCtrl.controller('travelCtrl', ['$scope','$http','Base64','baseUrl','$localS
         $http.get(baseUrl + "/currentjourney")
             .success(function(data,status){
                 $scope.travelInfo = data;
+                if(data.error == undefined){
+                    $scope.travelTag = true;
+                }else{
+                    $scope.travelTag = false;
+                }
             }).error(function(data,status){
             });
 
@@ -350,85 +344,15 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
                             }
 
 
-                        }).error(function (data) {
-                            $scope.status = data.status;
-                            alert('$scope.status:' + $scope.status);
-                            switch ($scope.status) {
-                                case 401:
-                                    var myPopup = $ionicPopup.show({
-                                        title: '您还未登录，请登录后再试'
-                                    });
-                                    $timeout(function () {
-                                        myPopup.close();
-                                        $location.path('/login');
-                                    }, 2000);
-                                    break;
-                                case 5000:
-                                    var myPopup = $ionicPopup.show({
-                                        title: '您已有预约车辆'
-                                    });
-                                    $timeout(function () {
-                                        myPopup.close();
-                                    }, 2000);
-                                    break;
-                                case 5001:
-                                    var myPopup = $ionicPopup.show({
-                                        title: '您有已确认订单，若要重新预约，请取消此订单'
-                                    });
-
-                                    $timeout(function () {
-                                        myPopup.close();
-                                    }, 2000);
-                                    break;
-                                case 5002:
-                                    console.log(status);
-                                    var myPopup = $ionicPopup.show({
-                                        title: '您的余额不足，请及时充值!'
-                                    });
-
-                                    $timeout(function () {
-                                        myPopup.close();
-                                    }, 2000);
-                                    break;
-
-                                case 5003:
-                                    var myPopup = $ionicPopup.show({
-                                        title: '您有进行中的订单，待订单完成后方可预约'
-                                    });
-
-                                    $timeout(function () {
-                                        myPopup.close();
-                                    }, 2000);
-                                    break;
-                                case 5004:
-                                    var myPopup = $ionicPopup.show({
-                                        title: '您有未支付订单，若要预约请先完成支付'
-                                    });
-
-                                    $timeout(function () {
-                                        myPopup.close();
-                                    }, 2000);
-                                    break;
-                                case 5005:
-                                    var myPopup = $ionicPopup.show({
-                                        title: '您还未认证，请先通过认证'
-                                    });
-
-                                    $timeout(function () {
-                                        myPopup.close();
-                                        $location.path("/bikebon/mine");
-                                    }, 2000);
-                                    break;
-                                case 5006:
-                                    var myPopup = $ionicPopup.show({
-                                        title: '认证尚未通过，请耐心等待'
-                                    });
-
-                                    $timeout(function () {
-                                        myPopup.close();
-                                        $location.path("/bikebon/mine");
-                                    }, 2000);
-                                    break;
+                        }).error(function (data,status) {
+                            if(status == 401){
+                                var myPopup = $ionicPopup.show({
+                                    title: '您还未登录，请登录后再试'
+                                });
+                                $timeout(function () {
+                                    myPopup.close();
+                                    $location.path('/login');
+                                }, 2000);
                             }
                         });
                 } else {
@@ -605,46 +529,49 @@ ionicCtrl.controller('orderDetailCtrl',['$scope','orderDetailSer', '$stateParams
                 switch ($scope.orderDetail.order_status) {
                     case 0:   //已取消
                         $scope.orderDetail.cancelStatus = true;       //控制照片、取消时间的显示
-                        $scope.orderDetail.calculateStatus = false;               //控制时长、费用的显示
+                        $scope.orderDetail.img = "img/cancel.png";
+                        $scope.orderDetail.calculateStatus = false;   //控制时长、费用的显示
                         $scope.orderDetail.payStatus = false;         //控制支付详情的显示
                         break;
                     case 1:   //待审核
                         $scope.orderDetail.checkingStatus = true;
+                        $scope.orderDetail.img = "img/check.png";
                         $scope.orderDetail.calculateStatus = false;
                         $scope.orderDetail.payStatus = false;
                         break;
                     case 2:   //未付款
                         $scope.orderDetail.notPayStatus = true;
+                        $scope.orderDetail.img = "img/pay.png";
                         $scope.orderDetail.getBikeStatus = true;
                         $scope.orderDetail.returnBikeStatus = true;
                         $scope.orderDetail.calculateStatus = true;
                         $scope.orderDetail.payStatus = false;
-
                         break;
                     case 3:   //未评价
                         $scope.orderDetail.notEvaluateStatus = true;
+                        $scope.orderDetail.img = "img/finish.png";
                         $scope.orderDetail.getBikeStatus = true;
                         $scope.orderDetail.returnBikeStatus = true;
                         $scope.orderDetail.calculateStatus = true;
                         $scope.orderDetail.payStatus = true;
-
                         break;
                     case 4:   //已评价
                         $scope.orderDetail.Evaluated = true;
+                        $scope.orderDetail.img = "img/finish.png";
                         $scope.orderDetail.getBikeStatus = true;
                         $scope.orderDetail.returnBikeStatus = true;
                         $scope.orderDetail.calculateStatus = true;
                         $scope.orderDetail.payStatus = true;
-
                         break;
                     case 5:   //已预订
                         $scope.orderDetail.bookStatus = true;
+                        $scope.orderDetail.img = "img/book.png";
                         $scope.orderDetail.calculateStatus = false;
                         $scope.orderDetail.payStatus = false;
-
                         break;
                     case 6:   //进行中
                         $scope.orderDetail.ingStatus = true;
+                        $scope.orderDetail.img = "img/ing.png";
                         $scope.orderDetail.getBikeStatus = true;
                         $scope.orderDetail.calculateStatus = false;
                         $scope.orderDetail.payStatus = false;
@@ -668,10 +595,6 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
         //登录、身份认证模块
         if("undefined" !== temp && undefined !== temp){
             $scope.loginFlag = true;
-            $scope.userName = $localStorage.get("userName");
-            $scope.deposit = $localStorage.get("remainder");
-            $scope.baseTime = $localStorage.get("normalTime");
-            $scope.upscaleTime = $localStorage.get("superTime");
             $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(temp + ': ');
             $http.get(baseUrl + '/user')
                 .success(function(data){
@@ -690,14 +613,9 @@ ionicCtrl.controller('mineCtrl', ['$localStorage', '$scope', '$http', 'Base64', 
                             $scope.notCertified = true;
                             break;
                     }
-
-                    $localStorage.set("userName", data.userName);
                     $scope.userName = data.userName;
-                    $localStorage.set("remainder", data.deposit);
                     $scope.deposit = data.deposit;
-                    $localStorage.set("normalTime", data.baseTime);
                     $scope.baseTime = data.baseTime;
-                    $localStorage.set("superTime", data.upscaleTime);
                     $scope.upscaleTime = data.upscaleTime;
                     $localStorage.set("sex", data.gender);
                     $localStorage.set("phoneID", data.ID);
@@ -787,9 +705,14 @@ ionicCtrl.controller('settingCtrl', ['$scope', '$localStorage', '$location', '$i
  * desc:
  * author: yxq
  * */
-ionicCtrl.controller('balanceCtrl', ['$scope', 'mineSer', '$localStorage',
-    function($scope, mineSer, $localStorage){
-        $scope.local = $localStorage.get("remainder");
+ionicCtrl.controller('balanceCtrl', ['$scope', 'mineSer', '$http', 'baseUrl',
+    function($scope, mineSer, $http, baseUrl){
+        $http.get(baseUrl + '/user')
+            .success(function(data){
+                $scope.local = data.deposit;
+            }).error(function(){
+                console.log("Sorry, it has an error in normalCtrl.");
+            });
         mineSer.get(1)
             .success(function(data){
                 $scope.data = data.bills;
@@ -804,9 +727,14 @@ ionicCtrl.controller('balanceCtrl', ['$scope', 'mineSer', '$localStorage',
  * desc:
  * author: yxq
  * */
-ionicCtrl.controller('normalCtrl', ['$scope', 'mineSer', '$localStorage', 'paySer',
-    function($scope, mineSer, $localStorage, paySer){
-        $scope.local = $localStorage.get("normalTime");
+ionicCtrl.controller('normalCtrl', ['$scope', 'mineSer', '$http', 'baseUrl',
+    function($scope, mineSer, $http, baseUrl){
+        $http.get(baseUrl + '/user')
+            .success(function(data){
+                $scope.local = data.baseTime;
+            }).error(function(){
+                console.log("Sorry, it has an error in normalCtrl.");
+            });
         mineSer.get(2)
             .success(function(data){
                 $scope.data = data.bills;
@@ -821,9 +749,14 @@ ionicCtrl.controller('normalCtrl', ['$scope', 'mineSer', '$localStorage', 'paySe
  * desc:
  * author: yxq
  * */
-ionicCtrl.controller('advanceCtrl', ['$scope', 'mineSer', '$localStorage',
-    function($scope, mineSer, $localStorage){
-        $scope.local = $localStorage.get("superTime");
+ionicCtrl.controller('advanceCtrl', ['$scope', 'mineSer', '$http', 'baseUrl',
+    function($scope, mineSer, $http, baseUrl){
+        $http.get(baseUrl + '/user')
+            .success(function(data){
+                $scope.local = data.upscaleTime;
+            }).error(function(){
+                console.log("Sorry, it has an error in advanceCtrl.");
+            });
         mineSer.get(3)
             .success(function(data){
                 $scope.data = data.bills;

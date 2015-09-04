@@ -9,13 +9,14 @@
             <ion-item class="item-divider-yxq"></ion-item>
             <ion-item style="padding-top: 0px;padding-bottom: 0px;" class="details-bg-gj">
                 <div class="details-finish-gj">
-                    <img ng-show="orderDetail.cancelStatus" ng-src="img/cancel.png"/>
+                   <!-- <img ng-show="orderDetail.cancelStatus" ng-src="img/cancel.png"/>
                     <img ng-show="orderDetail.checkingStatus" ng-src="img/check.png"/>
                     <img ng-show="orderDetail.notPayStatus" ng-src="img/pay.png"/>
                     <img ng-show="orderDetail.notEvaluateStatus" ng-src="img/finish.png"/>
                     <img ng-show="orderDetail.Evaluated" ng-src="img/finish.png"/>
                     <img ng-show="orderDetail.bookStatus" ng-src="img/book.png"/>
-                    <img ng-show="orderDetail.ingStatus" ng-src="img/ing.png"/>
+                    <img ng-show="orderDetail.ingStatus" ng-src="img/ing.png"/>-->
+                    <img src={{orderDetail.img}}>
                 </div>
                 <div class="row font-14-yxq" style="padding-top: 3px;padding-bottom: 3px;">
                     <a class="col col-50 ">订单编号:{{orderDetail.order_id}}</a>
