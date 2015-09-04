@@ -3204,8 +3204,8 @@ a.subdued {
       font-weight: 300;
       font-size: 17px; }
       .bar .button.button-clear .icon:before, .bar .button.button-clear.icon:before, .bar .button.button-clear.icon-left:before, .bar .button.button-clear.icon-right:before {
-        font-size: 26px;
-        line-height: 32px; }
+        font-size: 25px;
+        line-height: 30px; }
     .bar .button.back-button {
       display: block;
       margin-right: 5px;
@@ -5773,7 +5773,7 @@ input, button, select, textarea {
 .input-label {
   display: table;
   padding: 7px 10px 7px 0px;
-  max-width: 200px;
+  max-width: 100px;
   width: 35%;
   color: #444;
   font-size: 16px; }
@@ -6594,11 +6594,11 @@ progress {
     margin-top: 10px;
     margin-bottom: 10px; }
   .button.button-light {
-    border-color: #ddd;
-    background-color: #fff;
-    color: #444; }
+    border-color: #fff;
+    background-color: #90B620;
+    color: #fff; }
     .button.button-light:hover {
-      color: #444;
+      color: #fff;
       text-decoration: none; }
 
     /*自己加_gj*/

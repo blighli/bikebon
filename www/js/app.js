@@ -158,6 +158,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('getMoney',{
           url:'/getMoney',
           templateUrl: 'templates/mine/getMoney.html',
+          controller: 'myMoneyCtrl',
           cache: false
       })
       .state('identitySuccess',{
