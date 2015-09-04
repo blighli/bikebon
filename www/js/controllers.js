@@ -256,23 +256,104 @@ ionicCtrl.controller('bikeDetailCtrl', ['$scope', '$stateParams', 'bikeTypeSer',
                 if (res) {
                     $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode(token + ': ');
                     $http.post(baseUrl + '/lender/' + lender_id + '/bike_type/' + $stateParams.bike_type_id + '/order_form')
-                        .success(function(data,status){
-                            $scope.orderId = data.orderId;
+                        .success(function (data) {
 
-                            if(status == 200){
-                                var myPopup = $ionicPopup.show({
-                                    title: '预约成功'
-                                });
-                                $timeout(function () {
-                                    myPopup.close();
-                                    //预约成功后跳转到订单详情页面
-                                    $location.path("/myOrder/" + $scope.orderId);
-                                }, 2000);
+                            $scope.orderId = data.orderId;
+                            $scope.status = data.status;
+
+                            switch ($scope.status) {
+                                case 200:
+                                    var myPopup = $ionicPopup.show({
+                                        title: '预约成功'
+                                    });
+                                    $timeout(function () {
+                                        myPopup.close();
+                                        //预约成功后跳转到订单详情页面
+                                        $location.path("/myOrder/" + $scope.orderId);
+                                    }, 2000);
+                                    break;
+                                case 401:
+                                    var myPopup = $ionicPopup.show({
+                                        title: '您还未登录，请登录后再试'
+                                    });
+                                    $timeout(function () {
+                                        myPopup.close();
+                                        $location.path('/login');
+                                    }, 2000);
+                                    break;
+                                case 5000:
+                                    var myPopup = $ionicPopup.show({
+                                        title: '您已有预约车辆'
+                                    });
+                                    $timeout(function () {
+                                        myPopup.close();
+                                    }, 2000);
+                                    break;
+                                case 5001:
+                                    var myPopup = $ionicPopup.show({
+                                        title: '您有已确认订单，若要重新预约，请取消此订单'
+                                    });
+
+                                    $timeout(function () {
+                                        myPopup.close();
+                                    }, 2000);
+                                    break;
+                                case 5002:
+                                    console.log(status);
+                                    var myPopup = $ionicPopup.show({
+                                        title: '您的余额不足，请及时充值!'
+                                    });
+
+                                    $timeout(function () {
+                                        myPopup.close();
+                                    }, 2000);
+                                    break;
+
+                                case 5003:
+                                    var myPopup = $ionicPopup.show({
+                                        title: '您有进行中的订单，待订单完成后方可预约'
+                                    });
+
+                                    $timeout(function () {
+                                        myPopup.close();
+                                    }, 2000);
+                                    break;
+                                case 5004:
+                                    var myPopup = $ionicPopup.show({
+                                        title: '您有未支付订单，若要预约请先完成支付'
+                                    });
+
+                                    $timeout(function () {
+                                        myPopup.close();
+                                    }, 2000);
+                                    break;
+                                case 5005:
+                                    var myPopup = $ionicPopup.show({
+                                        title: '您还未认证，请先通过认证'
+                                    });
+
+                                    $timeout(function () {
+                                        myPopup.close();
+                                        $location.path("/bikebon/mine");
+                                    }, 2000);
+                                    break;
+                                case 5006:
+                                    var myPopup = $ionicPopup.show({
+                                        title: '认证尚未通过，请耐心等待'
+                                    });
+
+                                    $timeout(function () {
+                                        myPopup.close();
+                                        $location.path("/bikebon/mine");
+                                    }, 2000);
+                                    break;
                             }
 
-                        }).error(function(data,status){
 
-                            switch (status){
+                        }).error(function (data) {
+                            $scope.status = data.status;
+                            alert('$scope.status:' + $scope.status);
+                            switch ($scope.status) {
                                 case 401:
                                     var myPopup = $ionicPopup.show({
                                         title: '您还未登录，请登录后再试'
