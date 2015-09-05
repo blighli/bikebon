@@ -807,13 +807,40 @@ ionicCtrl.controller("informationCtrl", ['$scope', '$ionicActionSheet', '$localS
  *  author：yxq
  * */
 /**
- *  name： 微信支付尚未开通提示（mine/myMoney.html）
+ *  name： 1.微信支付尚未开通提示（mine/myMoney.html）
+ *         2.将myMoney.html页面与getMoney.html页面合并
  *  desc： 是mine/myBalanced.html页面的充值页面
  *  author：wgj
  * */
-ionicCtrl.controller('myMoneyCtrl', ['$scope', 'paySer', '$location', '$http', 'baseUrl',  '$ionicPopup', '$timeout', '$location', 'getUserBikeInfoSer',
+ionicCtrl.controller('myMoneyCtrl', ['$scope', 'paySer', '$location', '$http', 'baseUrl', '$stateParams', '$ionicPopup', '$timeout', '$location', 'getUserBikeInfoSer',
     '$http', 'baseUrl', 'Base64', '$localStorage',
-    function($scope, paySer, $location, $http, baseUrl,  $ionicPopup, $timeout, $location, getUserBikeInfoSer, $http, baseUrl, Base64, $localStorage){
+    function($scope, paySer, $location, $http, baseUrl,$stateParams,  $ionicPopup, $timeout, $location, getUserBikeInfoSer, $http, baseUrl, Base64, $localStorage){
+        var btn = $stateParams.btnId + "";
+        var page = $stateParams.pageId + "";
+        var temp = "1";
+        if("1" == btn){
+            $scope.words = "请输入要提现的金额";
+            $scope.heads = "提现";
+            $scope.foots = "确认提现";
+        }else{
+            $scope.words = "请输入要充值的金额";
+            $scope.heads = "充值";
+            $scope.foots = "确认充值";
+        }
+        switch(page + "" + btn){
+            case "11":
+                temp = "1";
+                break;
+            case "12":
+                temp = "2";
+                break;
+            case "21":
+                temp = "3";
+                break;
+            case "22":
+                temp = "4";
+                break;
+        }
         $scope.payMoney = function(){
             paySer.post("0", "0.01")
                 .success(function(data){
