@@ -223,7 +223,8 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
       .state('settings',{
           url:'/settings',
           templateUrl: 'templates/mine/settings.html',
-          controller: 'settingCtrl'
+          controller: 'settingCtrl',
+          cache: false
       })
       .state('identity',{
           url:'/identity',
