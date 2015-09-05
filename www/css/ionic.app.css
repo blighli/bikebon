@@ -6593,13 +6593,21 @@ progress {
   .button.button-block, .button.button-full {
     margin-top: 10px;
     margin-bottom: 10px; }
-  .button.button-light {
+.button.button-light {
+  border-color: #ddd;
+  background-color: #fff;
+  color: #444; }
+.button.button-light:hover {
+  color: #444;
+  text-decoration: none; }
+
+  .button.button-white {
     border-color: #fff;
     background-color: #90B620;
     color: #fff; }
-    .button.button-light:hover {
-      color: #fff;
-      text-decoration: none; }
+  .button.button-light:hover {
+    color: #fff;
+    text-decoration: none; }
 
     /*自己加_gj*/
   .button.button-lightw {

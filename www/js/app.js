@@ -146,7 +146,7 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           cache: false
       })
       .state('myMoney',{
-          url:'/myMoney',
+          url:'/myMoney/:pageId/:btnId',
           templateUrl: 'templates/mine/myMoney.html',
           controller: 'myMoneyCtrl'
       })
@@ -154,12 +154,6 @@ ionicApp.config(function($stateProvider, $urlRouterProvider) {
           url:'/money/:pageId/:btnId',
           templateUrl: 'templates/mine/money.html',
           controller: 'moneyCtrl'
-      })
-      .state('getMoney',{
-          url:'/getMoney',
-          templateUrl: 'templates/mine/getMoney.html',
-          controller: 'myMoneyCtrl',
-          cache: false
       })
       .state('identitySuccess',{
           url:'/identitySuccess',
