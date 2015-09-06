@@ -841,8 +841,9 @@ ionicCtrl.controller('myMoneyCtrl', ['$scope', 'paySer', '$location', '$http', '
                 temp = "4";
                 break;
         }
+        var money=document.getElementById("money");
         $scope.payMoney = function(){
-            paySer.post("0", "0.01")
+            paySer.post("0", money.value)
                 .success(function(data){
                     var out_trade_no = data.out_trade_no;
                     window.alipay.payment(
