@@ -850,19 +850,13 @@ ionicCtrl.controller('myMoneyCtrl', ['$scope', 'paySer', '$location', '$http', '
                         {
                             "pay_info": data.string,
                             "sign": 1
-                        },function(){
-                            $http.post(baseUrl + '/payresult', {"out_trade_no": out_trade_no})
-                                .success(function(data){
-                                    if("True" === data.info)
-                                    {
-                                        $location.path("/getSuccess/1");
-                                    }
-                                })
-                                .error(function(){
-                                    $location.path("/getSuccess/0");
-                                });
-                        },function(){
-                            $location.path("/getSuccess/0");
+                        },function(data1){
+                            var tempd = eval("("+data1+")");
+                            if("9000" === tempd.resultStatus){
+                                window.location.href = "#/getSuccess/1";
+                            }else{
+                                window.location.href = "#/getSuccess/0";
+                            }
                         });
                 }).error(function(){
                     $location.path("/getSuccess/0");
@@ -932,17 +926,22 @@ ionicCtrl.controller('moneyCtrl', ['$scope', 'paySer', '$stateParams','$ionicPop
                 temp = "4";
                 break;
         }
+        //var money=document.getElementById("money");
         $scope.payMoney = function(){
-            paySer.post(temp, "0.01")
+            paySer.post("0", "50")
                 .success(function(data){
+                    var out_trade_no = data.out_trade_no;
                     window.alipay.payment(
                         {
-                            "pay_info": data,
+                            "pay_info": data.string,
                             "sign": 1
-                        },function(){
-                            $location.path("/getSuccess/1");
-                        },function(){
-                            $location.path("/getSuccess/0");
+                        },function(data1){
+                            var tempd = eval("("+data1+")");
+                            if("9000" === tempd.resultStatus){
+                                window.location.href = "#/getSuccess/1";
+                            }else{
+                                window.location.href = "#/getSuccess/0";
+                            }
                         });
                 }).error(function(){
                     $location.path("/getSuccess/0");
