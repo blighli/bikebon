@@ -3183,10 +3183,10 @@ a.subdued {
     z-index: 1;
     padding: 0 8px;
     min-width: initial;
-    min-height: 31px;
+    min-height: 28px;
     font-weight: 400;
     font-size: 13px;
-    line-height: 32px; }
+    line-height: 28px; }
     .bar .button.button-icon:before, .bar .button .icon:before, .bar .button.icon:before, .bar .button.icon-left:before, .bar .button.icon-right:before {
       padding-right: 2px;
       padding-left: 2px;
